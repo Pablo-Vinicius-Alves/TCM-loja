@@ -15,6 +15,8 @@ Cadastro/login -> visualizar produtos -> adicionar/remover ao carrinho -> pedido
 - [ ] RF06 - Cliente finaliza pedido (valida estoque, grava pedido e itens, baixa estoque)
 - [ ] RF07 - Cliente consulta seus pedidos
 - [ ] RF08 - Admin lista pedidos e altera status
+- [ ] RF09 - Emissão automática da nota
+- [ ] RF10 - Consulta da nota pelo admin e cliente
 
 ## Fora do MVP (se sobrar tempo)
 - Pagamento simulado

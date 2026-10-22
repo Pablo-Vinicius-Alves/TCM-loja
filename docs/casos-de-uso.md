@@ -24,6 +24,7 @@ Cliente e Administrador herdam do Visitante (generalização no diagrama).
 | UC06 | Consultar meus pedidos | Cliente | RF09 | `<<include>>` UC02 |
 | UC07 | Gerenciar categorias | Administrador | RF01 | `<<include>>` UC02 |
 | UC08 | Gerenciar produtos | Administrador | RF02 | `<<include>>` UC02 |
+| UC09 | Consultar nota fiscal | Administrador, cliente | RF10 | `<<include>>` UC02 |
 
 ## 3. Descrição dos casos de uso
 

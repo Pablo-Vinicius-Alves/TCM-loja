@@ -24,7 +24,7 @@ data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 ativo BOOLEAN NOT NULL DEFAULT TRUE,
 
 CONSTRAINT PRIMARY KEY (id_cadastro),
-CONSTRAINT fk_cadastro_cliente FOREIGN KEY (id_cliente) REFERENCES cliente (id_cliente)
+CONSTRAINT fk_cadastro_cliente FOREIGN KEY (id_cliente) REFERENCES cliente (id_cliente) ON DELETE CASCADE
 );
 
 CREATE TABLE consulta (
@@ -60,7 +60,7 @@ status_compra VARCHAR(20) NOT NULL DEFAULT 'PENDENTE',
 data_entrega_estimada DATETIME,
 
 CONSTRAINT PRIMARY KEY (id_compra),
-CONSTRAINT fk_compra_cliente FOREIGN KEY (id_cliente) REFERENCES cliente (id_cliente),
+CONSTRAINT fk_compra_cliente FOREIGN KEY (id_cliente) REFERENCES cliente (id_cliente) ON DELETE CASCADE,
 CONSTRAINT ck_compra_valor CHECK (valor_total >= 0),
 CONSTRAINT ck_compra_entrega CHECK (data_entrega_estimada IS NULL OR data_entrega_estimada >= data_compra)
 );
@@ -74,7 +74,7 @@ status_venda VARCHAR(20) NOT NULL DEFAULT 'PENDENTE',
 descricao_produto VARCHAR(255),
 
 CONSTRAINT PRIMARY KEY (id_venda),
-CONSTRAINT fk_venda_cliente FOREIGN KEY (id_cliente) REFERENCES cliente (id_cliente),
+CONSTRAINT fk_venda_cliente FOREIGN KEY (id_cliente) REFERENCES cliente (id_cliente) ON DELETE CASCADE,
 CONSTRAINT ck_venda_valor CHECK (valor_venda >= 0)
 );
 
@@ -103,7 +103,7 @@ tipo_documento VARCHAR(30) NOT NULL,
 status_nf VARCHAR(20) NOT NULL DEFAULT 'EMITIDA',
  
 CONSTRAINT PRIMARY KEY (id_nota_fiscal),
-CONSTRAINT fk_nota_fiscal_compra FOREIGN KEY (id_compra) REFERENCES compra (id_compra),
+CONSTRAINT fk_nota_fiscal_compra FOREIGN KEY (id_compra) REFERENCES compra (id_compra) ON DELETE CASCADE,
 CONSTRAINT fk_nota_fiscal_venda FOREIGN KEY (id_venda) REFERENCES venda (id_venda),
 CONSTRAINT ck_nota_fiscal_valor  CHECK (valor_total_nf >= 0),
 CONSTRAINT ck_nota_fiscal_origem CHECK (

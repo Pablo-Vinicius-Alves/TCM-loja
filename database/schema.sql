@@ -24,7 +24,7 @@ data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 ativo BOOLEAN NOT NULL DEFAULT TRUE,
 
 CONSTRAINT PRIMARY KEY (id_cadastro),
-CONSTRAINT fk_cadastro_cliente FOREIGN KEY (id_cliente) REFERENCES cliente (id_cliente)
+CONSTRAINT fk_cadastro_cliente FOREIGN KEY (id_cliente) REFERENCES cliente (id_cliente) ON DELETE CASCADE
 );
 
 CREATE TABLE consulta (

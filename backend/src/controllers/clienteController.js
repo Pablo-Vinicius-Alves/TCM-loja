@@ -13,7 +13,7 @@ function lerId(valor) {
 function lerDadosCliente(body = {}) {
   const nome = String(body.nome ?? '').trim();
   const email = String(body.email ?? '').trim();
-  const cpf = validarCPF(body.cpf);
+  const cpf = String(body.cpf ?? '').replace(/\D/g, '');
   const telefone = String(body.telefone ?? '').trim() || null;
   const endereco = String(body.endereco ?? '').trim() || null;
 

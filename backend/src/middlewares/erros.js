@@ -12,8 +12,15 @@ export function handleErrors(err, req, res, next) {
     return res.status(400).json({ erro: 'JSON inválido.' });
   }
   if (err.code === 'ER_DUP_ENTRY') {
-    return res.status(409).json({ erro: 'Registro duplicado.' });
+  let mensagem = 'Registro duplicado.';
+
+  if (err.sqlMessage.includes('cpf')) {
+    mensagem = 'Este CPF já está cadastrado.';
+  } else if (err.sqlMessage.includes('email')) {
+    mensagem = 'Este e-mail já está cadastrado.';
   }
+  return res.status(409).json({ erro: mensagem });
+}
   if (err.code === 'ER_NO_REFERENCED_ROW_2') {
     return res.status(400).json({ erro: 'Referência inválida (registro relacionado não existe).' });
   }

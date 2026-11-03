@@ -29,7 +29,13 @@ export async function atualizar(id, { nome, email, cpf, telefone, endereco }) {
 }
 
 export async function remover(id) {
-  const query = 'DELETE FROM cliente WHERE id_cliente = ?;';
+  await db.query('DELETE FROM consulta WHERE id_cliente=?', [id]);
+  await db.query('DELETE FROM compra WHERE id_cliente=?', [id]);
+  await db.query('DELETE FROM venda WHERE id_cliente=?', [id]);
+  await db.query('DELETE FROM login WHERE id_cliente=?', [id]);
+
+  const query = 'DELETE FROM cliente WHERE id_cliente=?';
   const [result] = await db.query(query, [id]);
+
   return result.affectedRows > 0;
 }

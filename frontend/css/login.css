@@ -1,24 +1,18 @@
 :root {
-  /* 🎨 Nova Paleta Premium: Loja Online de Roupas Chic */
-  --fundo: #faf8fb;               /* Fundo claro com um sutil toque lavanda/pérola */
+  --fundo: #faf8fb;               
   --superficie: #ffffff;
-  --texto: #21153b;               /* Texto principal em roxo quase preto (muito elegante) */
-  --texto-suave: #62557a;         /* Texto secundário em roxo acinzentado suave */
-  --borda: #ebdff5;               /* Bordas delicadas em tom lilás pastel */
-  
-  /* Cores de Identidade da Marca (US06) */
-  --primaria: #2e1a47;            /* Roxo Imperial Profundo */
-  --primaria-escura: #1f1033;     /* Roxo ainda mais escuro para estados ativos/hover */
-  --dourado: #d4af37;             /* Dourado Metálico Clássico (Luxury Gold) */
-  --dourado-escuro: #b89326;      /* Dourado para efeitos de foco e hover */
-  
-  /* Mensagens do Sistema */
+  --texto: #21153b;              
+  --texto-suave: #62557a;         
+  --borda: #ebdff5;               
+  --primaria: #2e1a47;            
+  --primaria-escura: #1f1033;    
+  --dourado: #d4af37;            
+  --dourado-escuro: #b89326;    
   --perigo: #9e2a2b;
   --perigo-fundo: #fff0f0;
   --sucesso: #1e5e3a;
   --sucesso-fundo: #f0fbf4;
-  
-  --raio: 6px;                    /* Cantos ligeiramente mais retos/finos trazem um ar mais premium */
+  --raio: 6px;                  
   --sombra: 0 4px 20px rgb(46 26 71 / 6%);
 }
 
@@ -28,7 +22,6 @@
 
 body {
     margin: 0;
-    /* Adicionada a fonte 'Playfair Display' ou 'Georgia' para dar o aspecto de revista de moda */
     font-family: 'Playfair Display', Georgia, system-ui, -apple-system, sans-serif;
     font-size: 1rem;
     line-height: 1.5;
@@ -44,7 +37,6 @@ main{
 h1{margin: 0; font-size: 1.6rem; font-weight: 400; letter-spacing: 1px;}
 h2{margin: 0 0 1rem; font-size: 1.1rem; font-weight: 600;}
 
-/* Botões Estilizados (US07 - Hover, Transition) */
 .btn{
     font: inherit;
     font-weight: 600;
@@ -69,7 +61,6 @@ h2{margin: 0 0 1rem; font-size: 1.1rem; font-weight: 600;}
 
 .btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-/* Foco refinado em Dourado para Inputs e Botões */
 .btn:focus-visible,
 input:focus-visible { 
     outline: 2px solid var(--dourado); 
@@ -130,14 +121,12 @@ th {
     color: var(--texto-suave);
 }
 
-/* Container de Autenticação */
 .auth{
     min-height: 100vh;
     display: grid;
     grid-template-columns: minmax(350px, 5fr) 7fr;
 }
 
-/* Painel Lateral de Marca com Degradê Luxuoso Roxo -> Ouro */
 .authMarca{
     display: flex;
     flex-direction: column;
@@ -145,7 +134,6 @@ th {
     gap: 0.9rem;
     padding: 4rem 3rem;
     color: #fff;
-    /* Gradiente linear suave que mistura o roxo profundo da marca com um fundo escuro aconchegante */
     background: linear-gradient(135deg, var(--primaria) 0%, #170b24 100%);
     position: relative;
     border-right: 2px solid var(--dourado);
@@ -191,7 +179,6 @@ th {
     box-shadow: var(--sombra);
 }
 
-/* Abas de alternar entre Login e Cadastro */
 .abas { 
     display: flex;
     margin-bottom: 24px; 
@@ -230,7 +217,7 @@ th {
     left: 0;
     width: 100%;
     height: 2px;
-    background-color: var(--dourado); /* Linha indicadora agora é dourada */
+    background-color: var(--dourado); 
     border-radius: 2px;
 }
 
@@ -245,7 +232,6 @@ th {
 
 .dica { font-size: 0.8125rem; color: var(--texto-suave); }
 
-/* Responsividade para telas menores */
 @media (max-width: 860px) {
   .auth { grid-template-columns: 1fr; min-height: 0; }
   .authMarca { padding: 35px 24px; border-right: none; border-bottom: 2px solid var(--dourado); }
@@ -255,7 +241,6 @@ th {
   .authCaixa { padding: 1.8rem; box-shadow: none; background: transparent; }
 }
 
-/*US06 & US07 - CONFIGURAÇÕES GLOBAIS (:root) E ESTILOS GESTALT*/
 :root {
     --roxo-profundo: #2E1A47;       
     --roxo-vibrante: #4A2E76;     
@@ -264,13 +249,10 @@ th {
     --branco: #FFFFFF;
     --preto: #1A1A1A;
     --cinza-claro: #F9F9F9;
-    
-    /* Tipografia e Transições */
     --font-main: 'Playfair Display', 'Montserrat', sans-serif;
     --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-/* Reset básico */
 * {
     margin: 0;
     padding: 0;
@@ -284,10 +266,6 @@ body {
     overflow-x: hidden;
 }
 
-/*COMPONENTES E ANIMAÇÕES (KEYFRAMES & FLEXBOX)*/
-  
-
-/* Keyframes para efeito de surgimento elegante */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -299,7 +277,6 @@ body {
     }
 }
 
-/* Header / Navegação */
 header {
     background-color: var(--roxo-profundo);
     border-bottom: 3px solid var(--dourado-metalico);
@@ -340,7 +317,6 @@ nav a:hover {
     color: var(--dourado-metalico);
 }
 
-/* US08 - Carrossel de Destaques */
 .carousel-container {
     position: relative;
     width: 100%;
@@ -360,7 +336,6 @@ nav a:hover {
     background-position: center;
 }
 
-/* Camada escura para dar contraste ao texto (Princípio de Gestalt: Segregação) */
 .carousel-slide::before {
     content: '';
     position: absolute;
@@ -368,7 +343,7 @@ nav a:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(46, 26, 71, 0.4); /* Filtro roxo translúcido */
+    background: rgba(46, 26, 71, 0.4);
 }
 
 .carousel-content {
@@ -386,7 +361,6 @@ nav a:hover {
     text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
 }
 
-/* Botão Chic com Efeitos US07 (Hover, Transition, Translate) */
 .btn-gold {
     display: inline-block;
     padding: 1rem 2.5rem;
@@ -403,11 +377,10 @@ nav a:hover {
 .btn-gold:hover {
     background-color: var(--dourado-metalico);
     color: var(--roxo-profundo);
-    transform: translateY(-5px); /* Efeito Translate */
+    transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
 }
 
-/* US09 - Vitrine de Roupas (Grid/Flexbox) */
 .vitrine-section {
     padding: 4rem 5%;
 }
@@ -428,7 +401,6 @@ nav a:hover {
     justify-content: center;
 }
 
-/* Card do Produto - Princípio da Proximidade e Alinhamento */
 .product-card {
     background: var(--branco);
     border: 1px solid rgba(46, 26, 71, 0.1);
@@ -467,7 +439,7 @@ nav a:hover {
 }
 
 .product-card:hover .product-image-placeholder img {
-    transform: scale(1.05); /* Zoom elegante na foto */
+    transform: scale(1.05);
 }
 
 .product-title {

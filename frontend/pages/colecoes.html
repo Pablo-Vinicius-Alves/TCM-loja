@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coleções | SmartClothes</title>
+  <link href="https://googleapis.com" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .passadas-section { background-color: #f3eff7; padding: 5rem 5%; border-top: 1px solid var(--borda); }
+    .past-grid { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; }
+    .past-card { background: var(--superficie); border: 1px solid var(--borda); width: 260px; padding: 1rem; border-radius: var(--raio); opacity: 0.75; transition: var(--transition-smooth); filter: grayscale(30%); }
+    .past-card:hover { opacity: 1; filter: grayscale(0%); transform: scale(1.02); }
+    .tag-esgotado { background-color: var(--texto-suave); color: #fff; font-size: 0.7rem; padding: 2px 8px; border-radius: 2px; text-transform: uppercase; margin-bottom: 0.5rem; display: inline-block; font-family: sans-serif; }
+  </style>
+</head>
+<body>
+
+   <header>
+    <!-- Logo e Nome Alinhados -->
+    <div class="logo">
+        <!-- 👑 Chama a logo em formato de coroa aqui -->
+        <img src="../imag/logoDaMarca.jpg" class="logo-icone">
+        <span>SMARTCLOTHES</span>
+    </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="colecoes.html">Coleções</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="carrinho.html">Carrinho (<span id="contagem-carrinho">0</span>)</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+  <!-- Lançamentos Atuais e Exclusivos -->
+  <section class="vitrine-section">
+    <h2 class="section-title">Alta Costura Atual</h2>
+    <p style="text-align: center; margin-top: -2.5rem; margin-bottom: 4rem; color: var(--texto-suave);">Peças exclusivas e limitadas desenhadas nesta estação.</p>
+    
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-image-placeholder">
+          <img src="../imag/images.jpg" alt="Vestido de Seda Imperial">
+        </div>
+        <div class="product-title">Vestido de Seda Imperial</div>
+        <div class="product-price">R$ 1.899,00</div>
+        <button class="btn-gold" style="padding: 0.5rem 1.5rem; font-size: 0.8rem;">Adicionar</button>
+      </div>
+
+      <div class="product-card">
+        <div class="product-image-placeholder">
+          <img src="../imag/purple-open-back-cape-dress-rhinestone-detail-hotel.webp" alt="vestido de Cravejado de Ouro">
+        </div>
+        <div class="product-title">Vestido Cravejado</div>
+        <div class="product-price">R$ 2.450,00</div>
+        <button class="btn-gold" style="padding: 0.5rem 1.5rem; font-size: 0.8rem;">Adicionar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Histórico de Coleções Passadas -->
+  <section class="passadas-section">
+    <h2 class="section-title" style="color: var(--texto-suave);">Coleções Passadas</h2>
+    <p style="text-align: center; margin-top: -2.5rem; margin-bottom: 4rem; color: var(--texto-suave);">Historico das Coleções</p>
+    
+    <div class="past-grid">
+
+      <!-- CARD ARQUIVO 1 -->
+      <div class="past-card">
+        <div class="product-image-placeholder">
+          <!-- Sua foto do vestido antigo esquerdo -->
+          <img src="../imag/images (3).jpg" alt="Vestido de Acervo">
+        </div>
+        <span class="tag-esgotado">Acervo Outono</span>
+        <div class="product-title">Serpente Dourada</div>
+        <div style="font-size: 0.95rem; color: var(--texto-suave); font-weight: 700; text-decoration: line-through;">R$ 1.150,00</div>
+      </div>
+
+      <!-- CARD ARQUIVO 2 -->
+      <div class="past-card">
+        <div class="product-image-placeholder">
+          <!-- Sua foto do vestido antigo direito -->
+          <img src="../imag/il_570xN.7798784908_qq5g.webp" alt="Vestido de Acervo">
+        </div>
+        <span class="tag-esgotado">Acervo Verão</span>
+        <div class="product-title">Capa Linho Imperial</div>
+        <div style="font-size: 0.95rem; color: var(--texto-suave); font-weight: 700; text-decoration: line-through;">R$ 890,00</div>
+      </div>
+
+    </div>
+  </section>
+
+  <script src="../js/carrinho.js"></script>
+</body>
+</html>

@@ -11,7 +11,7 @@ export async function api(caminho, { method = 'GET', body, redirecionar401 = tru
   let resposta;
  
   try {
-    resposta = await fetch(`/api${caminho}`, {
+    resposta = await fetch(`http://localhost:3000/api${caminho}`, {
       method,
       headers: body ? { 'Content-Type': 'application/json' } : undefined,
       body: body ? JSON.stringify(body) : undefined

@@ -6,16 +6,10 @@
   <title>Coleções | SmartClothes</title>
   <link href="https://googleapis.com" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
-  <style>
-    .passadas-section { background-color: #f3eff7; padding: 5rem 5%; border-top: 1px solid var(--borda); }
-    .past-grid { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; }
-    .past-card { background: var(--superficie); border: 1px solid var(--borda); width: 260px; padding: 1rem; border-radius: var(--raio); opacity: 0.75; transition: var(--transition-smooth); filter: grayscale(30%); }
-    .past-card:hover { opacity: 1; filter: grayscale(0%); transform: scale(1.02); }
-    .tag-esgotado { background-color: var(--texto-suave); color: #fff; font-size: 0.7rem; padding: 2px 8px; border-radius: 2px; text-transform: uppercase; margin-bottom: 0.5rem; display: inline-block; font-family: sans-serif; }
-  </style>
 </head>
 <body>
 
+  <!-- Barra de Navegação Superior (Header) -->
   <header>
     <div class="logo">SMARTCLOTHES</div>
     <nav>
@@ -27,7 +21,6 @@
       </ul>
     </nav>
   </header>
-
 
   <!-- Lançamentos Atuais e Exclusivos -->
   <section class="vitrine-section">
@@ -58,14 +51,13 @@
   <!-- Histórico de Coleções Passadas -->
   <section class="passadas-section">
     <h2 class="section-title" style="color: var(--texto-suave);">Coleções Passadas</h2>
-    <p style="text-align: center; margin-top: -2.5rem; margin-bottom: 4rem; color: var(--texto-suave);">Historico das Coleções</p>
+    <p style="text-align: center; margin-top: -2.5rem; margin-bottom: 4rem; color: var(--texto-suave);">Histórico das Coleções</p>
     
     <div class="past-grid">
 
       <!-- CARD ARQUIVO 1 -->
       <div class="past-card">
         <div class="product-image-placeholder">
-          <!-- Sua foto do vestido antigo esquerdo -->
           <img src="../imag/images (3).jpg" alt="Vestido de Acervo">
         </div>
         <span class="tag-esgotado">Acervo Outono</span>
@@ -76,7 +68,6 @@
       <!-- CARD ARQUIVO 2 -->
       <div class="past-card">
         <div class="product-image-placeholder">
-          <!-- Sua foto do vestido antigo direito -->
           <img src="../imag/il_570xN.7798784908_qq5g.webp" alt="Vestido de Acervo">
         </div>
         <span class="tag-esgotado">Acervo Verão</span>

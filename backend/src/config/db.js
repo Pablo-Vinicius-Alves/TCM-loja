@@ -7,6 +7,7 @@ import 'dotenv/config';
         password: process.env.DB_PASSWORD,
         port: process.env.DB_PORT,
         database: process.env.DB_NAME,
+        JWT_SECRET: process.env.JWT_SECRET
     });
 
 export default connectionDB;

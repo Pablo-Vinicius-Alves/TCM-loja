@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { env } from '../config/env.js';
+import * as env from '../config/env.js';
  
 export const NOME_COOKIE = 'token';
  

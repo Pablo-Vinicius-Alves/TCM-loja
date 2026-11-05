@@ -1,3 +1,6 @@
+
+/*cores*/
+
 :root {
   --fundo: #faf8fb;               
   --superficie: #ffffff;          
@@ -20,6 +23,9 @@
   --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
+
+/* reset e configurações do  body*/
+
 * {
     box-sizing: border-box;
 }
@@ -41,6 +47,9 @@ h1, h2, h3 {
     font-weight: 400;
     letter-spacing: 1px;
 }
+
+
+/*- HEADER / NAVEGAÇÃO UNIFICADA (FLEXBOX) */
 
 header {
     background-color: var(--primaria);
@@ -85,6 +94,9 @@ header nav a:hover,
 header nav a.active {
     color: var(--dourado);
 }
+
+
+/*COMPONENTES DE BOTÕES E ENTRADAS GERAIS (FORMULÁRIOS)*/
 
 .btn {
     font: inherit;
@@ -168,6 +180,9 @@ input:focus {
     font-family: system-ui, sans-serif;
 }
 
+
+/*US07 & US08 - ANIMAÇÃO E BANNER DE ENTRADA (CARROSSEL) */
+
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -244,6 +259,9 @@ input:focus {
     transform: translateY(-4px); 
     box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
 }
+
+
+/*US07 & US09 - VITRINE DE PRODUTOS ATUAIS (FLEXBOX) */
 
 .vitrine-section {
     padding: 5rem 5%;
@@ -325,6 +343,9 @@ input:focus {
     margin-bottom: 1.25rem;
 }
 
+
+/* ESTRUTURA DA TELA DE LOGIN / CADASTRO*/
+
 .auth {
     min-height: 100vh;
     display: grid;
@@ -400,6 +421,7 @@ input:focus {
     box-shadow: var(--sombra);
 }
 
+
 @media (max-width: 860px) {
   .auth { grid-template-columns: 1fr; min-height: 0; }
   .authMarca { padding: 28px 20px; }
@@ -416,4 +438,150 @@ input:focus {
     border-radius: 6px;
     cursor: pointer;
     background-color: #dde7f4;
+
+/*  SUPORTE DE RESPONSIVIDADE INTERNACIONAL */
+@media (max-width: 860px) {
+    .auth { 
+        grid-template-columns: 1fr; 
+        min-height: 0; 
+    }
+    .authMarca { 
+        padding: 35px 24px; 
+        border-right: none; 
+        border-bottom: 2px solid var(--dourado); 
+    }
+    .authMarca h1 { 
+        font-size: 1.6rem; 
+    }
+    .authPainel { 
+        align-items: flex-start; 
+        padding-top: 32px; 
+    }
+    header nav ul { 
+        gap: 1.2rem; 
+    }
+    .carousel-content h1 { 
+        font-size: 2.2rem; 
+    }
+    .vitrine-section { 
+        padding: 3rem 2%; 
+    }
+    .product-card { 
+        width: 100%; 
+        max-width: 340px; 
+    }
+}
+/*US09 - ESTRUTURA E ARQUITETURA DO CARRINHO DE COMPRAS CHIC */
+
+/* Organiza o Closet e o Pagamento lado a lado em duas colunas */
+.carrinho-container {
+    padding: 4rem 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 7fr 4fr;
+    gap: 3rem;
+}
+
+/* Formatação da Tabela de Itens */
+.tabela-carrinho {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--superficie);
+    border-radius: var(--raio);
+    box-shadow: var(--sombra);
+    overflow: hidden;
+}
+
+.tabela-carrinho th {
+    background-color: var(--primaria);
+    color: var(--dourado);
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    padding: 1.25rem;
+    text-align: left;
+}
+
+.tabela-carrinho td {
+    padding: 1.25rem;
+    border-bottom: 1px solid var(--borda);
+    text-align: left;
+    vertical-align: middle;
+}
+
+/* Botões de controle de quantidade (+ e -) */
+.btn-qtd {
+    background: var(--primaria);
+    color: var(--dourado);
+    border: 1px solid var(--dourado);
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: var(--transition-smooth);
+}
+
+.btn-qtd:hover {
+    background: var(--dourado);
+    color: var(--primaria);
+}
+
+.qtd-valor {
+    font-weight: 600;
+    width: 30px;
+    text-align: center;
+    display: inline-block;
+    font-family: system-ui, sans-serif;
+}
+
+/* Botão de Excluir Item */
+.btn-remover {
+    background: transparent;
+    color: var(--perigo);
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-remover:hover {
+    text-decoration: underline;
+}
+
+/* Painel de Fechamento Financeiro e Cartão */
+.resumo-pagamento {
+    background: var(--superficie);
+    padding: 2rem;
+    border-radius: var(--raio);
+    box-shadow: var(--sombra);
+    border: 1px solid var(--borda);
+    height: fit-content;
+}
+
+.resumo-linha {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    border-bottom: 1px dashed var(--borda);
+    padding-bottom: 0.5rem;
+    font-family: system-ui, sans-serif;
+}
+
+.total-linha {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primaria);
+    border-bottom: none;
+}
+
+/* Responsividade para Celulares e Tablets */
+@media (max-width: 900px) {
+    .carrinho-container {
+        grid-template-columns: 1fr;
+        padding: 2rem 3%;
+    }
 }

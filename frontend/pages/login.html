@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Entrar - SmartClothes</title>
+  <link href="https://googleapis.com" rel="stylesheet">
+  <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+  <div class="auth">
+
+    <aside class="authMarca">
+      <p class="authLogo">SMARTCLOTHES</p>
+      <h1>Bem-vindo à nossa maison</h1>
+      <p>Entre na sua conta para conferir coleções exclusivas e acompanhar seus pedidos.</p>
+    </aside>
+
+    <main class="authPainel">
+      <div class="authCaixa">
+
+        <h2 class="section-title" style="text-align: left; font-size: 1.5rem; margin-bottom: 1.5rem;">Identifique-se</h2>
+
+        <div id="alerta" class="alerta" role="alert" hidden></div>
+
+        <!-- Formulário de Login Limpo -->
+        <form id="form-entrar" novalidate>
+          <div class="campo">
+            <label for="login-usuario">Usuário</label>
+            <input id="login-usuario" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" autofocus aria-required="true">
+          </div>
+
+          <div class="campo" style="margin-top: 1rem;">
+            <label for="login-senha">Senha</label>
+            <input id="login-senha" type="password" autocomplete="current-password" aria-required="true">
+          </div>
+
+          <button id="btn-entrar" class="btn btnbloco" type="submit" style="margin-top: 1.5rem;">Entrar</button>
+        </form>
+
+        <!-- Link Direto Funcional para o Cadastro -->
+        <p class="dica" style="margin-top: 1.5rem; text-align: center;">
+          Não tem uma conta? <a href="cadastro.html" style="color: var(--dourado); font-weight: bold; text-decoration: none;">Cadastre-se aqui</a>
+        </p>
+
+      </div>
+    </main>
+
+  </div>
+
+  <script type="module" src="../js/auth.js"></script>
+</body>
+</html>

@@ -1,24 +1,33 @@
-import { criarCliente } from "../../backend/src/controllers/clienteController";
-
-const formulario = document.getElementById('cadastro');
-const botao = document.getElementById('confirmar');
-
-formulario.addEventListener('submit', async (event) => {
-    event.preventDefault()
-
-    const cadastroClient = {
-        nome: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        cpf: document.getElementById('cpf').value,
-        telefone: document.getElementById('telefone').value,
-        endereco: document.getElementById('endereco').value
-    };
-
-    try {
-        await criarCliente(cadastroClient);
-        alert('cliente cadastrado com sucesso!');
-        formulario.reset();
-    } catch (error) {
-        alert(error.message);
-    }
-});
+export class ApiError extends Error {
+  constructor(mensagem, status, detalhes = []) {
+    super(mensagem);
+    this.name = 'ApiError';
+    this.status = status; 
+    this.detalhes = detalhes;
+  }
+}
+ 
+export async function api(caminho, { method = 'GET', body, redirecionar401 = true } = {}) {
+  let resposta;
+ 
+  try {
+    resposta = await fetch(`/api${caminho}`, {
+      method,
+      headers: body ? { 'Content-Type': 'application/json' } : undefined,
+      body: body ? JSON.stringify(body) : undefined
+    });
+  } catch {
+    throw new ApiError('Não foi possível conectar ao servidor.', 0);
+  }
+ 
+  if (resposta.status === 204) return null;
+ 
+  const dados = await resposta.json().catch(() => null);
+ 
+  if (!resposta.ok) {
+    if (resposta.status === 401 && redirecionar401) window.location.replace('/');
+    throw new ApiError(dados?.erro ?? 'Erro inesperado.', resposta.status, dados?.detalhes ?? []);
+  }
+ 
+  return dados;
+}

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Entrar - SmartClothes</title>
+  <link rel="stylesheet" href="/frontend/css/style.css">
+</head>
+<body>
+  <div class="auth">
+
+    <aside class="auth_marca">
+      <p class="auth_logo">SMARTCLOTHES</p>
+      <h1>Bem-vindo à nossa loja</h1>
+      <p>Entre ou crie sua conta para fazer compras e acompanhar seus pedidos.</p>
+    </aside>
+
+    <main class="auth_painel">
+      <div class="auth_caixa">
+
+        <div class="abas" role="tablist" aria-label="Acesso à conta">
+          <button id="aba-entrar" class="aba" type="button" role="tab"
+                  aria-selected="true" aria-controls="form-entrar">Entrar</button>
+          <button id="aba-criar" class="aba" type="button" role="tab"
+                  aria-selected="false" aria-controls="form-criar" tabindex="-1">Criar conta</button>
+        </div>
+
+        <div id="alerta" class="alerta" role="alert" hidden></div>
+
+        <form id="form-entrar" role="tabpanel" aria-labelledby="aba-entrar" novalidate>
+          <div class="campo">
+            <label for="login-usuario">Usuário</label>
+            <input id="login-usuario" type="text" autocomplete="username"
+                   autocapitalize="none" spellcheck="false" autofocus aria-required="true">
+          </div>
+
+          <div class="campo">
+            <label for="login-senha">Senha</label>
+            <input id="login-senha" type="password" autocomplete="current-password" aria-required="true">
+          </div>
+
+          <button id="btn-entrar" class="btn btn--primario btn--bloco" type="submit">Entrar</button>
+        </form>
+
+        <form id="form-criar" role="tabpanel" aria-labelledby="aba-criar" hidden novalidate>
+          <div class="grade">
+            <div class="campo campolargo">
+              <label for="reg-nome">Nome completo</label>
+              <input id="reg-nome" type="text" maxlength="100" autocomplete="name" aria-required="true">
+            </div>
+
+            <div class="campo">
+              <label for="reg-email">E-mail</label>
+              <input id="reg-email" type="email" maxlength="120" autocomplete="email" aria-required="true">
+            </div>
+
+            <div class="campo">
+              <label for="reg-cpf">CPF</label>
+              <input id="reg-cpf" type="text" inputmode="numeric" maxlength="14"
+                     placeholder="000.000.000-00" autocomplete="off" aria-required="true">
+            </div>
+
+            <div class="campo">
+              <label for="reg-telefone">Telefone</label>
+              <input id="reg-telefone" type="text" maxlength="20" autocomplete="tel">
+            </div>
+
+            <div class="campo">
+              <label for="reg-endereco">Endereço</label>
+              <input id="reg-endereco" type="text" maxlength="200" autocomplete="street-address">
+            </div>
+
+            <div class="campo campo--largo">
+              <label for="reg-usuario">Usuário</label>
+              <input id="reg-usuario" type="text" maxlength="50" autocomplete="username"
+                     autocapitalize="none" spellcheck="false">
+              <span class="dica">De 3 a 50 caracteres: letras, números, ponto, hífen ou sublinhado.</span>
+            </div>
+
+            <div class="campo">
+              <label for="reg-senha">Senha</label>
+              <input id="reg-senha" type="password" autocomplete="new-password">
+            </div>
+
+            <div class="campo">
+              <label for="reg-confirmar">Repita a senha</label>
+              <input id="reg-confirmar" type="password" autocomplete="new-password">
+            </div>
+
+            <span class="dica campolargo">A senha precisa ter pelo menos 8 caracteres, com letras e números.</span>
+          </div>
+
+          <button id="btn-criar" class="btn btn--primario btn--bloco" type="submit">Criar conta</button>
+        </form>
+
+      </div>
+    </main>
+
+  </div>
+
+  <script type="module" src="/js/auth.js"></script>
+</body>
+</html>

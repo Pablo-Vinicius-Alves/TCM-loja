@@ -5,20 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Criar Conta - SmartClothes</title>
   <link href="https://googleapis.com" rel="stylesheet">
-  <!-- Apontando para o CSS global unificado em roxo e dourado -->
-  <link rel="stylesheet" href="../css/login.css">
+  <link rel="stylesheet" href="/frontend/css/login.css">
 </head>
 <body>
   <div class="auth">
-
-    <!-- Painel Lateral Chic -->
     <aside class="authMarca">
       <p class="authLogo">SMARTCLOTHES</p>
-      <h1>Crie sua conta na nossa loja!!</h1>
+      <h1>Crie sua conta agora!</h1>
       <p>Cadastre-se para conferir coleções exclusivas, salvar seus looks favoritos e gerenciar seu carrinho de compras.</p>
     </aside>
 
-    <!-- Painel do Formulário -->
     <main class="authPainel">
       <div class="authCaixa">
         
@@ -26,7 +22,6 @@
 
         <div id="alerta" class="alerta" role="alert" hidden></div>
 
-        <!-- Formulário focado apenas no Cadastro -->
         <form id="form-criar" novalidate>
           <div class="grade">
             <div class="campolargo">
@@ -57,7 +52,7 @@
             <div class="campo campolargo">
               <label for="reg-usuario">Usuário</label>
               <input id="reg-usuario" type="text" maxlength="50" autocomplete="username" autocapitalize="none" spellcheck="false">
-              <span class="dica">De 3 a 50 caracteres: letras, números, ponto, hífen ou sublinhado.</span>
+              <span class="dica">apenas letras, números, ponto, hífen ou sublinhado.</span>
             </div>
 
             <div class="campo">
@@ -79,12 +74,10 @@
         <p class="dica" style="margin-top: 1.5rem; text-align: center;">
           Já tem uma conta? <a href="login.html" style="color: var(--dourado); font-weight: bold; text-decoration: none;">Faça login aqui</a>
         </p>
-
       </div>
     </main>
-
   </div>
 
-  <script type="module" src="../js/auth.js"></script>
+  <script type="module" src="/frontend/js/auth.js"></script>
 </body>
 </html>

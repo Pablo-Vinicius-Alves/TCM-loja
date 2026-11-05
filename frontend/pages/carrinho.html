@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seu Carrinho | SmartClothes</title>
     <link href="https://googleapis.com" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="/frontend/css/style.css">
     <style>
         .carrinho-container { padding: 4rem 5%; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 7fr 4fr; gap: 3rem; }
         .tabela-carrinho { width: 100%; border-collapse: collapse; background: var(--superficie); border-radius: var(--raio); box-shadow: var(--sombra); overflow: hidden; }
@@ -35,7 +35,6 @@
     </header>
 
     <main class="carrinho-container">
-        <!-- Seção de Itens -->
         <section>
             <h2 class="section-title" style="text-align: left; margin-bottom: 2rem;">Seu Closet Temporário</h2>
             <table class="tabela-carrinho">
@@ -48,13 +47,10 @@
                         <th>Ações</th>
                     </tr>
                 </thead>
-                <tbody id="itens-carrinho">
-                    <!-- Gerado pelo carrinho.js -->
-                </tbody>
+                <tbody id="itens-carrinho"></tbody>
             </table>
         </section>
 
-        <!-- Seção de Checkout de Cartão -->
         <aside class="resumo-pagamento" id="painel-checkout">
             <h3 style="margin-bottom: 1.5rem; text-transform: uppercase; color: var(--primaria); font-size: 1.1rem;">Fechamento</h3>
             <div class="resumo-linha">
@@ -80,6 +76,6 @@
         </aside>
     </main>
 
-    <script src="../js/carrinho.js"></script>
+    <script src="/frontend/js/"></script>
 </body>
 </html>

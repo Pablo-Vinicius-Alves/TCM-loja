@@ -9,17 +9,17 @@
 <body>
   <div class="auth">
 
-    <aside class="auth_marca">
-      <p class="auth_logo">SMARTCLOTHES</p>
+    <aside class="authMarca">
+      <p class="authLogo">SMARTCLOTHES</p>
       <h1>Bem-vindo à nossa loja</h1>
       <p>Entre ou crie sua conta para fazer compras e acompanhar seus pedidos.</p>
     </aside>
 
-    <main class="auth_painel">
-      <div class="auth_caixa">
+    <main class="authPainel">
+      <div class="authCaixa">
 
         <div class="abas" role="tablist" aria-label="Acesso à conta">
-          <button id="aba-entrar" class="aba" type="button" role="tab"
+          <button id="aba-entrar" class="aba active" type="button" role="tab"
                   aria-selected="true" aria-controls="form-entrar">Entrar</button>
           <button id="aba-criar" class="aba" type="button" role="tab"
                   aria-selected="false" aria-controls="form-criar" tabindex="-1">Criar conta</button>
@@ -39,12 +39,12 @@
             <input id="login-senha" type="password" autocomplete="current-password" aria-required="true">
           </div>
 
-          <button id="btn-entrar" class="btn btn--primario btn--bloco" type="submit">Entrar</button>
+          <button id="btn-entrar" class="btn btnprimario btnbloco" type="submit">Entrar</button>
         </form>
 
         <form id="form-criar" role="tabpanel" aria-labelledby="aba-criar" hidden novalidate>
           <div class="grade">
-            <div class="campo campolargo">
+            <div class="campolargo">
               <label for="reg-nome">Nome completo</label>
               <input id="reg-nome" type="text" maxlength="100" autocomplete="name" aria-required="true">
             </div>
@@ -90,7 +90,7 @@
             <span class="dica campolargo">A senha precisa ter pelo menos 8 caracteres, com letras e números.</span>
           </div>
 
-          <button id="btn-criar" class="btn btn--primario btn--bloco" type="submit">Criar conta</button>
+          <button id="btn-criar" class="btnbloco" type="submit">Criar conta</button>
         </form>
 
       </div>

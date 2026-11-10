@@ -1,4 +1,4 @@
-import { mostrarAlerta } from "./UI";
+import { mostrarAlerta } from "./ui.js";
 import { api, ApiError } from "./api";
 
 const $ = (id) => document.getElementById(id);

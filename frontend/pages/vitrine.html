@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vitrine | TCM Loja</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/vitrine.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="header__conteudo">
+      <h1 class="header__logo">TCM Loja</h1>
+      <div class="header__acoes">
+        <button id="btn-carrinho" class="btn btn--icone" type="button" aria-label="Ver Carrinho">
+           Carrinho (<span id="carrinho-contador">0</span>)
+        </button>
+        <div id="usuario-container">
+
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <h2>Nossos Produtos</h2>
+    
+    <div class="carrossel-wrapper">
+      <button id="btn-prev" class="carrossel-btn carrossel-btn--prev" type="button" aria-label="Anterior">&#10094;</button>
+
+      <div id="grade-produtos" class="carrossel-trilho">
+      </div>
+
+      <button id="btn-next" class="carrossel-btn carrossel-btn--next" type="button" aria-label="Próximo">&#10095;</button>
+    </div>
+  </main>
+
+  <dialog id="modal-carrinho" class="modal">
+    <div class="modal__conteudo">
+      <button id="fechar-carrinho" class="modal__fechar" type="button" aria-label="Fechar">&times;</button>
+      <h3>Seu Carrinho</h3>
+      
+      <div id="carrinho-itens" class="carrinho-itens">
+      </div>
+
+      <div class="carrinho-rodape">
+        <div class="carrinho-total">
+          <span>Total:</span>
+          <strong id="carrinho-total-valor">R$ 0,00</strong>
+        </div>
+        <button id="btn-finalizar-compra" class="btn btn--primario btn--bloco" type="button">
+          Finalizar Compra
+        </button>
+      </div>
+    </div>
+  </dialog>
+
+  <script type="module" src="../js/vitrine.js"></script>
+</body>
+</html>

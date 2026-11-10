@@ -1,102 +1,120 @@
 import { api, ApiError } from './api.js';
+import { mostrarAlerta, esconderAlerta, formatarCpf } from './ui.js';
 
-const paginaInicial = '/frontend/pages/index.html';
+const PAGINA_INICIAL = 'vitrine.html';
+const PAGINA_CHECKOUT = 'checkout.html';
+
 const $ = (id) => document.getElementById(id);
+const alerta = $('alerta');
+
+const abas = {
+  entrar: { aba: $('aba-entrar'), form: $('form-entrar') },
+  criar: { aba: $('aba-criar'), form: $('form-criar') }
+};
+
+api('/auth/me', { redirecionar401: false })
+  .then(() => tratarRedirecionamentoPosLogin())
+  .catch(() => {});
+
+function selecionarAba(nome, { limparAlerta = true } = {}) {
+  for (const [chave, { aba, form }] of Object.entries(abas)) {
+    const ativa = chave === nome;
+    aba.setAttribute('aria-selected', String(ativa));
+    aba.tabIndex = ativa ? 0 : -1;
+    form.hidden = !ativa;
+  }
+  if (limparAlerta) esconderAlerta(alerta);
+}
+
+for (const [chave, { aba }] of Object.entries(abas)) {
+  aba.addEventListener('click', () => selecionarAba(chave));
+
+  aba.addEventListener('keydown', (evento) => {
+    if (evento.key !== 'ArrowLeft' && evento.key !== 'ArrowRight') return;
+    const outra = chave === 'entrar' ? 'criar' : 'entrar';
+    selecionarAba(outra);
+    abas[outra].aba.focus();
+  });
+}
 
 async function enviar(botao, acao) {
-  const alerta = $('alerta');
   esconderAlerta(alerta);
-  if (botao) botao.disabled = true;
-
+  botao.disabled = true;
   try {
     await acao();
   } catch (erro) {
-    if (erro instanceof ApiError) {
-      mostrarAlerta(alerta, erro.message, 'erro', erro.detalhes);
-    } else {
-      mostrarAlerta(alerta, 'Ocorreu um erro inesperado. Tente novamente.', 'erro');
-      console.error(erro);
-    }
+    if (!(erro instanceof ApiError)) throw erro;
+    mostrarAlerta(alerta, erro.message, 'erro', erro.detalhes);
   } finally {
-    if (botao) botao.disabled = false;
+    botao.disabled = false;
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  const formEntrar = $('form-entrar');
-  const formCriar = $('form-criar');
+function tratarRedirecionamentoPosLogin() {
+  const veioDoCheckout = sessionStorage.getItem('redirecionar_checkout');
+  
+  if (veioDoCheckout) {
+    sessionStorage.removeItem('redirecionar_checkout');
+    window.location.replace(PAGINA_CHECKOUT);
+  } else {
+    window.location.replace(PAGINA_INICIAL);
+  }
+}
 
-  api('/auth/perfil', { redirecionar401: false })
-    .then(() => window.location.replace(paginaInicial))
-    .catch(() => {});
+abas.entrar.form.addEventListener('submit', (evento) => {
+  evento.preventDefault();
 
-  if (formEntrar) {
-    const usuarioSalvo = localStorage.getItem('login_usuario_temp');
-    if (usuarioSalvo) {
-      const campoUsuario = $('login-usuario');
-      if (campoUsuario) {
-        campoUsuario.value = usuarioSalvo;
-        $('login-senha')?.focus();
+  enviar($('btn-entrar'), async () => {
+    await api('/auth/login', {
+      method: 'POST',
+      redirecionar401: false,
+      body: { 
+        usuario: $('login-usuario').value.trim(), 
+        senha: $('login-senha').value 
       }
-      localStorage.removeItem('login_usuario_temp');
-    }
-
-    formEntrar.addEventListener('submit', (event) => {
-      event.preventDefault();
-
-      enviar($('btn-entrar'), async () => {
-        await api('/auth/login', {
-          method: 'POST',
-          redirecionar401: false,
-          body: {
-            usuario: $('login-usuario').value,
-            senha: $('login-senha').value
-          }
-        });
-        window.location.href = paginaInicial;
-      });
     });
+
+    tratarRedirecionamentoPosLogin();
+  });
+});
+
+abas.criar.form.addEventListener('submit', (evento) => {
+  evento.preventDefault();
+
+  const senha = $('reg-senha').value;
+  const confirmar = $('reg-confirmar').value;
+
+  if (!senha || !confirmar) {
+    mostrarAlerta(alerta, 'Preencha os campos de senha.');
+    return;
   }
 
-  if (formCriar) {
-    const campoCpf = $('reg-cpf');
-    if (campoCpf) {
-      campoCpf.addEventListener('input', () => {
-        campoCpf.value = formatarCpf(campoCpf.value);
-      });
-    }
-
-    formCriar.addEventListener('submit', (event) => {
-      event.preventDefault();
-
-      const senha = $('reg-senha').value;
-      const confirmar = $('reg-confirmar').value;
-
-      if (senha !== confirmar) {
-        mostrarAlerta($('alerta'), 'As senhas não conferem.');
-        return;
-      }
-
-      enviar($('btn-criar'), async () => {
-        const dados = {
-          nome: $('reg-nome').value,
-          email: $('reg-email').value,
-          cpf: $('reg-cpf').value,
-          telefone: $('reg-telefone').value,
-          endereco: $('reg-endereco').value,
-          usuario: $('reg-usuario').value,
-          senha: senha
-        };
-
-        await api('/auth/registrar', {
-          method: 'POST',
-          redirecionar401: false,
-          body: dados
-        });
-
-        localStorage.setItem('login_usuario_temp', dados.usuario.trim().toLowerCase());
-        window.location.href = 'login.html';
-      });
-    });
+  if (senha !== confirmar) {
+    mostrarAlerta(alerta, 'As senhas não conferem.');
+    return;
   }
+
+  enviar($('btn-criar'), async () => {
+    const dados = {
+      nome: $('reg-nome').value.trim(),
+      email: $('reg-email').value.trim(),
+      cpf: $('reg-cpf').value.trim(),
+      telefone: $('reg-telefone').value.trim(),
+      endereco: $('reg-endereco').value.trim(),
+      usuario: $('reg-usuario').value.trim(),
+      senha: senha
+    };
+
+    const resposta = await api('/auth/registrar', {
+      method: 'POST',
+      redirecionar401: false,
+      body: dados
+    });
+
+    selecionarAba('entrar');
+    $('login-usuario').value = dados.usuario.toLowerCase();
+    $('login-senha').value = '';
+    $('login-senha').focus();
+    mostrarAlerta(alerta, resposta.mensagem || 'Conta criada com sucesso! Faça login.', 'sucesso');
+  });
 });

@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vitrine | TCM Loja</title>
-  <link rel="stylesheet" href="/frontend/css/vitrine.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/vitrine.css">
 </head>
 <body>
 
@@ -12,10 +13,11 @@
     <div class="header__conteudo">
       <h1 class="header__logo">TCM Loja</h1>
       <div class="header__acoes">
-        <button id="btn-carrinho" class="btn btn--icone" aria-label="Ver Carrinho">
-         Carrinho (<span id="carrinho-contador">0</span>)
+        <button id="btn-carrinho" class="btn btn--icone" type="button" aria-label="Ver Carrinho">
+           Carrinho (<span id="carrinho-contador">0</span>)
         </button>
         <div id="usuario-container">
+
         </div>
       </div>
     </div>
@@ -23,25 +25,37 @@
 
   <main class="container">
     <h2>Nossos Produtos</h2>
-    <div id="grade-produtos" class="grade-produtos">
+    
+    <div class="carrossel-wrapper">
+      <button id="btn-prev" class="carrossel-btn carrossel-btn--prev" type="button" aria-label="Anterior">&#10094;</button>
+
+      <div id="grade-produtos" class="carrossel-trilho">
+      </div>
+
+      <button id="btn-next" class="carrossel-btn carrossel-btn--next" type="button" aria-label="Próximo">&#10095;</button>
     </div>
   </main>
 
-  <dialog id="modal-auth" class="modal">
+  <dialog id="modal-carrinho" class="modal">
     <div class="modal__conteudo">
-      <button id="modal-fechar" class="modal__fechar" aria-label="Fechar">&times;</button>
-      <div class="modal__corpo">
-        <span class="modal__icone"></span>
-        <h3>Faça login para continuar</h3>
-        <p>Você precisa estar conectado à sua conta para adicionar itens ao carrinho.</p>
-        <div class="modal__acoes">
-          <a href="/pages/login.html" class="btn btn--primario btn--bloco">Entrar na Conta</a>
-          <a href="/pages/login.html#criar" class="btn btn--secundario btn--bloco">Criar nova conta</a>
+      <button id="fechar-carrinho" class="modal__fechar" type="button" aria-label="Fechar">&times;</button>
+      <h3>Seu Carrinho</h3>
+      
+      <div id="carrinho-itens" class="carrinho-itens">
+      </div>
+
+      <div class="carrinho-rodape">
+        <div class="carrinho-total">
+          <span>Total:</span>
+          <strong id="carrinho-total-valor">R$ 0,00</strong>
         </div>
+        <button id="btn-finalizar-compra" class="btn btn--primario btn--bloco" type="button">
+          Finalizar Compra
+        </button>
       </div>
     </div>
   </dialog>
 
-  <script type="module" src="/frontend/js/vitrine.js"></script>
+  <script type="module" src="../js/vitrine.js"></script>
 </body>
 </html>

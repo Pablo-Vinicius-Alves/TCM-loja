@@ -28,7 +28,19 @@ const PRODUTOS = [
     id: 4,
     nome: 'Look Temo',
     preco: 99.90,
-    imagem: '../assets/produtos/terno.jpg'
+    imagem: '../assets/produtos/vestido-costas.jpg'
+  },
+  {
+    id: 5,
+    nome: 'Look Temo',
+    preco: 99.90,
+    imagem: '../assets/produtos/vestido-amarelos.jpg'
+  },
+  {
+    id: 6,
+    nome: 'Look Temo',
+    preco: 99.90,
+    imagem: '../assets/produtos/terno2.jpg'
   }
 ];
 
@@ -66,7 +78,7 @@ function renderizarHeaderUsuario() {
   if (usuarioAutenticado) {
     container.innerHTML = `<span>Olá, <strong>${usuarioDados.nome || 'Cliente'}</strong></span>`;
   } else {
-    container.innerHTML = `<a href="/pages/login.html" class="btn btn--secundario">Entrar</a>`;
+    container.innerHTML = `<a href="index.html" class="btn btn--secundario">Entrar</a>`;
   }
 }
 
@@ -163,3 +175,19 @@ $('modal-fechar')?.addEventListener('click', () => $('modal-auth')?.close());
 checarSessao();
 renderizarProdutos();
 atualizarContadorCarrinho();
+
+const trilho = $('grade-produtos');
+const btnPrev = $('btn-prev');
+const btnNext = $('btn-next');
+
+if (trilho && btnPrev && btnNext) {
+  const LARGURA_CARD = 284;
+
+  btnPrev.addEventListener('click', () => {
+    trilho.scrollBy({ left: -LARGURA_CARD * 2, behavior: 'smooth' });
+  });
+
+  btnNext.addEventListener('click', () => {
+    trilho.scrollBy({ left: LARGURA_CARD * 2, behavior: 'smooth' });
+  });
+}

@@ -1,11 +1,10 @@
 import 'dotenv/config';
 
-const obrigatorias = ['DB_HOST', 'DB_NAME', 'DB_USER'];
+const obrigatorias = ['DB_HOST', 'DB_NAME', 'DB_USER', 'JWT_SECRET'];
 const faltando = obrigatorias.filter((nome) => !process.env[nome]);
 
 if (faltando.length) {
   console.error(`Variáveis ausentes no .env: ${faltando.join(', ')}`);
-  process.exit(1);
 }
 
 if (process.env.JWT_SECRET.length < 32) {

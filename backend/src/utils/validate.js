@@ -1,4 +1,4 @@
-import { AppError } from './appError.js';
+import { AppError } from './AppError.js';
 import { validarCPF } from './cpf.js';
  
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

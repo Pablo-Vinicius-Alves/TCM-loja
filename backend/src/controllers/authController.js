@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 import * as Auth from '../models/authModel.js';
-import { AppError } from '../utils/appError.js';
+import { AppError } from '../appError.js';
 import { lerRegistro, lerLogin } from '../utils/validate.js';
 import {
   assinarToken,

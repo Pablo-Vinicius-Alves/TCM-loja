@@ -1,71 +1,102 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartClothes</title>
-    <link rel="icon" type="image/jpeg" href="../imag/logoDaMarca.jpg">
-    <link rel="stylesheet" href="../css/style.css">
-    <link href="https://googleapis.com" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Entrar | TCM Loja</title>
+  <link rel="stylesheet" href="/frontend/css/style.css">
 </head>
 <body>
+  <div class="auth">
 
-    <header>
-        <div class="logo">SMARTCLOTHES</div>
-        <nav>
-            <ul>
-                <li><a href="index.html" class="active">Início</a></li>
-                <li><a href="colecoes.html">Coleções</a></li>
-                <li><a href="login.html">Login</a></li>
-                <li><a href="carrinho.html">Carrinho (<span id="contagem-carrinho">0</span>)</a></li>
-            </ul>
-        </nav>
-    </header>
+    <aside class="auth__marca">
+      <p class="auth__logo">TCM Loja</p>
+      <h1>Bem-vindo à nossa loja</h1>
+      <p>Entre na sua conta ou crie uma nova para fazer compras e acompanhar seus pedidos.</p>
+    </aside>
 
-    <section class="carousel-container">
-        <div class="carousel-slide">
-            <div class="carousel-content">
-                <h1>Coleção de Inverno</h1>
-                <p style="letter-spacing: 4px; margin-bottom: 2rem; font-family: system-ui;">Coleção: Crepúsculo Dourado </p>
-                <a href="colecoes.html" class="btn-gold">Descubra</a>
+    <main class="auth__painel">
+      <div class="auth__caixa">
+
+        <div class="abas" role="tablist" aria-label="Acesso à conta">
+          <button id="aba-entrar" class="aba" type="button" role="tab"
+                  aria-selected="true" aria-controls="form-entrar">Entrar</button>
+          <button id="aba-criar" class="aba" type="button" role="tab"
+                  aria-selected="false" aria-controls="form-criar" tabindex="-1">Criar conta</button>
+        </div>
+
+        <div id="alerta" class="alerta" role="alert" hidden></div>
+
+        <form id="form-entrar" role="tabpanel" aria-labelledby="aba-entrar" novalidate>
+          <div class="campo">
+            <label for="login-usuario">Usuário</label>
+            <input id="login-usuario" type="text" autocomplete="username"
+                   autocapitalize="none" spellcheck="false" autofocus>
+          </div>
+
+          <div class="campo">
+            <label for="login-senha">Senha</label>
+            <input id="login-senha" type="password" autocomplete="current-password">
+          </div>
+
+          <button id="btn-entrar" class="btn btn--primario btn--bloco" type="submit">Entrar</button>
+        </form>
+
+        <form id="form-criar" role="tabpanel" aria-labelledby="aba-criar" hidden novalidate>
+          <div class="grade">
+            <div class="campo campo--largo">
+              <label for="reg-nome">Nome completo *</label>
+              <input id="reg-nome" type="text" maxlength="100" autocomplete="name">
             </div>
-        </div>
-    </section>
 
-    <section class="vitrine-section">
-        <h2 class="section-title">Estilo para o Ano Todo</h2>
-        <div class="products-grid">
-      
-    <div class="product-card">
-        <div class="product-image-placeholder">
-        <img src="../imag/images (2).jpg" alt="Blazer Cravejado">
-        </div>
-        <div class="product-title">Terno Slim Fit Casual</div>
-        <div class="product-price">R$ 599,00</div>
-        <button class="btn-gold" style="padding: 0.5rem 1.5rem; font-size: 0.8rem;">Adicionar</button>
+            <div class="campo">
+              <label for="reg-email">E-mail *</label>
+              <input id="reg-email" type="email" maxlength="120" autocomplete="email">
+            </div>
+
+            <div class="campo">
+              <label for="reg-cpf">CPF *</label>
+              <input id="reg-cpf" type="text" inputmode="numeric" maxlength="14"
+                     placeholder="000.000.000-00" autocomplete="off">
+            </div>
+
+            <div class="campo">
+              <label for="reg-telefone">Telefone</label>
+              <input id="reg-telefone" type="text" maxlength="20" autocomplete="tel">
+            </div>
+
+            <div class="campo">
+              <label for="reg-endereco">Endereço</label>
+              <input id="reg-endereco" type="text" maxlength="200" autocomplete="street-address">
+            </div>
+
+            <div class="campo campo--largo">
+              <label for="reg-usuario">Usuário *</label>
+              <input id="reg-usuario" type="text" maxlength="50" autocomplete="username"
+                     autocapitalize="none" spellcheck="false">
+              <span class="dica">De 3 a 50 caracteres: letras, números, ponto, hífen ou sublinhado.</span>
+            </div>
+
+            <div class="campo">
+              <label for="reg-senha">Senha *</label>
+              <input id="reg-senha" type="password" autocomplete="new-password">
+            </div>
+
+            <div class="campo">
+              <label for="reg-confirmar">Repita a senha *</label>
+              <input id="reg-confirmar" type="password" autocomplete="new-password">
+            </div>
+
+            <span class="dica campo--largo">A senha precisa ter pelo menos 8 caracteres, com letras e números.</span>
+          </div>
+
+          <button id="btn-criar" class="btn btn--primario btn--bloco" type="submit">Criar conta</button>
+        </form>
+
       </div>
+    </main>
 
-      <div class="product-card">
-        <div class="product-image-placeholder">
-          <img src="../imag/cf304a7455fe18cfe8936889e975e63e.jpg" alt="Vestido Folheado a Ouro">
-        </div>
-        <div class="product-title">Blusa de Lã Premium</div>
-        <div class="product-price">R$ 780,00</div>
-        <button class="btn-gold" style="padding: 0.5rem 1.5rem; font-size: 0.8rem;">Adicionar</button>
-      </div>
-
-      <div class="product-card">
-        <div class="product-image-placeholder">
-          <img src="../imag/images (1).jpg" alt="Vestido de lã Roxa">
-        </div>
-        <div class="product-title">Sobretudo Casual Urbano</div>
-        <div class="product-price">R$ 749,00</div>
-        <button class="btn-gold" style="padding: 0.5rem 1.5rem; font-size: 0.8rem;">Adicionar</button>
-      </div>
-
-    </div>
-  </section>
+  </div>
 
   <script type="module" src="/frontend/js/auth.js"></script>
 </body>

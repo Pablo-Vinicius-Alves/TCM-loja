@@ -19,7 +19,7 @@ function lerPessoa(body, erros) {
   else if (email.length > 120) erros.push('email deve ter no máximo 120 caracteres');
  
   if (!cpf) erros.push('cpf é obrigatório');
-  else if (!cpfValido(cpf)) erros.push('cpf inválido');
+ 
  
   if (telefone && telefone.length > 20) erros.push('telefone deve ter no máximo 20 caracteres');
   if (endereco && endereco.length > 200) erros.push('endereco deve ter no máximo 200 caracteres');

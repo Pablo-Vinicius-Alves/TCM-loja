@@ -12,7 +12,7 @@ const abas = {
   criar: { aba: $('aba-criar'), form: $('form-criar') }
 };
 
-api('/auth/me', { redirecionar401: false })
+api('/auth/perfil', { redirecionar401: false })
   .then(() => tratarRedirecionamentoPosLogin())
   .catch(() => {});
 
@@ -84,11 +84,6 @@ abas.criar.form.addEventListener('submit', (evento) => {
   const senha = $('reg-senha').value;
   const confirmar = $('reg-confirmar').value;
 
-  if (!senha || !confirmar) {
-    mostrarAlerta(alerta, 'Preencha os campos de senha.');
-    return;
-  }
-
   if (senha !== confirmar) {
     mostrarAlerta(alerta, 'As senhas não conferem.');
     return;
@@ -98,7 +93,7 @@ abas.criar.form.addEventListener('submit', (evento) => {
     const dados = {
       nome: $('reg-nome').value.trim(),
       email: $('reg-email').value.trim(),
-      cpf: $('reg-cpf').value.trim(),
+      cpf: $('reg-cpf').value, 
       telefone: $('reg-telefone').value.trim(),
       endereco: $('reg-endereco').value.trim(),
       usuario: $('reg-usuario').value.trim(),

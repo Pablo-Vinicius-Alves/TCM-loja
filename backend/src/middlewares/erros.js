@@ -14,6 +14,7 @@ export function handleErrors(err, req, res, next) {
   if (err.code === 'ER_DUP_ENTRY') {
   let mensagem = 'Registro duplicado.';
 
+  console.error(err.code, '|', err.sqlMessage);
   if (err.sqlMessage.includes('cpf')) {
     mensagem = 'Este CPF já está cadastrado.';
   } else if (err.sqlMessage.includes('email')) {

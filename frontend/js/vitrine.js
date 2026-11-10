@@ -127,7 +127,7 @@ async function finalizarCompra() {
   }
 
   try {
-    await api('/auth/me', { redirecionar401: false });
+    await api('/auth/perfil', { redirecionar401: false });
     usuarioAutenticado = true;
   } catch {
     usuarioAutenticado = false;

@@ -8,7 +8,7 @@ export async function buscarCadastroPorUsuario(usuario) {
       WHERE ca.usuario = ?`,
     [usuario]
   );
-  return linhas[0] ?? null;
+  return linhas.at(0) ?? null;
 }
 
 export async function contarFalhasRecentes(idCliente, minutos) {
@@ -17,13 +17,14 @@ export async function contarFalhasRecentes(idCliente, minutos) {
        FROM login
       WHERE id_cliente = ?
         AND sucesso = FALSE
+        AND data_hora_login >= DATE_SUB(NOW(), INTERVAL ? MINUTE)
         AND id_login > COALESCE(
               (SELECT MAX(id_login) FROM login
                 WHERE id_cliente = ? AND sucesso = TRUE),
               0)`,
     [idCliente, minutos, idCliente]
   );
-  return Number(linhas[0].total);
+  return Number(linhas.at(0)?.total ?? 0);
 }
 
 export async function registrarTentativa({ idCliente, ip, navegador, sucesso }) {
@@ -54,8 +55,19 @@ export async function criarConta(cliente, usuario, senhaHash) {
     return resultado.insertId;
   } catch (erro) {
     await conexao.rollback();
-    throw erro;               
+    throw erro;
   } finally {
-    conexao.release();        
+    conexao.release();
   }
+}
+
+export async function buscarPerfil(usuario) {
+  const [linhas] = await connectionDB.query(
+    `SELECT c.id_cliente, c.nome, c.email, c.telefone, c.cpf, c.endereco, ca.usuario
+       FROM cadastro ca
+       JOIN cliente c ON c.id_cliente = ca.id_cliente
+      WHERE ca.usuario = ?`,
+    [usuario]
+  );
+  return linhas.at(0) ?? null;
 }

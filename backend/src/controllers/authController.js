@@ -1,10 +1,12 @@
 import bcrypt from 'bcryptjs';
 import * as Auth from '../models/authModel.js';
-import { AppError } from '../utils/appError.js';
+import { AppError } from '../utils/AppError.js';
 import { lerRegistro, lerLogin } from '../utils/validate.js';
 import {
   assinarToken,
-  NOME_COOKIE
+  NOME_COOKIE,
+  opcoesCookie,
+  opcoesLimparCookie
 } from '../utils/token.js';
  
 const CUSTO_BCRYPT = 10;

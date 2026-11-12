@@ -1,457 +1,146 @@
-:root {
-  --fundo: #faf8fb;               
-  --superficie: #ffffff;
-  --texto: #21153b;              
-  --texto-suave: #62557a;         
-  --borda: #ebdff5;               
-  --primaria: #2e1a47;            
-  --primaria-escura: #1f1033;    
-  --dourado: #d4af37;            
-  --dourado-escuro: #b89326;    
-  --perigo: #9e2a2b;
-  --perigo-fundo: #fff0f0;
-  --sucesso: #1e5e3a;
-  --sucesso-fundo: #f0fbf4;
-  --raio: 6px;                  
-  --sombra: 0 4px 20px rgb(46 26 71 / 6%);
+/* ==========================================================
+   TELA DIVIDIDA SOFISTICADA (LOGIN E CADASTRO)
+   ========================================================== */
+.tela-acesso {
+  min-height: 100vh; /* Ocupa 100% da altura da tela */
+  display: grid; /* Divide a tela em colunas */
+  grid-template-columns: 5fr 7fr; /* Lado esquerdo menor, direito maior */
 }
 
-*{
-    box-sizing: border-box;
+/* ==========================================================
+   PAINEL ESQUERDO (IDENTIDADE DA GRIFE)
+   ========================================================== */
+.painel-marca {
+  display: flex; /* Organiza conteúdo */
+  flex-direction: column; /* Empilha logo, título e texto */
+  justify-content: center; /* Centraliza na vertical */
+  padding: 4rem 3.5rem; /* Espaço interno generoso */
+  color: var(--branco-puro); /* Texto branco */
+  background: radial-gradient(circle at top left, #4a2a75 0%, var(--roxo-profundo) 75%); /* Degradê luxuoso */
+  border-right: 3px solid var(--dourado); /* Linha dourada divisória */
+  position: relative; /* Base para detalhes */
 }
 
-body {
-    margin: 0;
-    font-family: 'Playfair Display', Georgia, system-ui, -apple-system, sans-serif;
-    font-size: 1rem;
-    line-height: 1.5;
-    color: var(--texto);
-    background-color: var(--fundo);
+.cabecalho-marca-acesso {
+  display: flex; /* Coloca logo e nome lado a lado */
+  align-items: center; /* Centraliza na vertical */
+  gap: 14px; /* Espaço entre logo e texto */
+  margin-bottom: 2.5rem; /* Espaço abaixo da marca */
+  text-decoration: none; /* Tira sublinhado */
 }
 
-main{
-    padding-top: 1.7rem;
-    padding-bottom: 3rem;
+.logo-acesso {
+  width: 54px; /* Largura da logo */
+  height: 54px; /* Altura da logo */
+  border-radius: 50%; /* Deixa redonda */
+  border: 2px solid var(--dourado); /* Borda dourada */
+  object-fit: cover; /* Ajusta foto sem esticar */
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.35); /* Brilho dourado */
 }
 
-h1{margin: 0; font-size: 1.6rem; font-weight: 400; letter-spacing: 1px;}
-h2{margin: 0 0 1rem; font-size: 1.1rem; font-weight: 600;}
-
-.btn{
-    font: inherit;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 0.85rem;
-    padding: 11px 20px;
-    border: 1px solid var(--dourado);
-    background-color: var(--primaria);
-    color: var(--dourado);
-    border-radius: var(--raio);
-    cursor: pointer;
-    transition: all 0.3s ease;
+.nome-marca-acesso {
+  font-weight: 700; /* Negrito */
+  font-size: 1.5rem; /* Tamanho do nome */
+  color: var(--dourado); /* Dourado */
+  letter-spacing: 3px; /* Espaço entre letras */
 }
 
-.btn:hover {
-    background-color: var(--dourado);
-    color: var(--primaria);
-    border-color: var(--dourado);
-    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+.painel-marca h1 {
+  font-size: 2.4rem; /* Título grande */
+  line-height: 1.25; /* Altura da linha */
+  margin-bottom: 1rem; /* Espaço abaixo */
+  color: var(--branco-puro); /* Branco */
 }
 
-.btn:disabled { opacity: 0.5; cursor: not-allowed; }
-
-.btn:focus-visible,
-input:focus-visible { 
-    outline: 2px solid var(--dourado); 
-    outline-offset: 2px; 
+.painel-marca p {
+  color: var(--lilas-claro); /* Lilás suave */
+  font-size: 1rem; /* Tamanho do parágrafo */
+  font-family: system-ui, sans-serif; /* Fonte limpa */
+  max-width: 36ch; /* Limita largura para leitura elegante */
 }
 
-.alerta{
-    padding: 0.8rem 1rem;
-    margin-bottom: 1rem;
-    border-radius: var(--raio);
-    border: 1px solid;
+.link-voltar-loja {
+  margin-top: 2.5rem; /* Espaço acima */
+  color: var(--dourado); /* Cor dourada */
+  text-decoration: none; /* Sem sublinhado */
+  font-family: system-ui, sans-serif; /* Fonte limpa */
+  font-size: 0.85rem; /* Tamanho da letra */
+  letter-spacing: 1px; /* Espaço entre letras */
+  text-transform: uppercase; /* Maiúsculas */
 }
 
-.alerta[hidden] { display: none; }
-.alerta ul { margin: 6px 0 0; padding-left: 20px; }
-
-.grade{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+.link-voltar-loja:hover {
+  text-decoration: underline; /* Sublinha ao passar o mouse */
 }
 
-.campo { display: flex; flex-direction: column; gap: 4px; }
-.campolargo { grid-column: 1 / -1; }
-.campo label { font-size: 0.875rem; font-weight: 600; color: var(--texto); }
-
-input[type='text'],
-input[type='email'],
-input[type='password'],
-input[type='search'] {
-  font: inherit;
-  width: 100%;
-  padding: 10px 14px;
-  border: 1px solid var(--borda);
-  border-radius: var(--raio);
-  background: var(--superficie);
-  color: var(--texto);
-  transition: border-color 0.3s ease;
+/* ==========================================================
+   PAINEL DIREITO (CARTÃO DO FORMULÁRIO)
+   ========================================================== */
+.painel-formulario {
+  display: flex; /* Centraliza o cartão */
+  align-items: center; /* Centraliza na vertical */
+  justify-content: center; /* Centraliza na horizontal */
+  padding: 2.5rem 1.5rem; /* Espaço ao redor */
+  background-color: var(--branco-perola); /* Fundo claro */
 }
 
-input[type='text']:focus,
-input[type='email']:focus,
-input[type='password']:focus,
-input[type='search']:focus {
-    border-color: var(--dourado);
+.cartao-formulario {
+  width: 100%; /* Largura total até o limite */
+  max-width: 480px; /* Largura máxima elegante */
+  background: var(--branco-puro); /* Fundo branco */
+  padding: 2.8rem; /* Espaço interno */
+  border-radius: var(--arredondamento); /* Cantos arredondados */
+  border: 1px solid var(--lilas-claro); /* Borda fina */
+  border-top: 4px solid var(--dourado); /* Detalhe dourado no topo */
+  box-shadow: 0 12px 35px rgba(46, 26, 71, 0.08); /* Sombra sofisticada */
 }
 
-th, td{
-    text-align: left;
-    padding: 10px 12px;
-    border-bottom: 1px solid var(--borda);
-    vertical-align: middle;
-}
-th {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05rem;
-    color: var(--texto-suave);
+.titulo-formulario {
+  font-size: 1.6rem; /* Tamanho do título */
+  color: var(--roxo-escuro); /* Cor roxa */
+  margin-bottom: 0.4rem; /* Espaço abaixo */
 }
 
-.auth{
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: minmax(350px, 5fr) 7fr;
+.subtitulo-formulario {
+  font-family: system-ui, sans-serif; /* Fonte limpa */
+  font-size: 0.9rem; /* Tamanho pequeno */
+  color: var(--roxo-acinzentado); /* Cor suave */
+  margin-bottom: 1.8rem; /* Espaço antes dos campos */
 }
 
-.authMarca{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 0.9rem;
-    padding: 4rem 3rem;
-    color: #fff;
-    background: linear-gradient(135deg, var(--primaria) 0%, #170b24 100%);
-    position: relative;
-    border-right: 2px solid var(--dourado);
+.formulario-lista {
+  display: flex; /* Organiza campos */
+  flex-direction: column; /* Empilha um abaixo do outro */
+  gap: 1.1rem; /* Espaço entre campos */
 }
 
-.authLogo { 
-    margin: 0 0 24px; 
-    font-weight: 700; 
-    font-size: 1.4rem; 
-    color: var(--dourado);
-    text-transform: uppercase;
-    letter-spacing: 2px;
+.divisor-cadastro {
+  margin-top: 1.8rem; /* Espaço acima */
+  padding-top: 1.4rem; /* Espaço interno acima */
+  border-top: 1px solid var(--lilas-claro); /* Linha divisória */
+  text-align: center; /* Centraliza texto e botão */
 }
 
-.authMarca h1 { 
-    font-size: 2.2rem; 
-    line-height: 1.3; 
-    color: #ffffff;
+.divisor-cadastro p {
+  font-family: system-ui, sans-serif; /* Fonte limpa */
+  font-size: 0.85rem; /* Tamanho pequeno */
+  color: var(--roxo-acinzentado); /* Cor suave */
+  margin-bottom: 0.8rem; /* Espaço antes do botão */
 }
 
-.authMarca p { 
-    margin: 0; 
-    max-width: 34ch; 
-    color: var(--borda); 
-    font-size: 1rem;
-    font-family: system-ui, sans-serif;
-}
- 
-.authPainel{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem 1rem;
-    background-color: var(--fundo);
-}
-
-.authCaixa{
-    width: 100%; 
-    max-width: 460px;
-    background: var(--superficie);
-    padding: 2.5rem;
-    border-radius: var(--raio);
-    box-shadow: var(--sombra);
-}
-
-.abas { 
-    display: flex;
-    margin-bottom: 24px; 
-    border-bottom: 1px solid var(--borda); 
-}
-
-.aba {
-  font: inherit;
-  font-weight: 600;
-  text-transform: uppercase;
-  font-size: 0.85rem;
-  letter-spacing: 1px;
-  position: relative;
-  margin-bottom: -1px;
-  padding: 12px 18px;
-  background: none;
-  border: 0;
-  border-bottom: 2px solid transparent;
-  color: var(--texto-suave);
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.aba:hover {
-    color: var(--primaria);
-}
-
-.aba.active {
-    color: var(--primaria);
-}
-
-.aba.active::after{
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: var(--dourado); 
-    border-radius: 2px;
-}
-
-#form-entrar { display: flex; flex-direction: column; gap: 16px; }
-
-.btnbloco { 
-    width: 100%; 
-    margin-top: 20px; 
-    padding: 13px 16px; 
-}
-#form-entrar .btnbloco { margin-top: 8px; }
-
-.dica { font-size: 0.8125rem; color: var(--texto-suave); }
-
+/* ==========================================================
+   RESPONSIVIDADE (CELULARES)
+   ========================================================== */
 @media (max-width: 860px) {
-  .auth { grid-template-columns: 1fr; min-height: 0; }
-  .authMarca { padding: 35px 24px; border-right: none; border-bottom: 2px solid var(--dourado); }
-  .authLogo { margin-bottom: 8px; }
-  .authMarca h1 { font-size: 1.6rem; }
-  .authPainel { align-items: flex-start; padding-top: 32px; }
-  .authCaixa { padding: 1.8rem; box-shadow: none; background: transparent; }
-}
-
-:root {
-    --roxo-profundo: #2E1A47;       
-    --roxo-vibrante: #4A2E76;     
-    --dourado-metalico: #D4AF37;          
-    --dourado-claro: #F4E8C1;           
-    --branco: #FFFFFF;
-    --preto: #1A1A1A;
-    --cinza-claro: #F9F9F9;
-    --font-main: 'Playfair Display', 'Montserrat', sans-serif;
-    --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: var(--font-main);
-    background-color: var(--cinza-claro);
-    color: var(--preto);
-    overflow-x: hidden;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-header {
-    background-color: var(--roxo-profundo);
-    border-bottom: 3px solid var(--dourado-metalico);
-    padding: 1.5rem 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.logo {
-    color: var(--dourado-metalico);
-    font-size: 1.8rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-nav ul {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
-}
-
-nav a {
-    color: var(--branco);
-    text-decoration: none;
-    font-weight: 500;
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    letter-spacing: 1px;
-    transition: var(--transition-smooth);
-}
-
-nav a:hover {
-    color: var(--dourado-metalico);
-}
-
-.carousel-container {
-    position: relative;
-    width: 100%;
-    height: 70vh;
-    background-color: var(--preto);
-    overflow: hidden;
-}
-
-.carousel-slide {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-size: cover;
-    background-position: center;
-}
-
-.carousel-slide::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(46, 26, 71, 0.4);
-}
-
-.carousel-content {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    color: var(--branco);
-    animation: fadeInUp 1s ease-out;
-}
-
-.carousel-content h1 {
-    font-size: 3.5rem;
-    margin-bottom: 1rem;
-    letter-spacing: 3px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
-}
-
-.btn-gold {
-    display: inline-block;
-    padding: 1rem 2.5rem;
-    background-color: transparent;
-    color: var(--dourado-metalico);
-    border: 2px solid var(--dourado-metalico);
-    text-decoration: none;
-    text-transform: uppercase;
-    font-weight: bold;
-    letter-spacing: 2px;
-    transition: var(--transition-smooth);
-}
-
-.btn-gold:hover {
-    background-color: var(--dourado-metalico);
-    color: var(--roxo-profundo);
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
-}
-
-.vitrine-section {
-    padding: 4rem 5%;
-}
-
-.section-title {
-    text-align: center;
-    font-size: 2.2rem;
-    color: var(--roxo-profundo);
-    margin-bottom: 3rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-.products-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: center;
-}
-
-.product-card {
-    background: var(--branco);
-    border: 1px solid rgba(46, 26, 71, 0.1);
-    width: 280px;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: var(--transition-smooth);
-    border-radius: 4px;
-}
-
-.product-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 30px rgba(46, 26, 71, 0.1);
-    border-color: var(--dourado-metalico);
-}
-
-.product-image-placeholder {
-    width: 100%;
-    height: 350px;
-    background-color: #EAEAEA;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #666;
-    margin-bottom: 1rem;
-    overflow: hidden;
-}
-
-.product-image-placeholder img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: var(--transition-smooth);
-}
-
-.product-card:hover .product-image-placeholder img {
-    transform: scale(1.05);
-}
-
-.product-title {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: var(--preto);
-}
-
-.product-price {
-    color: var(--roxo-vibrante);
-    font-weight: bold;
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
+  .tela-acesso {
+    grid-template-columns: 1fr; /* Empilha painéis no celular */
+  }
+  .painel-marca {
+    padding: 2.5rem 1.5rem; /* Diminui espaço interno */
+    border-right: none; /* Tira borda lateral */
+    border-bottom: 3px solid var(--dourado); /* Coloca borda dourada embaixo */
+  }
+  .cartao-formulario {
+    padding: 1.8rem; /* Diminui espaço interno no celular */
+  }
 }

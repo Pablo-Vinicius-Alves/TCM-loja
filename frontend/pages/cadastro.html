@@ -3,88 +3,100 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Criar Conta - SmartClothes</title>
-  <link href="https://googleapis.com" rel="stylesheet">
-  <!-- Apontando para o CSS global unificado em roxo e dourado -->
+  <title>Criar Conta | SmartClothes</title>
+  <!-- Ícone da marca na aba do navegador -->
+  <link rel="icon" type="image/jpeg" href="../imag/logoDaMarca.jpg">
+  <!-- CSS principal e CSS exclusivo da tela de acesso -->
+  <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/login.css">
 </head>
 <body>
-  <div class="auth">
 
-    <!-- Painel Lateral Chic -->
-    <aside class="authMarca">
-      <p class="authLogo">SMARTCLOTHES</p>
-      <h1>Crie sua conta na nossa loja!!</h1>
-      <p>Cadastre-se para conferir coleções exclusivas, salvar seus looks favoritos e gerenciar seu carrinho de compras.</p>
+  <!-- DIVISÃO GERAL: TELA DIVIDIDA EM APRESENTAÇÃO E FORMULÁRIO -->
+  <div class="tela-acesso">
+
+    <!-- DIVISÃO 1 (ESQUERDA): APRESENTAÇÃO LUXUOSA DA MARCA -->
+    <aside class="painel-marca">
+      <div class="cabecalho-marca-acesso">
+        <img src="../imag/logoDaMarca.jpg" alt="Logo SmartClothes" class="logo-acesso">
+        <span class="nome-marca-acesso">SMARTCLOTHES</span>
+      </div>
+      <h1>Crie sua conta na nossa loja</h1>
+      <p>Cadastre-se para conferir coleções exclusivas e gerenciar seu carrinho de compras com facilidade.</p>
     </aside>
 
-    <!-- Painel do Formulário -->
-    <main class="authPainel">
-      <div class="authCaixa">
+    <!-- DIVISÃO 2 (DIREITA): CARTÃO COM OS CAMPOS DE CADASTRO -->
+    <main class="painel-formulario">
+      <div class="cartao-formulario" style="max-width: 560px;">
         
-        <h2 class="section-title" style="text-align: left; font-size: 1.5rem; margin-bottom: 1.5rem;">Nova Conta</h2>
+        <h2 class="titulo-formulario">Nova Conta</h2>
+        <p class="subtitulo-formulario">Preencha seus dados abaixo para se cadastrar.</p>
 
-        <div id="alerta" class="alerta" role="alert" hidden></div>
+        <!-- Caixa que exibe mensagens de erro ou sucesso -->
+        <div id="caixa-alerta" class="caixa-alerta" role="alert" hidden></div>
 
-        <!-- Formulário focado apenas no Cadastro -->
-        <form id="form-criar" novalidate>
-          <div class="grade">
-            <div class="campolargo">
-              <label for="reg-nome">Nome completo</label>
-              <input id="reg-nome" type="text" maxlength="100" autocomplete="name" aria-required="true">
+        <!-- Formulário de Cadastro -->
+        <form id="formulario-cadastro" novalidate>
+          <div class="grade-duas-colunas">
+            <div class="grupo-campo campo-inteiro">
+              <label for="cadastro-nome">Nome completo</label>
+              <input id="cadastro-nome" type="text" maxlength="100" required>
             </div>
 
-            <div class="campo">
-              <label for="reg-email">E-mail</label>
-              <input id="reg-email" type="email" maxlength="120" autocomplete="email" aria-required="true">
+            <div class="grupo-campo">
+              <label for="cadastro-email">E-mail</label>
+              <input id="cadastro-email" type="email" maxlength="120" required>
             </div>
 
-            <div class="campo">
-              <label for="reg-cpf">CPF</label>
-              <input id="reg-cpf" type="text" inputmode="numeric" maxlength="14" placeholder="000.000.000-00" aria-required="true">
+            <div class="grupo-campo">
+              <label for="cadastro-cpf">CPF</label>
+              <input id="cadastro-cpf" type="text" maxlength="14" placeholder="000.000.000-00" required>
             </div>
 
-            <div class="campo">
-              <label for="reg-telefone">Telefone</label>
-              <input id="reg-telefone" type="text" maxlength="20" autocomplete="tel">
+            <div class="grupo-campo">
+              <label for="cadastro-telefone">Telefone</label>
+              <input id="cadastro-telefone" type="text" maxlength="20">
             </div>
 
-            <div class="campo">
-              <label for="reg-endereco">Endereço</label>
-              <input id="reg-endereco" type="text" maxlength="200" autocomplete="street-address">
+            <div class="grupo-campo">
+              <label for="cadastro-endereco">Endereço</label>
+              <input id="cadastro-endereco" type="text" maxlength="200">
             </div>
 
-            <div class="campo campolargo">
-              <label for="reg-usuario">Usuário</label>
-              <input id="reg-usuario" type="text" maxlength="50" autocomplete="username" autocapitalize="none" spellcheck="false">
-              <span class="dica">De 3 a 50 caracteres: letras, números, ponto, hífen ou sublinhado.</span>
+            <div class="grupo-campo campo-inteiro">
+              <label for="cadastro-usuario">Nome de Usuário</label>
+              <input id="cadastro-usuario" type="text" maxlength="50" required>
+              <span class="texto-ajuda">Mínimo de 3 caracteres (letras sem acento ou números).</span>
             </div>
 
-            <div class="campo">
-              <label for="reg-senha">Senha</label>
-              <input id="reg-senha" type="password" autocomplete="new-password">
+            <div class="grupo-campo">
+              <label for="cadastro-senha">Senha</label>
+              <input id="cadastro-senha" type="password" required>
             </div>
 
-            <div class="campo">
-              <label for="reg-confirmar">Repita a senha</label>
-              <input id="reg-confirmar" type="password" autocomplete="new-password">
+            <div class="grupo-campo">
+              <label for="cadastro-confirmar">Repita a senha</label>
+              <input id="cadastro-confirmar" type="password" required>
             </div>
 
-            <span class="dica campolargo">A senha precisa ter pelo menos 8 caracteres, com letras e números.</span>
+            <span class="texto-ajuda campo-inteiro">A senha precisa ter pelo menos 8 caracteres, misturando letras e números.</span>
           </div>
 
-          <button id="btn-criar" class="btn btnbloco" type="submit" style="margin-top: 1.5rem;">Criar conta</button>
+          <button id="botao-cadastrar" class="botao-principal botao-largura-total" type="submit" style="margin-top: 1.5rem;">Criar Minha Conta</button>
         </form>
 
-        <p class="dica" style="margin-top: 1.5rem; text-align: center;">
-          Já tem uma conta? <a href="login.html" style="color: var(--dourado); font-weight: bold; text-decoration: none;">Faça login aqui</a>
-        </p>
+        <!-- Botão para quem já tem conta voltar ao Login -->
+        <div class="divisor-cadastro">
+          <p>Já possui uma conta cadastrada?</p>
+          <a href="login.html" class="botao-dourado botao-largura-total">Fazer Login</a>
+        </div>
 
       </div>
     </main>
 
   </div>
 
+  <!-- Script que envia o cadastro para o servidor -->
   <script type="module" src="../js/auth.js"></script>
 </body>
 </html>

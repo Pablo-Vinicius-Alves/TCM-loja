@@ -1,610 +1,314 @@
-/* ==========================================================================
-   US06 - ARQUITETURA GLOBAIS (:root) E PALETA PREMIUM UNIFICADA
-   ========================================================================== */
+/* ==========================================================
+   PALETA DE CORES (NOMES DAS CORES)
+   ========================================================== */
 :root {
-  /* Tons de Luxo da Grife */
-  --fundo: #faf8fb;               /* Fundo perolado com leve nuance lavanda */
-  --superficie: #ffffff;          /* Painéis, caixas e cards */
-  --texto: #21153b;               /* Roxo imperial quase preto (alta leitura) */
-  --texto-suave: #62557a;         /* Roxo acinzetado de suporte */
-  --borda: #ebdff5;               /* Bordas ultra-finas lilás pastel */
-  
-  /* Cores de Identidade de Marca (Roxo e Dourado) */
-  --primaria: #2e1a47;            /* Roxo Imperial Profundo */
-  --primaria-escura: #1f1033;     /* Roxo escuro para estados ativos/hover */
-  --dourado: #d4af37;             /* Dourado Metálico Clássico (Luxury Gold) */
-  --dourado-escuro: #b89326;      /* Dourado escuro para transições */
-  
-  /* Estados do Sistema */
-  --perigo: #9e2a2b;
-  --perigo-fundo: #fff0f0;
-  --sucesso: #1e5e3a;
-  --sucesso-fundo: #f0fbf4;
-  
-  /* Estrutura */
-  --raio: 6px;                    /* Bordas retas trazem aspecto editorial refinado */
-  --sombra: 0 4px 25px rgb(46 26 71 / 6%);
-  --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --branco-perola: #faf8fb;       /* Cor de fundo principal */
+  --branco-puro: #ffffff;         /* Cor dos cartões e caixas */
+  --roxo-quase-preto: #21153b;    /* Cor principal dos textos */
+  --roxo-acinzentado: #62557a;    /* Cor de textos secundários */
+  --lilas-claro: #ebdff5;         /* Cor das bordas suaves */
+  --roxo-escuro: #2e1a47;         /* Cor principal da marca */
+  --roxo-profundo: #1f1033;       /* Roxo mais escuro para detalhes */
+  --dourado: #d4af37;             /* Cor dourada da marca */
+  --dourado-escuro: #b89326;      /* Dourado mais escuro */
+  --vermelho-vinho: #9e2a2b;      /* Cor de erro ou excluir */
+  --rosa-claro: #fff0f0;          /* Fundo de aviso de erro */
+  --verde-escuro: #1e5e3a;        /* Cor de sucesso */
+  --verde-claro: #f0fbf4;         /* Fundo de aviso de sucesso */
+  --arredondamento: 6px;          /* Arredondamento dos cantos */
+  --sombra-suave: 0 4px 25px rgb(46 26 71 / 8%); /* Sombra leve */
+  --transicao-suave: all 0.35s ease; /* Velocidade das animações */
 }
 
-/* ==========================================================================
-   RESETS E CONFIGURAÇÕES DO BODY
-   ========================================================================== */
+/* ==========================================================
+   CONFIGURAÇÃO GERAL DA PÁGINA
+   ========================================================== */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0; /* Remove margens padrão */
+  padding: 0; /* Remove espaçamentos padrão */
+  box-sizing: border-box; /* Faz bordas não aumentarem o tamanho das caixas */
 }
 
 body {
-    font-family: 'Playfair Display', Georgia, system-ui, -apple-system, sans-serif;
-    background-color: var(--fundo);
-    color: var(--texto);
-    overflow-x: hidden;
-    line-height: 1.5;
+  font-family: 'Playfair Display', Georgia, sans-serif; /* Fonte elegante */
+  background-color: var(--branco-perola); /* Aplica o fundo claro */
+  color: var(--roxo-quase-preto); /* Aplica a cor do texto */
+  overflow-x: hidden; /* Evita rolagem horizontal */
+  line-height: 1.5; /* Espaço entre linhas */
 }
 
-main {
-    padding-top: 2rem;
-    padding-bottom: 4rem;
-}
-
-h1, h2, h3 {
-    font-weight: 400;
-    letter-spacing: 1px;
-}
-
-/* ==========================================================================
-   US07 & US08 - HEADER / NAVEGAÇÃO UNIFICADA (FLEXBOX)
-   ========================================================================== */
+/* ==========================================================
+   CABEÇALHO E MENU SUPERIOR (FLEXBOX)
+   ========================================================== */
 header {
-    background-color: var(--primaria);
-    border-bottom: 3px solid var(--dourado);
-    padding: 1.2rem 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: var(--sombra);
+  background-color: var(--roxo-escuro); /* Fundo roxo no topo */
+  border-bottom: 3px solid var(--dourado); /* Linha dourada embaixo */
+  padding: 1rem 5%; /* Espaço interno */
+  display: flex; /* Coloca logo e menu lado a lado */
+  justify-content: space-between; /* Empurra logo para esquerda e menu para direita */
+  align-items: center; /* Centraliza na vertical */
+  position: sticky; /* Gruda o menu no topo ao rolar */
+  top: 0; /* Posição no topo */
+  z-index: 1000; /* Fica por cima de tudo */
+  box-shadow: var(--sombra-suave); /* Sombra abaixo do menu */
 }
 
-.logo {
-    color: var(--dourado);
-    font-size: 1.5rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+.marca-cabecalho {
+  display: flex; /* Coloca imagem da logo e texto lado a lado */
+  align-items: center; /* Alinha imagem e texto no meio */
+  gap: 12px; /* Espaço entre a logo e o nome */
+  text-decoration: none; /* Tira sublinhado do link */
+}
+
+.imagem-logo {
+  width: 42px; /* Largura da logo */
+  height: 42px; /* Altura da logo */
+  border-radius: 50%; /* Deixa a logo redonda */
+  border: 1.5px solid var(--dourado); /* Borda dourada na logo */
+  object-fit: cover; /* Ajusta a foto sem esticar */
+}
+
+.texto-logo {
+  color: var(--dourado); /* Cor dourada no nome */
+  font-size: 1.4rem; /* Tamanho da letra */
+  font-weight: 700; /* Negrito */
+  text-transform: uppercase; /* Letras maiúsculas */
+  letter-spacing: 2px; /* Espaço entre letras */
 }
 
 header nav ul {
-    display: flex;
-    list-style: none;
-    gap: 2.5rem;
-    align-items: center;
+  display: flex; /* Coloca links na horizontal */
+  list-style: none; /* Tira bolinhas da lista */
+  gap: 2rem; /* Espaço entre os links */
+  align-items: center; /* Centraliza os links */
 }
 
 header nav a {
-    color: #ffffff;
-    text-decoration: none;
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    letter-spacing: 1px;
-    font-family: system-ui, sans-serif;
-    transition: var(--transition-smooth);
+  color: var(--branco-puro); /* Texto branco */
+  text-decoration: none; /* Tira sublinhado */
+  font-weight: 600; /* Semi-negrito */
+  text-transform: uppercase; /* Maiúsculas */
+  font-size: 0.85rem; /* Tamanho da fonte */
+  letter-spacing: 1px; /* Espaço entre letras */
+  font-family: system-ui, sans-serif; /* Fonte limpa para menu */
+  transition: var(--transicao-suave); /* Suaviza troca de cor */
 }
 
 header nav a:hover,
-header nav a.active {
-    color: var(--dourado);
+header nav a.ativo {
+  color: var(--dourado); /* Fica dourado ao passar mouse ou na página atual */
 }
 
-/* ==========================================================================
-   COMPONENTES DE BOTÕES E ENTRADAS GERAIS (FORMULÁRIOS)
-   ========================================================================== */
-.btn {
-    font: inherit;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 0.85rem;
-    padding: 12px 24px;
-    border: 1px solid var(--dourado);
-    background-color: var(--primaria);
-    color: var(--dourado);
-    border-radius: var(--raio);
-    cursor: pointer;
-    transition: var(--transition-smooth);
+/* ==========================================================
+   BOTÕES E CAMPOS DE FORMULÁRIO
+   ========================================================== */
+.botao-principal {
+  font-family: system-ui, sans-serif; /* Fonte do botão */
+  font-weight: 600; /* Negrito */
+  text-transform: uppercase; /* Letras maiúsculas */
+  letter-spacing: 1px; /* Espaço entre letras */
+  font-size: 0.85rem; /* Tamanho da letra */
+  padding: 12px 24px; /* Espaço interno do botão */
+  border: 1px solid var(--dourado); /* Borda dourada */
+  background-color: var(--roxo-escuro); /* Fundo roxo */
+  color: var(--dourado); /* Texto dourado */
+  border-radius: var(--arredondamento); /* Cantos arredondados */
+  cursor: pointer; /* Mãozinha ao passar o mouse */
+  transition: var(--transicao-suave); /* Animação suave */
+  text-decoration: none; /* Tira sublinhado se for link */
+  display: inline-block; /* Permite definir largura e padding */
+  text-align: center; /* Centraliza o texto */
 }
 
-.btn:hover {
-    background-color: var(--dourado);
-    color: var(--primaria);
-    box-shadow: 0 6px 15px rgba(212, 175, 55, 0.25);
+.botao-principal:hover {
+  background-color: var(--dourado); /* Fundo vira dourado */
+  color: var(--roxo-escuro); /* Texto vira roxo */
+  transform: translateY(-3px); /* Sobe levemente */
+  box-shadow: 0 6px 15px rgba(212, 175, 55, 0.25); /* Brilho dourado */
 }
 
-.btnbloco {
-    width: 100%;
+.botao-largura-total {
+  width: 100%; /* Ocupa 100% da largura */
 }
 
-.campo {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+.botao-dourado {
+  display: inline-block; /* Formato de bloco em linha */
+  padding: 10px 26px; /* Espaço interno */
+  background-color: transparent; /* Fundo transparente */
+  color: var(--dourado); /* Texto dourado */
+  border: 2px solid var(--dourado); /* Borda dourada */
+  text-decoration: none; /* Sem sublinhado */
+  text-transform: uppercase; /* Letras maiúsculas */
+  font-weight: 600; /* Negrito */
+  font-size: 0.8rem; /* Tamanho da letra */
+  letter-spacing: 2px; /* Espaço entre letras */
+  border-radius: var(--arredondamento); /* Cantos arredondados */
+  transition: var(--transicao-suave); /* Animação suave */
+  cursor: pointer; /* Mãozinha ao passar o mouse */
 }
 
-.campo label {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--texto);
-    font-family: system-ui, sans-serif;
+.botao-dourado:hover {
+  background-color: var(--dourado); /* Preenche de dourado */
+  color: var(--roxo-escuro); /* Texto fica roxo */
+  transform: translateY(-4px); /* Sobe 4px ao passar o mouse */
+  box-shadow: 0 10px 20px rgba(212, 175, 55, 0.25); /* Sombra dourada */
 }
 
-input[type='text'],
-input[type='email'],
-input[type='password'],
-input[type='search'] {
-    font-family: system-ui, sans-serif;
-    width: 100%;
-    padding: 11px 14px;
-    border: 1px solid var(--borda);
-    border-radius: var(--raio);
-    background: var(--superficie);
-    color: var(--texto);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+.grupo-campo {
+  display: flex; /* Organiza etiqueta e caixa */
+  flex-direction: column; /* Coloca etiqueta em cima da caixa */
+  gap: 6px; /* Espaço entre etiqueta e caixa */
+}
+
+.grupo-campo label {
+  font-size: 0.85rem; /* Tamanho da etiqueta */
+  font-weight: 600; /* Negrito */
+  color: var(--roxo-quase-preto); /* Cor do texto */
+  font-family: system-ui, sans-serif; /* Fonte limpa */
+}
+
+input {
+  font-family: system-ui, sans-serif; /* Fonte de digitação */
+  width: 100%; /* Largura total */
+  padding: 11px 14px; /* Espaço interno */
+  border: 1px solid var(--lilas-claro); /* Borda lilás */
+  border-radius: var(--arredondamento); /* Cantos arredondados */
+  background: var(--branco-puro); /* Fundo branco */
+  color: var(--roxo-quase-preto); /* Texto escuro */
+  transition: var(--transicao-suave); /* Suaviza foco */
 }
 
 input:focus {
-    border-color: var(--dourado);
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+  border-color: var(--dourado); /* Borda dourada ao clicar */
+  outline: none; /* Tira borda azul padrão do navegador */
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.18); /* Brilho dourado */
 }
 
-.grade {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+.grade-duas-colunas {
+  display: grid; /* Ativa grade */
+  grid-template-columns: repeat(2, 1fr); /* 2 colunas iguais */
+  gap: 1rem; /* Espaço entre colunas */
 }
 
-.campolargo {
-    grid-column: 1 / -1;
+.campo-inteiro {
+  grid-column: 1 / -1; /* Faz o campo ocupar as 2 colunas */
 }
 
-.dica {
-    font-family: system-ui, sans-serif;
-    font-size: 0.8rem;
-    color: var(--texto-suave);
+.texto-ajuda {
+  font-family: system-ui, sans-serif; /* Fonte limpa */
+  font-size: 0.8rem; /* Letra pequena */
+  color: var(--roxo-acinzentado); /* Cor suave */
 }
 
-.alerta {
-    padding: 0.8rem 1rem;
-    margin-bottom: 1.5rem;
-    border-radius: var(--raio);
-    border: 1px solid;
-    font-family: system-ui, sans-serif;
+.caixa-alerta {
+  padding: 0.8rem 1rem; /* Espaço interno */
+  margin-bottom: 1.2rem; /* Espaço abaixo */
+  border-radius: var(--arredondamento); /* Cantos arredondados */
+  border: 1px solid var(--vermelho-vinho); /* Borda vermelha */
+  background-color: var(--rosa-claro); /* Fundo rosado */
+  color: var(--vermelho-vinho); /* Texto vermelho */
+  font-family: system-ui, sans-serif; /* Fonte limpa */
+  font-size: 0.9rem; /* Tamanho do texto */
 }
 
-/* ==========================================================================
-   US07 & US08 - ANIMAÇÃO E BANNER DE ENTRADA (CARROSSEL)
-   ========================================================================== */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(25px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.caixa-alerta[hidden] {
+  display: none; /* Esconde o alerta quando não há erro */
 }
 
-.carousel-container {
-    position: relative;
-    width: 100%;
-    height: 65vh;
-    background-color: var(--primaria-escura);
-    overflow: hidden;
+/* ==========================================================
+   VITRINE E CARTÕES DE ROUPAS (USADO NO INÍCIO E COLEÇÕES)
+   ========================================================== */
+.secao-vitrine {
+  padding: 4.5rem 5%; /* Espaço ao redor da vitrine */
 }
 
-.carousel-slide {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-size: cover;
-    background-position: center;
-    position: relative;
+.titulo-secao {
+  text-align: center; /* Centraliza o título */
+  font-size: 2.1rem; /* Tamanho do título */
+  color: var(--roxo-escuro); /* Cor roxa */
+  margin-bottom: 3rem; /* Espaço abaixo do título */
+  text-transform: uppercase; /* Letras maiúsculas */
+  letter-spacing: 2px; /* Espaço entre letras */
 }
 
-.carousel-slide::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(31, 16, 51, 0.45);
-    z-index: 1;
+.grade-produtos {
+  display: flex; /* Coloca roupas lado a lado */
+  flex-wrap: wrap; /* Quebra linha se não couber */
+  gap: 2.5rem; /* Espaço entre os cartões */
+  justify-content: center; /* Centraliza os cartões */
 }
 
-.carousel-content {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    color: #ffffff;
-    animation: fadeInUp 1s ease-out;
+.cartao-produto {
+  background: var(--branco-puro); /* Fundo branco */
+  border: 1px solid var(--lilas-claro); /* Borda fina */
+  width: 290px; /* Largura fixa do cartão */
+  padding: 1.25rem; /* Espaço interno */
+  display: flex; /* Organiza itens dentro do cartão */
+  flex-direction: column; /* Empilha foto, nome, preço e botão */
+  align-items: center; /* Centraliza tudo */
+  border-radius: var(--arredondamento); /* Cantos arredondados */
+  box-shadow: var(--sombra-suave); /* Sombra leve */
+  transition: var(--transicao-suave); /* Animação suave */
 }
 
-.carousel-content h1 {
-    font-size: 3.5rem;
-    margin-bottom: 0.5rem;
+.cartao-produto:hover {
+  transform: translateY(-8px); /* Sobe o cartão ao passar o mouse */
+  border-color: var(--dourado); /* Borda fica dourada */
+  box-shadow: 0 15px 30px rgba(46, 26, 71, 0.12); /* Aumenta a sombra */
+}
+.moldura-foto {
+  width: 100%; /* Largura total do cartão */
+  height: 350px; /* Altura fixa da foto */
+  background-color: #f5f2f9; /* Fundo enquanto carrega */
+  margin-bottom: 1.2rem; /* Espaço abaixo da foto */
+  overflow: hidden; /* Corta sobras da imagem */
+  border-radius: 4px; /* Canto levemente arredondado */
 }
 
-.btn-gold {
-    display: inline-block;
-    padding: 12px 30px;
-    background-color: transparent;
-    color: var(--dourado);
-    border: 2px solid var(--dourado);
-    text-decoration: none;
-    text-transform: uppercase;
-    font-weight: 600;
-    font-size: 0.85rem;
-    letter-spacing: 2px;
-    border-radius: var(--raio);
-    transition: var(--transition-smooth);
-    cursor: pointer;
+.moldura-foto img {
+  width: 100%; /* Preenche largura */
+  height: 100%; /* Preenche altura */
+  object-fit: cover; /* Corta sem distorcer a roupa */
+  transition: var(--transicao-suave); /* Suaviza zoom */
 }
 
-.btn-gold:hover {
-    background-color: var(--dourado);
-    color: var(--primaria);
-    transform: translateY(-4px); 
-    box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+.cartao-produto:hover .moldura-foto img {
+  transform: scale(1.05); /* Dá zoom leve na foto ao passar o mouse */
 }
 
-/* ==========================================================================
-   US07 & US09 - VITRINE DE PRODUTOS ATUAIS (FLEXBOX)
-   ========================================================================== */
-.vitrine-section {
-    padding: 5rem 5%;
+.nome-produto {
+  font-family: system-ui, sans-serif; /* Fonte limpa */
+  font-size: 1rem; /* Tamanho do nome */
+  font-weight: 600; /* Semi-negrito */
+  text-align: center; /* Centralizado */
+  margin-bottom: 0.4rem; /* Espaço abaixo */
+  color: var(--roxo-quase-preto); /* Cor escura */
 }
 
-.section-title {
-    text-align: center;
-    font-size: 2.2rem;
-    color: var(--primaria);
-    margin-bottom: 3.5rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+.preco-produto {
+  font-family: system-ui, sans-serif; /* Fonte limpa */
+  color: var(--roxo-acinzentado); /* Cor suave */
+  font-weight: 700; /* Negrito */
+  font-size: 1.15rem; /* Tamanho do preço */
+  margin-bottom: 1.2rem; /* Espaço antes do botão */
 }
 
-.products-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2.5rem;
-    justify-content: center;
-}
-
-.product-card {
-    background: var(--superficie);
-    border: 1px solid var(--borda);
-    width: 290px;
-    padding: 1.25rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: var(--raio);
-    box-shadow: var(--sombra);
-    transition: var(--transition-smooth);
-}
-
-.product-card:hover {
-    transform: translateY(-8px); 
-    border-color: var(--dourado);
-    box-shadow: 0 15px 30px rgba(46, 26, 71, 0.12);
-}
-
-.product-image-placeholder {
-    width: 100%;
-    height: 360px;
-    background-color: #f5f2f9;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1.25rem;
-    overflow: hidden;
-    border-radius: calc(var(--raio) - 2px);
-    position: relative;
-}
-
-.product-image-placeholder img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: var(--transition-smooth);
-}
-
-.product-card:hover .product-image-placeholder img {
-    transform: scale(1.05);
-}
-
-.product-title {
-    font-family: system-ui, sans-serif;
-    font-size: 1rem;
-    font-weight: 500;
-    text-align: center;
-    margin-bottom: 0.4rem;
-    color: var(--texto);
-}
-
-.product-price {
-    font-family: system-ui, sans-serif;
-    color: var(--texto-suave);
-    font-weight: 700;
-    font-size: 1.15rem;
-    margin-bottom: 1.25rem;
-}
-
-/* ==========================================================================
-   US07 & US08 - HISTÓRICO DE COLEÇÕES PASSADAS (ACERVO)
-   ========================================================================== */
-.passadas-section {
-    background-color: #f3eff7; 
-    padding: 5rem 5%; 
-    border-top: 2px dashed var(--borda); 
-}
-
-.past-grid { 
-    display: flex; 
-    flex-wrap: wrap; 
-    gap: 2rem; 
-    justify-content: center; 
-}
-
-.past-card { 
-    background: var(--superficie); 
-    border: 1px solid var(--borda); 
-    width: 260px; 
-    padding: 1rem; 
-    border-radius: var(--raio); 
-    opacity: 0.75; 
-    filter: grayscale(30%);
-    transition: var(--transition-smooth); 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: var(--sombra);
-}
-
-.past-card:hover { 
-    opacity: 1; 
-    filter: grayscale(0%); 
-    transform: scale(1.02); 
-    border-color: var(--dourado);
-}
-
-.tag-esgotado { 
-    background-color: var(--texto-suave); 
-    color: #ffffff; 
-    font-size: 0.7rem; 
-    padding: 4px 10px; 
-    border-radius: 2px; 
-    text-transform: uppercase; 
-    margin-top: 0.75rem;
-    margin-bottom: 0.5rem; 
-    display: inline-block; 
-    font-family: system-ui, sans-serif;
-    letter-spacing: 1px;
-}
-
-/* ==========================================================================
-   ESTRUTURA DA TELA DE LOGIN / CADASTRO DA AUTH
-   ========================================================================== */
-.auth {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: minmax(350px, 5fr) 7fr;
-}
-
-.authMarca {
-    display: flex;
-    flex-direction: column;
-justify-content: center;
-gap: 0.9rem;
-padding: 4rem 3rem;
-color: #ffffff;
-background: linear-gradient(135deg, var(--primaria) 0%, #170b24 100%);
-position: relative;
-border-right: 2px solid var(--dourado);
-}
-.authLogo {
-margin: 0 0 24px;
-font-weight: 700;
-font-size: 1.4rem;
-color: var(--dourado);
-text-transform: uppercase;
-letter-spacing: 2px;
-}
-.authMarca h1 { font-size: 2.2rem; line-height: 1.3; color: #ffffff; }
-.authMarca p { margin: 0; max-width: 34ch; color: var(--borda); font-size: 1rem; font-family: system-ui, sans-serif; }
-.authPainel {
-display: flex;
-align-items: center;
-justify-content: center;
-padding: 2rem 1rem;
-background-color: var(--fundo);
-}
-.authCaixa { width: 100%; max-width: 520px; }
-.abas {
-display: flex;
-margin-bottom: 20px;
-border-bottom: 1px solid var(--borda);
-}
-.aba {
-font: inherit;
-font-weight: 600;
-position: relative;
-margin-bottom: -1px;
-padding: 10px 18px;
-background: none;
-border: 0;
-border-bottom: 2px solid transparent;
-color: var(--texto-suave);
-cursor: pointer;
-}
-.aba.active {
-color: var(--primaria-escura);
-}
-.aba.active::after {
-content: "";
-position: absolute;
-bottom: -1px;
-left: 0;
-width: 100%;
-height: 2px;
-background-color: var(--dourado);
-}
-#btn-entrar, #btn-criar {
-border: none;
-font: inherit;
-padding: 9px 16px;
-border: 1px solid transparent;
-border-radius: 6px;
-cursor: pointer;
-background-color: #dde7f4;
-}
-/* ==========================================================================
-US09 - ESTRUTURA E ARQUITETURA DO CARRINHO DE COMPRAS CHIC
-========================================================================== */
-.carrinho-container {
-padding: 4rem 5%;
-max-width: 1200px;
-margin: 0 auto;
-display: grid;
-grid-template-columns: 7fr 4fr;
-gap: 3rem;
-}
-.tabela-carrinho {
-width: 100%;
-border-collapse: collapse;
-background: var(--superficie);
-border-radius: var(--raio);
-box-shadow: var(--sombra);
-overflow: hidden;
-}
-.tabela-carrinho th {
-background-color: var(--primaria);
-color: var(--dourado);
-text-transform: uppercase;
-font-size: 0.8rem;
-letter-spacing: 1px;
-padding: 1.25rem;
-text-align: left;
-}
-.tabela-carrinho td {
-padding: 1.25rem;
-border-bottom: 1px solid var(--borda);
-text-align: left;
-vertical-align: middle;
-}
-.btn-qtd {
-background: var(--primaria);
-color: var(--dourado);
-border: 1px solid var(--dourado);
-width: 28px;
-height: 28px;
-border-radius: 4px;
-cursor: pointer;
-font-weight: bold;
-transition: var(--transition-smooth);
-}
-.btn-qtd:hover {
-background: var(--dourado);
-color: var(--primaria);
-}
-.qtd-valor {
-font-weight: 600;
-width: 30px;
-text-align: center;
-display: inline-block;
-font-family: system-ui, sans-serif;
-}
-.btn-remover {
-background: transparent;
-color: var(--perigo);
-border: none;
-font-weight: 600;
-cursor: pointer;
-font-size: 0.75rem;
-text-transform: uppercase;
-letter-spacing: 1px;
-}
-.btn-remover:hover {
-text-decoration: underline;
-}
-.resumo-pagamento {
-background: var(--superficie);
-padding: 2rem;
-border-radius: var(--raio);
-box-shadow: var(--sombra);
-border: 1px solid var(--borda);
-height: fit-content;
-}
-.resumo-linha {
-display: flex;
-justify-content: space-between;
-margin-bottom: 1rem;
-border-bottom: 1px dashed var(--borda);
-padding-bottom: 0.5rem;
-font-family: system-ui, sans-serif;
-}
-.total-linha {
-font-size: 1.3rem;
-font-weight: 700;
-color: var(--primaria);
-border-bottom: none;
-}
-/* ==========================================================================
-SUPORTE DE RESPONSIVIDADE INTERNACIONAL UNIFICADO
-========================================================================== */
+/* ==========================================================
+RESPONSIVIDADE GERAL (CELULARES)
+========================================================== */
 @media (max-width: 860px) {
-.auth {
-grid-template-columns: 1fr;
-min-height: 0;
-}
-.authMarca {
-padding: 35px 24px;
-border-right: none;
-border-bottom: 2px solid var(--dourado);
-}
-.authMarca h1 {
-font-size: 1.6rem;
-}
-.authPainel {
-align-items: flex-start;
-padding-top: 32px;
-}
-header nav ul {
-gap: 1.2rem;
-}
-.carousel-content h1 {
-font-size: 2.2rem;
-}
-.vitrine-section {
-padding: 3rem 2%;
-}
-.product-card {
-width: 100%;
-max-width: 340px;
-}
-}
-@media (max-width: 900px) {
-.carrinho-container {
-grid-template-columns: 1fr;
-padding: 2rem 3%;
-}
+  header {
+    flex-direction: column; /* Empilha logo e menu no celular */
+    gap: 1rem; /* Espaço entre logo e links */
+  }
+
+  header nav ul {
+    gap: 1rem; /* Diminui espaço entre links */
+    flex-wrap: wrap; /* Permite quebrar linha */
+    justify-content: center; /* Centraliza links */
+  }
+
+  .titulo-secao {
+    font-size: 1.6rem; /* Diminui título no celular */
+  }
 }

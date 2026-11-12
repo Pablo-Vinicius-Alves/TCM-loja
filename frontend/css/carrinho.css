@@ -1,0 +1,167 @@
+/* ==========================================================
+   LAYOUT DA PÁGINA DO CARRINHO (DUAS COLUNAS)
+   ========================================================== */
+.area-carrinho {
+  padding: 4rem 5%; /* Espaço ao redor */
+  max-width: 1250px; /* Largura máxima */
+  margin: 0 auto; /* Centraliza na tela */
+  display: grid; /* Ativa grade */
+  grid-template-columns: 7.5fr 4fr; /* Tabela maior na esquerda, resumo na direita */
+  gap: 2.5rem; /* Espaço entre as duas colunas */
+}
+
+/* ==========================================================
+   TABELA DE ROUPAS ESCOLHIDAS
+   ========================================================== */
+.tabela-carrinho {
+  width: 100%; /* Largura total */
+  border-collapse: collapse; /* Junta as bordas das células */
+  background: var(--branco-puro); /* Fundo branco */
+  border-radius: var(--arredondamento); /* Cantos arredondados */
+  box-shadow: var(--sombra-suave); /* Sombra leve */
+  overflow: hidden; /* Mantém cantos arredondados no topo */
+}
+
+.tabela-carrinho th {
+  background-color: var(--roxo-escuro); /* Cabeçalho roxo */
+  color: var(--dourado); /* Texto dourado */
+  text-transform: uppercase; /* Letras maiúsculas */
+  font-size: 0.78rem; /* Tamanho da letra */
+  letter-spacing: 1px; /* Espaço entre letras */
+  padding: 1.1rem; /* Espaço interno */
+  text-align: left; /* Alinha texto à esquerda */
+}
+
+.tabela-carrinho td {
+  padding: 1.1rem; /* Espaço interno */
+  border-bottom: 1px solid var(--lilas-claro); /* Linha divisória */
+  vertical-align: middle; /* Centraliza na vertical */
+  font-family: system-ui, sans-serif; /* Fonte limpa */
+}
+
+.etiqueta-prazo {
+  display: inline-block; /* Formato de etiqueta */
+  background-color: var(--branco-perola); /* Fundo claro */
+  color: var(--roxo-escuro); /* Texto roxo */
+  border: 1px solid var(--dourado); /* Borda dourada */
+  padding: 4px 10px; /* Espaço interno */
+  border-radius: 20px; /* Cantos bem arredondados */
+  font-size: 0.75rem; /* Letra pequena */
+  font-weight: 600; /* Semi-negrito */
+}
+
+.botao-quantidade {
+  background: var(--roxo-escuro); /* Fundo roxo */
+  color: var(--dourado); /* Símbolo dourado */
+  border: 1px solid var(--dourado); /* Borda dourada */
+  width: 28px; /* Largura */
+  height: 28px; /* Altura */
+  border-radius: 4px; /* Canto arredondado */
+  cursor: pointer; /* Mãozinha */
+  font-weight: bold; /* Negrito */
+  transition: var(--transicao-suave); /* Animação suave */
+}
+
+.botao-quantidade:hover {
+  background: var(--dourado); /* Fundo vira dourado */
+  color: var(--roxo-escuro); /* Símbolo vira roxo */
+}
+
+.numero-quantidade {
+  font-weight: 600; /* Negrito */
+  width: 28px; /* Largura fixa */
+  text-align: center; /* Centralizado */
+  display: inline-block; /* Fica na mesma linha dos botões */
+}
+
+.botao-excluir {
+  background: transparent; /* Sem fundo */
+  color: var(--vermelho-vinho); /* Texto vermelho */
+  border: none; /* Sem borda */
+  font-weight: 600; /* Negrito */
+  cursor: pointer; /* Mãozinha */
+  font-size: 0.8rem; /* Tamanho da letra */
+  text-transform: uppercase; /* Maiúsculas */
+}
+
+.botao-excluir:hover {
+  text-decoration: underline; /* Sublinha ao passar o mouse */
+}
+
+/* ==========================================================
+   CAIXA DE RESUMO, PAGAMENTO E ENCOMENDA
+   ========================================================== */
+.caixa-resumo {
+  background: var(--branco-puro); /* Fundo branco */
+  padding: 2rem; /* Espaço interno */
+  border-radius: var(--arredondamento); /* Cantos arredondados */
+  box-shadow: var(--sombra-suave); /* Sombra leve */
+  border: 1px solid var(--lilas-claro); /* Borda fina */
+  height: fit-content; /* Altura ajustada ao conteúdo */
+}
+
+.titulo-resumo {
+  margin-bottom: 1.5rem; /* Espaço abaixo */
+  text-transform: uppercase; /* Maiúsculas */
+  color: var(--roxo-escuro); /* Cor roxa */
+  font-size: 1.1rem; /* Tamanho da letra */
+  letter-spacing: 1px; /* Espaço entre letras */
+}
+
+.linha-resumo {
+  display: flex; /* Coloca texto e valor lado a lado */
+  justify-content: space-between; /* Empurra para as pontas */
+  margin-bottom: 1rem; /* Espaço abaixo */
+  border-bottom: 1px dashed var(--lilas-claro); /* Linha tracejada */
+  padding-bottom: 0.5rem; /* Espaço antes da linha */
+  font-family: system-ui, sans-serif; /* Fonte limpa */
+}
+
+.linha-total {
+  font-size: 1.3rem; /* Tamanho maior para o total */
+  font-weight: 700; /* Negrito */
+  color: var(--roxo-escuro); /* Cor roxa */
+  border-bottom: none; /* Sem linha embaixo */
+}
+
+.aviso-prazos {
+  margin-top: 1.2rem; /* Espaço acima */
+  padding: 1rem; /* Espaço interno */
+  background-color: var(--branco-perola); /* Fundo claro suave */
+  border-left: 3px solid var(--dourado); /* Barra dourada na esquerda */
+  border-radius: 4px; /* Cantos leves */
+  font-family: system-ui, sans-serif; /* Fonte limpa */
+  font-size: 0.82rem; /* Letra pequena */
+  color: var(--roxo-acinzentado); /* Cor suave */
+  line-height: 1.6; /* Espaço entre linhas */
+}
+
+.formulario-pagamento {
+  margin-top: 1.5rem; /* Espaço acima */
+  display: flex; /* Organiza campos */
+  flex-direction: column; /* Empilha campos */
+  gap: 14px; /* Espaço entre campos */
+}
+
+.campo-selecao {
+  font-family: system-ui, sans-serif; /* Fonte limpa */
+  width: 100%; /* Largura total */
+  padding: 11px 14px; /* Espaço interno */
+  border: 1px solid var(--lilas-claro); /* Borda lilás */
+  border-radius: var(--arredondamento); /* Cantos arredondados */
+  background-color: var(--branco-puro); /* Fundo branco */
+  color: var(--roxo-quase-preto); /* Texto escuro */
+  cursor: pointer; /* Mãozinha */
+}
+
+.campo-selecao:focus {
+  border-color: var(--dourado); /* Borda dourada ao selecionar */
+  outline: none; /* Tira contorno padrão */
+}
+
+@media (max-width: 960px) {
+  .area-carrinho {
+    grid-template-columns: 1fr; /* Coloca resumo abaixo da tabela no celular */
+    padding: 2rem 3%; /* Diminui margem lateral */
+  }
+}

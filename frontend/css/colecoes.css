@@ -1,0 +1,66 @@
+/* ==========================================================
+   SEÇÃO DE COLEÇÕES PASSADAS (ACERVO ESGOTADO)
+   ========================================================== */
+.subtitulo-secao {
+  text-align: center; /* Centraliza texto */
+  margin-top: -2rem; /* Aproxima do título principal */
+  margin-bottom: 3.5rem; /* Espaço antes das roupas */
+  color: var(--roxo-acinzentado); /* Cor suave */
+  font-family: system-ui, sans-serif; /* Fonte limpa */
+}
+
+.secao-passadas {
+  background-color: #f3eff7; /* Fundo lilás bem suave */
+  padding: 4.5rem 5%; /* Espaço interno */
+  border-top: 2px dashed var(--lilas-claro); /* Linha tracejada no topo */
+}
+
+.grade-passadas {
+  display: flex; /* Coloca cartões lado a lado */
+  flex-wrap: wrap; /* Quebra linha no celular */
+  gap: 2rem; /* Espaço entre cartões */
+  justify-content: center; /* Centraliza cartões */
+}
+
+.cartao-passado {
+  background: var(--branco-puro); /* Fundo branco */
+  border: 1px solid var(--lilas-claro); /* Borda fina */
+  width: 260px; /* Largura um pouco menor */
+  padding: 1rem; /* Espaço interno */
+  border-radius: var(--arredondamento); /* Cantos arredondados */
+  opacity: 0.78; /* Deixa levemente apagado */
+  filter: grayscale(35%); /* Deixa parcialmente preto e branco */
+  transition: var(--transicao-suave); /* Suaviza efeito */
+  display: flex; /* Organiza itens */
+  flex-direction: column; /* Empilha itens */
+  align-items: center; /* Centraliza itens */
+  box-shadow: var(--sombra-suave); /* Sombra leve */
+}
+
+.cartao-passado:hover {
+  opacity: 1; /* Volta a 100% de visibilidade */
+  filter: grayscale(0%); /* Volta as cores originais */
+  transform: scale(1.03); /* Cresce levemente */
+  border-color: var(--dourado); /* Borda fica dourada */
+}
+
+.etiqueta-esgotado {
+  background-color: var(--roxo-acinzentado); /* Fundo escuro suave */
+  color: var(--branco-puro); /* Texto branco */
+  font-size: 0.7rem; /* Letra pequena */
+  padding: 4px 10px; /* Espaço interno */
+  border-radius: 3px; /* Cantos arredondados */
+  text-transform: uppercase; /* Letras maiúsculas */
+  margin-top: 0.6rem; /* Espaço acima */
+  margin-bottom: 0.5rem; /* Espaço abaixo */
+  font-family: system-ui, sans-serif; /* Fonte limpa */
+  letter-spacing: 1px; /* Espaço entre letras */
+}
+
+.preco-riscado {
+  font-size: 0.95rem; /* Tamanho do preço */
+  color: var(--roxo-acinzentado); /* Cor suave */
+  font-weight: 700; /* Negrito */
+  text-decoration: line-through; /* Risca o valor */
+  font-family: system-ui, sans-serif; /* Fonte limpa */
+}

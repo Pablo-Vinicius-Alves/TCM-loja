@@ -1,72 +1,102 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartClothes</title>
-    <link rel="icon" type="image/jpeg" href="../imag/logoDaMarca.jpg">
-    <link rel="stylesheet" href="../css/style.css">
-    <link href="https://googleapis.com" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartClothes | Início</title>
+  <!-- Ícone da marca na aba do navegador -->
+  <link rel="icon" type="image/jpeg" href="../imag/logoDaMarca.jpg">
+  <!-- CSS principal e CSS exclusivo da página inicial -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/inicio.css">
 </head>
 <body>
 
-    <header>
-        <div class="logo">SMARTCLOTHES</div>
-        <nav>
-            <ul>
-                <li><a href="index.html" class="active">Início</a></li>
-                <li><a href="colecoes.html">Coleções</a></li>
-                <li><a href="login.html">Login</a></li>
-                <li><a href="carrinho.html">Carrinho (<span id="contagem-carrinho">0</span>)</a></li>
-            </ul>
-        </nav>
-    </header>
+  <!-- DIVISÃO 1: CABEÇALHO SUPERIOR (Logo ao lado do nome + Menu de navegação) -->
+  <header>
+    <a href="index.html" class="marca-cabecalho">
+      <img src="../imag/logoDaMarca.jpg" alt="Logo SmartClothes" class="imagem-logo">
+      <span class="texto-logo">SMARTCLOTHES</span>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="index.html" class="ativo">Início</a></li>
+        <li><a href="colecoes.html">Coleções</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="carrinho.html">Carrinho (<span id="contagem-carrinho">0</span>)</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <section class="carousel-container">
-        <div class="carousel-slide">
-            <div class="carousel-content">
-                <h1>Coleção de Inverno</h1>
-                <p style="letter-spacing: 4px; margin-bottom: 2rem; font-family: system-ui;">Coleção: Crepúsculo Dourado </p>
-                <a href="colecoes.html" class="btn-gold">Descubra</a>
-            </div>
-        </div>
-    </section>
+  <!-- DIVISÃO 2: BANNER CARROSSEL EDITORIAL (Foto emoldurada à esquerda + Textos à direita) -->
+  <section class="area-carrossel">
+    <div class="grade-carrossel-editorial">
 
-    <section class="vitrine-section">
-        <h2 class="section-title">Estilo para o Ano Todo</h2>
-        <div class="products-grid">
-      
-    <div class="product-card">
-        <div class="product-image-placeholder">
-        <img src="../imag/images (2).jpg" alt="Blazer Cravejado">
-        </div>
-        <div class="product-title">Terno Slim Fit Casual</div>
-        <div class="product-price">R$ 599,00</div>
-        <button class="btn-gold" style="padding: 0.5rem 1.5rem; font-size: 0.8rem;">Adicionar</button>
+      <!-- Lado Esquerdo: Foto da peça com selo no canto e setas nas laterais -->
+      <div class="caixa-foto-editorial">
+        <span class="selo-foto" id="selo-slide">&#10022; EDIÇÃO RARA</span>
+        <button type="button" class="seta-editorial seta-esquerda" id="botao-voltar-slide">&larr;</button>
+        <img id="imagem-slide" src="../imag/images.jpg" alt="Vestido de Seda Imperial">
+        <button type="button" class="seta-editorial seta-direita" id="botao-avancar-slide">&rarr;</button>
       </div>
 
-      <div class="product-card">
-        <div class="product-image-placeholder">
-          <img src="../imag/cf304a7455fe18cfe8936889e975e63e.jpg" alt="Vestido Folheado a Ouro">
-        </div>
-        <div class="product-title">Blusa de Lã Premium</div>
-        <div class="product-price">R$ 780,00</div>
-        <button class="btn-gold" style="padding: 0.5rem 1.5rem; font-size: 0.8rem;">Adicionar</button>
-      </div>
+      <!-- Lado Direito: Coleção, Título grande, Detalhe em itálico, Descrição, Preço e Botão -->
+      <div class="detalhes-peca-editorial" id="bloco-texto-slide">
+        <span class="etiqueta-colecao-topo" id="colecao-slide">CREPÚSCULO DOURADO &middot; EDIÇÃO RARA</span>
+        <h1 class="titulo-peca-grande" id="titulo-slide">Vestido de Seda Imperial</h1>
+        <p class="subtitulo-italico" id="italico-slide">coleção de inverno</p>
+        <div class="linha-dourada-editorial"></div>
+        <p class="descricao-peca-editorial" id="descricao-slide">
+          Seda pura em tom profundo, caimento fluido e acabamento artesanal com detalhes dourados exclusivos da grife.
+        </p>
 
-      <div class="product-card">
-        <div class="product-image-placeholder">
-          <img src="../imag/images (1).jpg" alt="Vestido de lã Roxa">
+        <div class="rodape-peca-editorial">
+          <span class="preco-editorial" id="preco-slide">R$ 1.899,00</span>
+          <a href="colecoes.html" class="botao-descobrir-cheio">DESCOBRIR</a>
         </div>
-        <div class="product-title">Sobretudo Casual Urbano</div>
-        <div class="product-price">R$ 749,00</div>
-        <button class="btn-gold" style="padding: 0.5rem 1.5rem; font-size: 0.8rem;">Adicionar</button>
       </div>
 
     </div>
   </section>
 
-  <script type="module" src="/frontend/js/auth.js"></script>
+  <!-- DIVISÃO 3: VITRINE DE PRODUTOS (Exibe as roupas disponíveis para adicionar ao carrinho) -->
+  <section class="secao-vitrine">
+    <h2 class="titulo-secao">Estilo para o Ano Todo</h2>
+    <div class="grade-produtos">
+      
+      <div class="cartao-produto">
+        <div class="moldura-foto">
+          <img src="../imag/images (2).jpg" alt="Terno Slim Fit Casual">
+        </div>
+        <div class="nome-produto">Terno Slim Fit Casual</div>
+        <div class="preco-produto">R$ 599,00</div>
+        <button class="botao-dourado">Adicionar</button>
+      </div>
+
+      <div class="cartao-produto">
+        <div class="moldura-foto">
+          <img src="../imag/cf304a7455fe18cfe8936889e975e63e.jpg" alt="Blusa de Lã Premium">
+        </div>
+        <div class="nome-produto">Blusa de Lã Premium</div>
+        <div class="preco-produto">R$ 780,00</div>
+        <button class="botao-dourado">Adicionar</button>
+      </div>
+
+      <div class="cartao-produto">
+        <div class="moldura-foto">
+          <img src="../imag/images (1).jpg" alt="Sobretudo Casual Urbano">
+        </div>
+        <div class="nome-produto">Sobretudo Casual Urbano</div>
+        <div class="preco-produto">R$ 749,00</div>
+        <button class="botao-dourado">Adicionar</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Scripts do sistema -->
+  <script type="module" src="../js/auth.js"></script>
+  <script src="../js/inicio.js"></script>
+  <script src="../js/carrinho.js"></script>
 </body>
 </html>

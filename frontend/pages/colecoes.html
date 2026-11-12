@@ -4,80 +4,83 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Coleções | SmartClothes</title>
-  <link href="https://googleapis.com" rel="stylesheet">
+  <!-- Ícone da marca na aba do navegador -->
+  <link rel="icon" type="image/jpeg" href="../imag/logoDaMarca.jpg">
+  <!-- CSS principal e CSS exclusivo de coleções -->
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/colecoes.css">
 </head>
 <body>
 
-  <!-- Barra de Navegação Superior (Header) -->
+  <!-- DIVISÃO 1: CABEÇALHO SUPERIOR (Logo ao lado do nome + Menu de navegação) -->
   <header>
-    <div class="logo">SMARTCLOTHES</div>
+    <a href="index.html" class="marca-cabecalho">
+      <img src="../imag/logoDaMarca.jpg" alt="Logo SmartClothes" class="imagem-logo">
+      <span class="texto-logo">SMARTCLOTHES</span>
+    </a>
     <nav>
       <ul>
         <li><a href="index.html">Início</a></li>
-        <li><a href="colecoes.html" class="active">Coleções</a></li>
+        <li><a href="colecoes.html" class="ativo">Coleções</a></li>
         <li><a href="login.html">Login</a></li>
         <li><a href="carrinho.html">Carrinho (<span id="contagem-carrinho">0</span>)</a></li>
       </ul>
     </nav>
   </header>
 
-  <!-- Lançamentos Atuais e Exclusivos -->
-  <section class="vitrine-section">
-    <h2 class="section-title">Alta Costura Atual</h2>
-    <p style="text-align: center; margin-top: -2.5rem; margin-bottom: 4rem; color: var(--texto-suave);">Peças exclusivas e limitadas desenhadas nesta estação.</p>
+  <!-- DIVISÃO 2: VITRINE DA ESTAÇÃO ATUAL (Peças disponíveis para compra) -->
+  <section class="secao-vitrine">
+    <h2 class="titulo-secao">Alta Costura Desse Inverno</h2>
+    <p class="subtitulo-secao">Peças exclusivas e limitadas desenhadas nesta estação.</p>
     
-    <div class="products-grid">
-      <div class="product-card">
-        <div class="product-image-placeholder">
+    <div class="grade-produtos">
+      <div class="cartao-produto">
+        <div class="moldura-foto">
           <img src="../imag/images.jpg" alt="Vestido de Seda Imperial">
         </div>
-        <div class="product-title">Vestido de Seda Imperial</div>
-        <div class="product-price">R$ 1.899,00</div>
-        <button class="btn-gold" style="padding: 0.5rem 1.5rem; font-size: 0.8rem;">Adicionar</button>
+        <div class="nome-produto">Vestido de Seda Imperial</div>
+        <div class="preco-produto">R$ 1.899,00</div>
+        <button class="botao-dourado">Adicionar</button>
       </div>
 
-      <div class="product-card">
-        <div class="product-image-placeholder">
-          <img src="../imag/purple-open-back-cape-dress-rhinestone-detail-hotel.webp" alt="vestido de Cravejado de Ouro">
+      <div class="cartao-produto">
+        <div class="moldura-foto">
+          <img src="../imag/purple-open-back-cape-dress-rhinestone-detail-hotel.webp" alt="Vestido Cravejado">
         </div>
-        <div class="product-title">Vestido Cravejado</div>
-        <div class="product-price">R$ 2.450,00</div>
-        <button class="btn-gold" style="padding: 0.5rem 1.5rem; font-size: 0.8rem;">Adicionar</button>
+        <div class="nome-produto">Vestido Cravejado</div>
+        <div class="preco-produto">R$ 2.450,00</div>
+        <button class="botao-dourado">Adicionar</button>
       </div>
     </div>
   </section>
 
-  <!-- Histórico de Coleções Passadas -->
-  <section class="passadas-section">
-    <h2 class="section-title" style="color: var(--texto-suave);">Coleções Passadas</h2>
-    <p style="text-align: center; margin-top: -2.5rem; margin-bottom: 4rem; color: var(--texto-suave);">Histórico das Coleções</p>
+  <!-- DIVISÃO 3: HISTÓRICO DE COLEÇÕES PASSADAS (Peças esgotadas apenas para exibição) -->
+  <section class="secao-passadas">
+    <h2 class="titulo-secao">Coleções Passadas</h2>
+    <p class="subtitulo-secao">Histórico das coleções anteriores da grife.</p>
     
-    <div class="past-grid">
-
-      <!-- CARD ARQUIVO 1 -->
-      <div class="past-card">
-        <div class="product-image-placeholder">
-          <img src="../imag/images (3).jpg" alt="Vestido de Acervo">
+    <div class="grade-passadas">
+      <div class="cartao-passado">
+        <div class="moldura-foto">
+          <img src="../imag/images (3).jpg" alt="Serpente Dourada">
         </div>
-        <span class="tag-esgotado">Acervo Outono</span>
-        <div class="product-title">Serpente Dourada</div>
-        <div style="font-size: 0.95rem; color: var(--texto-suave); font-weight: 700; text-decoration: line-through;">R$ 1.150,00</div>
+        <span class="etiqueta-esgotado">Acervo Outono</span>
+        <div class="nome-produto">Serpente Dourada</div>
+        <div class="preco-riscado">R$ 1.150,00</div>
       </div>
 
-      <!-- CARD ARQUIVO 2 -->
-      <div class="past-card">
-        <div class="product-image-placeholder">
-          <img src="../imag/il_570xN.7798784908_qq5g.webp" alt="Vestido de Acervo">
+      <div class="cartao-passado">
+        <div class="moldura-foto">
+          <img src="../imag/il_570xN.7798784908_qq5g.webp" alt="Capa Linho Imperial">
         </div>
-        <span class="tag-esgotado">Acervo Verão</span>
-        <div class="product-title">Capa Linho Imperial</div>
-        <div style="font-size: 0.95rem; color: var(--texto-suave); font-weight: 700; text-decoration: line-through;">R$ 890,00</div>
+        <span class="etiqueta-esgotado">Acervo Verão</span>
+        <div class="nome-produto">Capa Linho Imperial</div>
+        <div class="preco-riscado">R$ 890,00</div>
       </div>
-
     </div>
   </section>
 
+  <!-- Script para fazer os botões de adicionar funcionarem -->
   <script src="../js/carrinho.js"></script>
 </body>
 </html>

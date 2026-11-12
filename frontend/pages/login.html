@@ -3,51 +3,65 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Entrar - SmartClothes</title>
-  <link href="https://googleapis.com" rel="stylesheet">
+  <title>Entrar | SmartClothes</title>
+  <!-- Ícone da marca na aba do navegador -->
+  <link rel="icon" type="image/jpeg" href="../imag/logoDaMarca.jpg">
+  <!-- CSS principal e CSS exclusivo da tela de acesso -->
+  <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/login.css">
 </head>
 <body>
-  <div class="auth">
 
-    <aside class="authMarca">
-      <p class="authLogo">SMARTCLOTHES</p>
-      <h1>Bem-vindo à nossa maison</h1>
-      <p>Entre na sua conta para conferir coleções exclusivas e acompanhar seus pedidos.</p>
+  <!-- DIVISÃO GERAL: TELA DIVIDIDA EM APRESENTAÇÃO E FORMULÁRIO -->
+  <div class="tela-acesso">
+
+    <!-- DIVISÃO 1 (ESQUERDA): APRESENTAÇÃO LUXUOSA DA MARCA -->
+    <aside class="painel-marca">
+      <div class="cabecalho-marca-acesso">
+        <img src="../imag/logoDaMarca.jpg" alt="Logo SmartClothes" class="logo-acesso">
+        <span class="nome-marca-acesso">SMARTCLOTHES</span>
+      </div>
+      <h1>Bem-vindo à nossa grife</h1>
+      <p>Entre na sua conta para conferir coleções exclusivas, salvar seus favoritos e acompanhar seus pedidos.</p>
     </aside>
 
-    <main class="authPainel">
-      <div class="authCaixa">
+    <!-- DIVISÃO 2 (DIREITA): CARTÃO DE LOGIN E BOTÃO PARA CADASTRO -->
+    <main class="painel-formulario">
+      <div class="cartao-formulario">
 
-        <h2 class="section-title" style="text-align: left; font-size: 1.5rem; margin-bottom: 1.5rem;">Identifique-se</h2>
+        <h2 class="titulo-formulario">Identifique-se</h2>
+        <p class="subtitulo-formulario">Digite seus dados para acessar a loja.</p>
 
-        <div id="alerta" class="alerta" role="alert" hidden></div>
+        <!-- Caixa que mostra erros ou sucesso -->
+        <div id="caixa-alerta" class="caixa-alerta" role="alert" hidden></div>
 
-        <!-- Formulário de Login Limpo -->
-        <form id="form-entrar" novalidate>
-          <div class="campo">
-            <label for="login-usuario">Usuário</label>
-            <input id="login-usuario" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" autofocus aria-required="true">
+        <!-- Formulário de Login -->
+        <form id="formulario-login" class="formulario-lista" novalidate>
+          <div class="grupo-campo">
+            <label for="campo-usuario-login">Usuário</label>
+            <input id="campo-usuario-login" type="text" placeholder="Digite seu usuário" required>
           </div>
 
-          <div class="campo" style="margin-top: 1rem;">
-            <label for="login-senha">Senha</label>
-            <input id="login-senha" type="password" autocomplete="current-password" aria-required="true">
+          <div class="grupo-campo">
+            <label for="campo-senha-login">Senha</label>
+            <input id="campo-senha-login" type="password" placeholder="Digite sua senha" required>
           </div>
 
-          <button id="btn-entrar" class="btn btnbloco" type="submit" style="margin-top: 1.5rem;">Entrar</button>
+          <button id="botao-entrar" class="botao-principal botao-largura-total" type="submit">Entrar na Loja</button>
         </form>
 
-        <!-- Link Direto Funcional para o Cadastro -->
-        <p class="dica" style="margin-top: 1.5rem; text-align: center;">
-          Não tem uma conta? <a href="cadastro.html" style="color: var(--dourado); font-weight: bold; text-decoration: none;">Cadastre-se aqui</a>
-        </p>
+        <!-- Botão destacado para ir direto para a página de Cadastro -->
+        <div class="divisor-cadastro">
+          <p>Ainda não faz parte da SmartClothes?</p>
+          <a href="cadastro.html" class="botao-dourado botao-largura-total">Criar Minha Conta</a>
+        </div>
 
       </div>
     </main>
 
   </div>
 
+  <!-- Script que conecta o login com o servidor e redireciona para a página principal -->
   <script type="module" src="../js/auth.js"></script>
 </body>
 </html>

@@ -1,122 +1,160 @@
-
 document.addEventListener('DOMContentLoaded', () => {
-    // Busca os itens salvos no navegador ou cria uma lista vazia segura
-    let carrinho = JSON.parse(localStorage.getItem('smartclothes_cart')) || [];
+  // Carrega os itens salvos no navegador ou inicia uma lista vazia
+  let listaCarrinho = JSON.parse(localStorage.getItem('smartclothes_cart')) || [];
 
-    const contagemCarrinho = document.getElementById('contagem-carrinho');
-    const tabelaItens = document.getElementById('itens-carrinho');
-    const resumoSubtotal = document.getElementById('resumo-subtotal');
-    const resumoTotal = document.getElementById('resumo-total');
-    const painelCheckout = document.getElementById('painel-checkout');
-    const formPagamento = document.getElementById('form-pagamento');
+  const contadorMenu = document.getElementById('contagem-carrinho');
+  const tabelaItens = document.getElementById('lista-itens-carrinho');
+  const textoSubtotal = document.getElementById('valor-subtotal');
+  const textoPrazoEstimado = document.getElementById('prazo-estimado');
+  const textoTotal = document.getElementById('valor-total');
+  const painelFechamento = document.getElementById('painel-fechamento');
+  const selecaoPagamento = document.getElementById('forma-pagamento');
+  const areaNumeroCartao = document.getElementById('area-numero-cartao');
+  const inputNumeroCartao = document.getElementById('numero-cartao');
+  const formularioEncomenda = document.getElementById('formulario-encomenda');
 
-    // Atualiza o numerozinho (X) no menu superior
-    function atualizarContadorVisual() {
-        if (!contagemCarrinho) return;
-        const totalItens = carrinho.reduce((total, item) => total + item.quantidade, 0);
-        contagemCarrinho.innerText = totalItens;
+  // Lista das peças que pertencem à Coleção de Inverno (3 dias úteis)
+  const pecasInverno = ['Vestido de Seda Imperial', 'Vestido Cravejado'];
+
+  // Descobre quantos dias úteis a peça leva para encomenda
+  function descobrirPrazoDias(nomeRoupa) {
+    if (pecasInverno.includes(nomeRoupa)) {
+      return 3; // Coleção de Inverno: até 3 dias úteis
+    }
+    return 2; // Estilo para o Ano Todo: até 2 dias úteis
+  }
+
+  // Mostra ou esconde o campo do cartão conforme a forma de pagamento escolhida
+  if (selecaoPagamento && areaNumeroCartao) {
+    selecaoPagamento.addEventListener('change', () => {
+      const escolheuCartao = selecaoPagamento.value.includes('Cartão');
+      areaNumeroCartao.hidden = !escolheuCartao;
+      if (inputNumeroCartao) inputNumeroCartao.required = escolheuCartao;
+    });
+  }
+
+  // Atualiza o número de peças no menu superior
+  function atualizarContadorMenu() {
+    if (!contadorMenu) return;
+    const totalPecas = listaCarrinho.reduce((soma, item) => soma + item.quantidade, 0);
+    contadorMenu.innerText = totalPecas;
+  }
+
+  // Desenha as linhas da tabela na página do carrinho
+  function desenharTabelaCarrinho() {
+    if (!tabelaItens) return;
+    tabelaItens.innerHTML = '';
+
+    // Se estiver vazio, mostra aviso e esconde o resumo
+    if (listaCarrinho.length === 0) {
+      tabelaItens.innerHTML = `<tr><td colspan="6" style="text-align:center; padding: 3.5rem; color: var(--roxo-acinzentado);">Seu carrinho está vazio! Escolha suas roupas em Início ou Coleções.</td></tr>`;
+      if (painelFechamento) painelFechamento.style.display = 'none';
+      return;
     }
 
-    // Renderiza e desenha a tabela do carrinho de compras
-    function renderizarCarrinho() {
-        if (!tabelaItens) return;
-        tabelaItens.innerHTML = '';
+    if (painelFechamento) painelFechamento.style.display = 'block';
+    let somaGeral = 0;
+    let maiorPrazo = 2;
 
-        // Se o closet estiver vazio, mostra o aviso que você pediu e oculta a cobrança
-        if (carrinho.length === 0) {
-            tabelaItens.innerHTML = `<tr><td colspan="5" style="text-align:center; padding: 4rem; color: var(--texto-suave); font-size: 1.1rem;">⚠️ Seu carrinho está vazio! Vá até o Início ou Coleções para escolher suas roupas.</td></tr>`;
-            if (painelCheckout) painelCheckout.style.display = 'none';
-            return;
-        }
+    listaCarrinho.forEach((item, posicao) => {
+      const precoNumero = parseFloat(item.preco.replace('R$', '').replace('.', '').replace(',', '.').trim());
+      const subtotalItem = precoNumero * item.quantidade;
+      const diasPrazo = descobrirPrazoDias(item.nome);
 
-        if (painelCheckout) painelCheckout.style.display = 'block';
-        let totalGeral = 0;
+      somaGeral += subtotalItem;
+      if (diasPrazo > maiorPrazo) maiorPrazo = diasPrazo;
 
-        carrinho.forEach((item, index) => {
-            const precoNum = parseFloat(item.preco.replace('R$', '').replace('.', '').replace(',', '.').trim());
-            const subtotal = precoNum * item.quantidade;
-            totalGeral += subtotal;
-
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td style="font-weight:600; padding: 1.25rem;">${item.nome}</td>
-                <td style="padding: 1.25rem;">${item.preco}</td>
-                <td style="padding: 1.25rem;">
-                    <button class="btn-qtd" data-index="${index}" data-acao="diminuir">-</button>
-                    <span class="qtd-valor">${item.quantidade}</span>
-                    <button class="btn-qtd" data-index="${index}" data-acao="aumentar">+</button>
-                </td>
-                <td style="font-weight:600; color:var(--primaria); padding: 1.25rem;">R$ ${subtotal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</td>
-                <td style="padding: 1.25rem;"><button class="btn-remover" data-index="${index}">Excluir</button></td>
-            `;
-            tabelaItens.appendChild(tr);
-        });
-
-        if (resumoSubtotal) resumoSubtotal.innerText = `R$ ${totalGeral.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
-        if (resumoTotal) resumoTotal.innerText = `R$ ${totalGeral.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
-        
-        adicionarEventosTabela();
-    }
-
-    // Gerencia as ações de aumentar, diminuir e remover itens
-    function adicionarEventosTabela() {
-        document.querySelectorAll('.btn-qtd').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const index = btn.getAttribute('data-index');
-                const acao = btn.getAttribute('data-acao');
-                if (acao === 'aumentar') carrinho[index].quantidade += 1;
-                else if (acao === 'diminuir' && carrinho[index].quantidade > 1) carrinho[index].quantidade -= 1;
-                salvarEAtualizar();
-            });
-        });
-
-        document.querySelectorAll('.btn-remover').forEach(btn => {
-            btn.addEventListener('click', () => {
-                carrinho.splice(btn.getAttribute('data-index'), 1);
-                salvarEAtualizar();
-            });
-        });
-    }
-
-    function salvarEAtualizar() {
-        localStorage.setItem('smartclothes_cart', JSON.stringify(carrinho));
-        atualizarContadorVisual();
-        renderizarCarrinho();
-    }
-
-    // Capta os cliques de "Adicionar" nas vitrines
-    document.querySelectorAll('.product-card .btn-gold, .product-card button.btn-gold').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            const card = btn.closest('.product-card');
-            const nome = card.querySelector('.product-title').innerText;
-            const preco = card.querySelector('.product-price').innerText;
-
-            const itemExistente = carrinho.find(item => item.nome === nome);
-            if (itemExistente) {
-                itemExistente.quantidade += 1;
-            } else {
-                carrinho.push({ nome: nome, preco: preco, quantidade: 1 });
-            }
-            
-            salvarEAtualizar();
-            alert(`✨ ${nome} foi guardado no seu carrinho!`);
-        });
+      const linha = document.createElement('tr');
+      linha.innerHTML = `
+        <td style="font-weight: 600;">${item.nome}</td>
+        <td><span class="etiqueta-prazo">Até ${diasPrazo} dias úteis</span></td>
+        <td>${item.preco}</td>
+        <td>
+          <button class="botao-quantidade" data-posicao="${posicao}" data-acao="diminuir">-</button>
+          <span class="numero-quantidade">${item.quantidade}</span>
+          <button class="botao-quantidade" data-posicao="${posicao}" data-acao="aumentar">+</button>
+        </td>
+        <td style="font-weight: 600; color: var(--roxo-escuro);">R$ ${subtotalItem.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</td>
+        <td><button class="botao-excluir" data-posicao="${posicao}">Excluir</button></td>
+      `;
+      tabelaItens.appendChild(linha);
     });
 
-    // Finalização e pagamento simulado
-    if (formPagamento) {
-        formPagamento.addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('💳 Pagamento efetuado com sucesso na Maison SmartClothes! Obrigado pela sua compra.');
-            carrinho = [];
-            salvarEAtualizar();
-            window.location.href = 'index.html';
-        });
-    }
+    if (textoSubtotal) textoSubtotal.innerText = `R$ ${somaGeral.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+    if (textoPrazoEstimado) textoPrazoEstimado.innerText = `Até ${maiorPrazo} dias úteis`;
+    if (textoTotal) textoTotal.innerText = `R$ ${somaGeral.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
 
-    // Inicialização automática
-    atualizarContadorVisual();
-    renderizarCarrinho();
+    ativarBotoesTabela();
+  }
+
+  // Ativa os cliques nos botões de +, - e Excluir dentro da tabela
+  function ativarBotoesTabela() {
+    document.querySelectorAll('.botao-quantidade').forEach((botao) => {
+      botao.addEventListener('click', () => {
+        const posicao = botao.getAttribute('data-posicao');
+        const acao = botao.getAttribute('data-acao');
+
+        if (acao === 'aumentar') {
+          listaCarrinho[posicao].quantidade += 1;
+        } else if (acao === 'diminuir' && listaCarrinho[posicao].quantidade > 1) {
+          listaCarrinho[posicao].quantidade -= 1;
+        }
+        salvarEAtualizar();
+      });
+    });
+
+    document.querySelectorAll('.botao-excluir').forEach((botao) => {
+      botao.addEventListener('click', () => {
+        const posicao = botao.getAttribute('data-posicao');
+        listaCarrinho.splice(posicao, 1);
+        salvarEAtualizar();
+      });
+    });
+  }
+
+  // Salva a lista atualizada e atualiza a tela
+  function salvarEAtualizar() {
+    localStorage.setItem('smartclothes_cart', JSON.stringify(listaCarrinho));
+    atualizarContadorMenu();
+    desenharTabelaCarrinho();
+  }
+
+  // Faz os botões "Adicionar" do Início e de Coleções funcionarem
+  document.querySelectorAll('.cartao-produto .botao-dourado').forEach((botao) => {
+    botao.addEventListener('click', (evento) => {
+      evento.preventDefault();
+      const cartao = botao.closest('.cartao-produto');
+      const nomeRoupa = cartao.querySelector('.nome-produto').innerText;
+      const precoRoupa = cartao.querySelector('.preco-produto').innerText;
+
+      const roupaJaExiste = listaCarrinho.find((item) => item.nome === nomeRoupa);
+      if (roupaJaExiste) {
+        roupaJaExiste.quantidade += 1;
+      } else {
+        listaCarrinho.push({ nome: nomeRoupa, preco: precoRoupa, quantidade: 1 });
+      }
+
+      salvarEAtualizar();
+      alert(`${nomeRoupa} foi adicionado ao seu carrinho!`);
+    });
+  });
+
+  // Finaliza o pagamento e confirma a encomenda
+  if (formularioEncomenda) {
+    formularioEncomenda.addEventListener('submit', (evento) => {
+      evento.preventDefault();
+      const formaEscolhida = selecaoPagamento ? selecaoPagamento.value : 'PIX';
+      const prazoFinal = textoPrazoEstimado ? textoPrazoEstimado.innerText : 'até 3 dias úteis';
+      const valorFinal = textoTotal ? textoTotal.innerText : '';
+
+      alert(`Pagamento via ${formaEscolhida} (${valorFinal}) confirmado!\nSua encomenda na SmartClothes ficará pronta em ${prazoFinal}.`);
+      listaCarrinho = [];
+      salvarEAtualizar();
+      window.location.href = 'index.html';
+    });
+  }
+
+  // Inicia o contador e a tabela assim que a página abre
+  atualizarContadorMenu();
+  desenharTabelaCarrinho();
 });
-

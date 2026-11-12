@@ -1,0 +1,216 @@
+/* ==========================================================
+   ANIMAÇÃO SUAVE AO TROCAR DE PEÇA (@KEYFRAMES)
+   ========================================================== */
+@keyframes surgirSuave {
+  from {
+    opacity: 0; /* Começa invisível */
+    transform: translateY(15px); /* Sobe levemente */
+  }
+  to {
+    opacity: 1; /* Fica visível */
+    transform: translateY(0); /* Posição final */
+  }
+}
+
+/* ==========================================================
+   FAIXA PRINCIPAL DO CARROSSEL (FUNDO ROXO LUXUOSO)
+   ========================================================== */
+.area-carrossel {
+  width: 100%; /* Largura total */
+  min-height: 82vh; /* Altura generosa tipo vitrine de grife */
+  background: radial-gradient(circle at 65% 45%, #3d2163 0%, var(--roxo-profundo) 80%); /* Degradê roxo igual ao exemplo */
+  border-bottom: 2px solid var(--dourado); /* Linha dourada na base */
+  display: flex; /* Centraliza o conteúdo */
+  align-items: center; /* Centraliza na vertical */
+  justify-content: center; /* Centraliza na horizontal */
+  padding: 3.5rem 5%; /* Espaço ao redor */
+}
+
+.grade-carrossel-editorial {
+  width: 100%; /* Largura total até o limite */
+  max-width: 1120px; /* Largura máxima elegante */
+  display: grid; /* Divide em 2 colunas */
+  grid-template-columns: 1fr 1.15fr; /* Foto na esquerda, textos na direita */
+  gap: 4.5rem; /* Espaço entre a foto e os textos */
+  align-items: center; /* Alinha no meio na vertical */
+}
+
+/* ==========================================================
+   COLUNA DA ESQUERDA: FOTO EMOLDURADA + ETIQUETA + SETAS
+   ========================================================== */
+.caixa-foto-editorial {
+  position: relative; /* Base para etiqueta e setas ficarem sobre a foto */
+  width: 100%; /* Preenche a coluna */
+  max-width: 430px; /* Largura proporcional de retrato */
+  height: 540px; /* Altura vertical elegante */
+  margin: 0 auto; /* Centraliza na coluna */
+  border-radius: 2px; /* Canto reto sofisticado */
+  overflow: hidden; /* Corta sobras da imagem */
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.55); /* Sombra profunda */
+  border: 1px solid rgba(212, 175, 55, 0.35); /* Borda dourada sutil */
+}
+
+.caixa-foto-editorial img {
+  width: 100%; /* Largura total */
+  height: 100%; /* Altura total */
+  object-fit: cover; /* Preenche sem distorcer a roupa */
+  object-position: center top; /* Foca na parte superior da peça */
+  transition: opacity 0.4s ease; /* Suaviza troca de foto */
+}
+
+.selo-foto {
+  position: absolute; /* Flutua no canto da foto */
+  top: 22px; /* Distância do topo */
+  left: 22px; /* Distância da esquerda */
+  background: rgba(25, 14, 40, 0.78); /* Fundo escuro semitransparente */
+  backdrop-filter: blur(6px); /* Efeito fosco elegante */
+  color: var(--dourado); /* Texto dourado */
+  padding: 7px 14px; /* Espaço interno */
+  font-family: system-ui, sans-serif; /* Fonte limpa */
+  font-size: 0.72rem; /* Letra pequena */
+  font-weight: 600; /* Semi-negrito */
+  letter-spacing: 2.5px; /* Espaço largo entre letras */
+  text-transform: uppercase; /* Maiúsculas */
+  border: 1px solid rgba(212, 175, 55, 0.3); /* Borda dourada fina */
+}
+
+/* Setas redondas posicionadas nas laterais internas da foto (igual ao print) */
+.seta-editorial {
+  position: absolute; /* Flutua sobre a borda da foto */
+  top: 50%; /* Meio da altura da foto */
+  transform: translateY(-50%); /* Centraliza exato no meio */
+  z-index: 5; /* Fica acima da foto */
+  width: 38px; /* Largura */
+  height: 38px; /* Altura */
+  border-radius: 50%; /* Botão redondo */
+  background: rgba(25, 14, 40, 0.72); /* Fundo escuro */
+  color: var(--dourado); /* Seta dourada */
+  border: 1px solid rgba(212, 175, 55, 0.45); /* Borda dourada */
+  font-size: 1rem; /* Tamanho da seta */
+  cursor: pointer; /* Mãozinha */
+  transition: var(--transicao-suave); /* Animação suave */
+  display: flex; /* Centraliza ícone */
+  align-items: center; /* Centraliza vertical */
+  justify-content: center; /* Centraliza horizontal */
+}
+
+.seta-editorial:hover {
+  background: var(--dourado); /* Fundo fica dourado */
+  color: var(--roxo-profundo); /* Seta fica roxa */
+}
+
+.seta-esquerda {
+  left: 14px; /* Grudada na borda esquerda da foto */
+}
+
+.seta-direita {
+  right: 14px; /* Grudada na borda direita da foto */
+}
+
+/* ==========================================================
+   COLUNA DA DIREITA: TEXTOS EDITORIAIS, LINHA DOURADA E PREÇO
+   ========================================================== */
+.detalhes-peca-editorial {
+  color: var(--branco-puro); /* Texto branco */
+  text-align: left; /* Alinhado à esquerda */
+  animation: surgirSuave 0.7s ease-out; /* Animação suave */
+}
+
+.etiqueta-colecao-topo {
+  display: block; /* Fica em linha própria */
+  color: var(--dourado); /* Cor dourada */
+  font-family: system-ui, sans-serif; /* Fonte limpa */
+  font-size: 0.78rem; /* Letra pequena */
+  font-weight: 600; /* Semi-negrito */
+  letter-spacing: 3.5px; /* Espaço bem largo entre letras */
+  text-transform: uppercase; /* Maiúsculas */
+  margin-bottom: 1.2rem; /* Espaço antes do título grande */
+}
+
+.titulo-peca-grande {
+  font-family: 'Playfair Display', Georgia, serif; /* Fonte serifada clássica */
+  font-size: 4rem; /* Título bem grande e imponente */
+  font-weight: 400; /* Traço fino e sofisticado igual ao exemplo */
+  line-height: 1.08; /* Linhas próximas e elegantes */
+  color: var(--branco-puro); /* Branco puro */
+  margin-bottom: 1rem; /* Espaço abaixo */
+}
+
+.subtitulo-italico {
+  font-family: 'Playfair Display', Georgia, serif; /* Fonte serifada */
+  font-style: italic; /* Itálico elegante */
+  font-size: 1.45rem; /* Tamanho médio */
+  color: var(--lilas-claro); /* Lilás claro suave */
+  margin-bottom: 1.6rem; /* Espaço antes da linha dourada */
+}
+
+.linha-dourada-editorial {
+  width: 75px; /* Linha curta dourada */
+  height: 1.5px; /* Espessura fina */
+  background-color: var(--dourado); /* Cor dourada */
+  margin-bottom: 1.6rem; /* Espaço antes da descrição */
+}
+
+.descricao-peca-editorial {
+  font-family: system-ui, sans-serif; /* Fonte limpa para leitura */
+  font-size: 0.98rem; /* Tamanho confortável */
+  line-height: 1.7; /* Espaçamento entre linhas */
+  color: #d6cbe3; /* Lilás acinzentado claro */
+  max-width: 44ch; /* Limita largura do parágrafo */
+  margin-bottom: 2.2rem; /* Espaço antes do preço e botão */
+}
+
+/* ==========================================================
+   RODAPÉ DO SLIDE: PREÇO + BOTÃO DOURADO PREENCHIDO
+   ========================================================== */
+.rodape-peca-editorial {
+  display: flex; /* Coloca preço e botão lado a lado */
+  align-items: center; /* Centraliza na vertical */
+  gap: 2rem; /* Espaço entre preço e botão */
+  flex-wrap: wrap; /* Quebra linha se precisar */
+}
+
+.preco-editorial {
+  font-family: 'Playfair Display', Georgia, serif; /* Fonte serifada elegante */
+  font-size: 1.9rem; /* Preço em destaque */
+  color: var(--lilas-claro); /* Cor clara suave */
+  letter-spacing: 1px; /* Espaço leve */
+}
+
+.botao-descobrir-cheio {
+  display: inline-block; /* Formato de botão */
+  padding: 15px 38px; /* Tamanho generoso */
+  background: linear-gradient(135deg, #e5c158 0%, var(--dourado) 100%); /* Dourado metálico */
+  color: var(--roxo-profundo); /* Texto roxo escuro */
+  font-family: system-ui, sans-serif; /* Fonte limpa */
+  font-size: 0.8rem; /* Tamanho da letra */
+  font-weight: 700; /* Negrito */
+  letter-spacing: 3px; /* Espaço largo entre letras */
+  text-transform: uppercase; /* Maiúsculas */
+  text-decoration: none; /* Sem sublinhado */
+  border-radius: 3px; /* Canto levemente arredondado */
+  transition: var(--transicao-suave); /* Animação suave */
+  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.25); /* Brilho dourado */
+}
+
+.botao-descobrir-cheio:hover {
+  transform: translateY(-3px); /* Sobe levemente ao passar o mouse */
+  box-shadow: 0 12px 26px rgba(212, 175, 55, 0.4); /* Aumenta brilho */
+  filter: brightness(1.06); /* Clareia levemente */
+}
+
+/* ==========================================================
+   RESPONSIVIDADE (CELULARES E TABLETS)
+   ========================================================== */
+@media (max-width: 900px) {
+  .grade-carrossel-editorial {
+    grid-template-columns: 1fr; /* Empilha foto em cima e texto embaixo */
+    gap: 2.5rem; /* Espaço entre foto e texto */
+  }
+  .caixa-foto-editorial {
+    height: 440px; /* Ajusta altura da foto no celular */
+  }
+  .titulo-peca-grande {
+    font-size: 2.7rem; /* Diminui título no celular */
+  }
+}

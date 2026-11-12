@@ -4,87 +4,102 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Seu Carrinho | SmartClothes</title>
-  <!-- Buscando as fontes de revista de moda -->
-  <link href="https://googleapis.com" rel="stylesheet">
-  <!-- Chamando o CSS global unificado (Roxo e Dourado) -->
+  <!-- Ícone da marca na aba do navegador -->
+  <link rel="icon" type="image/jpeg" href="../imag/logoDaMarca.jpg">
+  <!-- CSS principal e CSS exclusivo do carrinho -->
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/carrinho.css">
 </head>
 <body>
 
-  <!-- Barra de Navegação Superior Unificada -->
+  <!-- DIVISÃO 1: CABEÇALHO SUPERIOR (Logo ao lado do nome + Menu de navegação) -->
   <header>
-    <div class="logo">SMARTCLOTHES</div>
+    <a href="index.html" class="marca-cabecalho">
+      <img src="../imag/logoDaMarca.jpg" alt="Logo SmartClothes" class="imagem-logo">
+      <span class="texto-logo">SMARTCLOTHES</span>
+    </a>
     <nav>
       <ul>
         <li><a href="index.html">Início</a></li>
         <li><a href="colecoes.html">Coleções</a></li>
         <li><a href="login.html">Login</a></li>
-        <li><a href="carrinho.html" class="active">Carrinho (<span id="contagem-carrinho">0</span>)</a></li>
+        <li><a href="carrinho.html" class="ativo">Carrinho (<span id="contagem-carrinho">0</span>)</a></li>
       </ul>
     </nav>
   </header>
 
-  <!-- Container Geral do Carrinho (Usa o Grid de duas colunas do CSS) -->
-  <main class="carrinho-container">
+  <!-- DIVISÃO GERAL: CONTEÚDO DO CARRINHO EM DUAS COLUNAS -->
+  <main class="area-carrinho">
     
-    <!-- Coluna da Esquerda: Lista de Roupas Escolhidas -->
+    <!-- DIVISÃO 2 (ESQUERDA): TABELA COM AS ROUPAS ADICIONADAS E PRAZO -->
     <section>
-      <h2 class="section-title" style="text-align: left; margin-bottom: 2rem;">Seu Closet Temporário</h2>
+      <h2 class="titulo-secao" style="text-align: left; margin-bottom: 2rem;">Seu Carrinho</h2>
       <table class="tabela-carrinho">
         <thead>
           <tr>
             <th>Produto</th>
+            <th>Prazo</th>
             <th>Preço</th>
             <th>Quantidade</th>
             <th>Subtotal</th>
             <th>Ações</th>
           </tr>
         </thead>
-        <tbody id="itens-carrinho">
-          <!-- O arquivo carrinho.js vai colocar as roupas jogadas aqui de forma dinâmica -->
+        <tbody id="lista-itens-carrinho">
+          <!-- As roupas escolhidas aparecem aqui automaticamente pelo JavaScript -->
         </tbody>
       </table>
     </section>
 
-    <!-- Coluna da Direita: Resumo Financeiro e Checkout de Cartão -->
-    <aside class="resumo-pagamento" id="painel-checkout">
-      <h3 style="margin-bottom: 1.5rem; text-transform: uppercase; color: var(--primaria); font-size: 1.1rem; letter-spacing: 1px;">Fechamento</h3>
+    <!-- DIVISÃO 3 (DIREITA): RESUMO, FORMA DE PAGAMENTO E BOTÃO DE ENCOMENDA -->
+    <aside class="caixa-resumo" id="painel-fechamento">
+      <h3 class="titulo-resumo">Resumo da Encomenda</h3>
       
-      <div class="resumo-linha">
+      <div class="linha-resumo">
         <span>Subtotal</span>
-        <span id="resumo-subtotal">R$ 0,00</span>
+        <span id="valor-subtotal">R$ 0,00</span>
       </div>
-      <div class="resumo-linha total-linha">
+      <div class="linha-resumo">
+        <span>Prazo Estimado</span>
+        <span id="prazo-estimado" style="font-weight: 600; color: var(--roxo-escuro);">-</span>
+      </div>
+      <div class="linha-resumo linha-total">
         <span>Total</span>
-        <span id="resumo-total">R$ 0,00</span>
+        <span id="valor-total">R$ 0,00</span>
       </div>
 
-      <!-- Formulário de Pagamento da Roupa -->
-      <form id="form-pagamento" style="margin-top: 2rem; display: flex; flex-direction: column; gap: 14px;">
-        <h4 style="font-size: 0.8rem; text-transform: uppercase; color: var(--texto-suave); letter-spacing: 0.5px;">Checkout de Crédito</h4>
-        
-        <div class="campo">
-          <label for="num-cartao">Número do Cartão</label>
-          <input id="num-cartao" type="text" placeholder="0000 0000 0000 0000" required autocomplete="cc-number">
+      <!-- Aviso explicativo dos prazos da grife -->
+      <div class="aviso-prazos">
+        <p><strong>Prazos de Encomenda:</strong></p>
+        <p>• Estilo para o Ano Todo: <strong>até 2 dias úteis</strong></p>
+        <p>• Coleção de Inverno: <strong>até 3 dias úteis</strong></p>
+      </div>
+
+      <!-- Formulário simples de Pagamento -->
+      <form id="formulario-encomenda" class="formulario-pagamento">
+        <div class="grupo-campo">
+          <label for="forma-pagamento">Forma de Pagamento</label>
+          <select id="forma-pagamento" class="campo-selecao" required>
+            <option value="PIX">PIX (Aprovação na hora)</option>
+            <option value="Cartão de Crédito">Cartão de Crédito</option>
+            <option value="Cartão de Débito">Cartão de Débito</option>
+          </select>
         </div>
-        
-        <div class="grade">
-          <div class="campo">
-            <label for="val-cartao">Validade</label>
-            <input id="val-cartao" type="text" placeholder="MM/AA" required autocomplete="cc-exp">
-          </div>
-          <div class="campo">
-            <label for="cvv-cartao">CVV</label>
-            <input id="cvv-cartao" type="text" placeholder="123" required autocomplete="cc-csc">
-          </div>
+
+        <!-- Campo que aparece só se escolher Cartão -->
+        <div class="grupo-campo" id="area-numero-cartao" hidden>
+          <label for="numero-cartao">Número do Cartão</label>
+          <input id="numero-cartao" type="text" maxlength="19" placeholder="0000 0000 0000 0000">
         </div>
-        
-        <button type="submit" class="btn btnbloco" style="margin-top: 1rem;">Efetuar Pagamento</button>
+
+        <button type="submit" id="botao-encomendar" class="botao-principal botao-largura-total" style="margin-top: 0.5rem;">
+          Pagar e Encomendar
+        </button>
       </form>
     </aside>
   </main>
 
-  <!-- Chamando a inteligência JavaScript que faz a tabela somar e alterar as quantidades -->
+  <!-- Script que soma valores, calcula prazos e finaliza pagamento + encomenda -->
   <script src="../js/carrinho.js"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-import { AppError } from '../utils/AppError.js';
+import { AppError } from '../utils/appError.js';
 import { NOME_COOKIE, verificarToken } from '../utils/token.js';
  
 export function autenticar(req, res, next) {

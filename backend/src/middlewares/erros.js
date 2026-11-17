@@ -1,4 +1,4 @@
-import AppError from '../utils/AppError.js';
+import AppError from '../utils/appError.js';
 
 export function notFound(req, res) {
   res.status(404).json({ erro: 'Rota não encontrada.' });

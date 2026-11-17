@@ -1,5 +1,5 @@
 import * as Cliente from '../models/clienteModel.js';
-import AppError from '../utils/AppError.js';
+import AppError from '../utils/appError.js';
 import { validarCPF } from '../utils/cpf.js';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

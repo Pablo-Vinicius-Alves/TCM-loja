@@ -1,0 +1,13 @@
+import { Router } from 'express';
+import * as controller from '../controllers/carrinhoController.js';
+import asyncHandler  from '../middlewares/async.js';
+
+const router = Router();
+
+router.get('/', asyncHandler(controller.obter));                                   
+router.post('/itens', asyncHandler(controller.adicionar));                          
+router.patch('/itens/:idProduto', asyncHandler(controller.alterarQuantidade));      
+router.delete('/itens/:idProduto', asyncHandler(controller.removerItem));           
+router.delete('/', asyncHandler(controller.esvaziar));                              
+
+export default router;

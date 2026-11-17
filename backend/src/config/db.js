@@ -1,13 +1,12 @@
 import mysql from 'mysql2/promise';
-import 'dotenv/config';
+import { env } from './env.js';
 
-    const connectionDB = mysql.createPool({
-        host: process.env.DB_HOST,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-        port: process.env.DB_PORT,
-        database: process.env.DB_NAME,
-        JWT_SECRET: process.env.JWT_SECRET
-    });
+const connectionDB = mysql.createPool({
+  host: env.db.host,
+  port: env.db.port,
+  user: env.db.user,
+  password: env.db.password,
+  database: env.db.database
+});
 
 export default connectionDB;

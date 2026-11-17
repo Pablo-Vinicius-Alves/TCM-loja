@@ -1,66 +1,63 @@
-/* ==========================================================
-   SEÇÃO DE COLEÇÕES PASSADAS (ACERVO ESGOTADO)
-   ========================================================== */
 .subtitulo-secao {
-  text-align: center; /* Centraliza texto */
-  margin-top: -2rem; /* Aproxima do título principal */
-  margin-bottom: 3.5rem; /* Espaço antes das roupas */
-  color: var(--roxo-acinzentado); /* Cor suave */
-  font-family: system-ui, sans-serif; /* Fonte limpa */
+  text-align: center;
+  margin-top: -2rem;
+  margin-bottom: 3.5rem;
+  color: var(--roxo-acinzentado);
+  font-family: system-ui, sans-serif;
 }
 
 .secao-passadas {
-  background-color: #f3eff7; /* Fundo lilás bem suave */
-  padding: 4.5rem 5%; /* Espaço interno */
-  border-top: 2px dashed var(--lilas-claro); /* Linha tracejada no topo */
+  background-color: #f3eff7;
+  padding: 4.5rem 5%;
+  border-top: 2px dashed var(--lilas-claro);
 }
 
 .grade-passadas {
-  display: flex; /* Coloca cartões lado a lado */
-  flex-wrap: wrap; /* Quebra linha no celular */
-  gap: 2rem; /* Espaço entre cartões */
-  justify-content: center; /* Centraliza cartões */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
 }
 
 .cartao-passado {
-  background: var(--branco-puro); /* Fundo branco */
-  border: 1px solid var(--lilas-claro); /* Borda fina */
-  width: 260px; /* Largura um pouco menor */
-  padding: 1rem; /* Espaço interno */
-  border-radius: var(--arredondamento); /* Cantos arredondados */
-  opacity: 0.78; /* Deixa levemente apagado */
-  filter: grayscale(35%); /* Deixa parcialmente preto e branco */
-  transition: var(--transicao-suave); /* Suaviza efeito */
-  display: flex; /* Organiza itens */
-  flex-direction: column; /* Empilha itens */
-  align-items: center; /* Centraliza itens */
-  box-shadow: var(--sombra-suave); /* Sombra leve */
+  background: var(--branco-puro);
+  border: 1px solid var(--lilas-claro);
+  width: 260px;
+  padding: 1rem;
+  border-radius: var(--arredondamento);
+  opacity: 0.78;
+  filter: grayscale(35%);
+  transition: var(--transicao-suave);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: var(--sombra-suave);
 }
 
 .cartao-passado:hover {
-  opacity: 1; /* Volta a 100% de visibilidade */
-  filter: grayscale(0%); /* Volta as cores originais */
-  transform: scale(1.03); /* Cresce levemente */
-  border-color: var(--dourado); /* Borda fica dourada */
+  opacity: 1;
+  filter: grayscale(0%);
+  transform: scale(1.03);
+  border-color: var(--dourado);
 }
 
 .etiqueta-esgotado {
-  background-color: var(--roxo-acinzentado); /* Fundo escuro suave */
-  color: var(--branco-puro); /* Texto branco */
-  font-size: 0.7rem; /* Letra pequena */
-  padding: 4px 10px; /* Espaço interno */
-  border-radius: 3px; /* Cantos arredondados */
-  text-transform: uppercase; /* Letras maiúsculas */
-  margin-top: 0.6rem; /* Espaço acima */
-  margin-bottom: 0.5rem; /* Espaço abaixo */
-  font-family: system-ui, sans-serif; /* Fonte limpa */
-  letter-spacing: 1px; /* Espaço entre letras */
+  background-color: var(--roxo-acinzentado);
+  color: var(--branco-puro);
+  font-size: 0.7rem;
+  padding: 4px 10px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  margin-top: 0.6rem;
+  margin-bottom: 0.5rem;
+  font-family: system-ui, sans-serif;
+  letter-spacing: 1px;
 }
 
 .preco-riscado {
-  font-size: 0.95rem; /* Tamanho do preço */
-  color: var(--roxo-acinzentado); /* Cor suave */
-  font-weight: 700; /* Negrito */
-  text-decoration: line-through; /* Risca o valor */
-  font-family: system-ui, sans-serif; /* Fonte limpa */
+  font-size: 0.95rem;
+  color: var(--roxo-acinzentado);
+  font-weight: 700;
+  text-decoration: line-through;
+  font-family: system-ui, sans-serif;
 }

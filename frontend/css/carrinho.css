@@ -1,167 +1,158 @@
-/* ==========================================================
-   LAYOUT DA PÁGINA DO CARRINHO (DUAS COLUNAS)
-   ========================================================== */
 .area-carrinho {
-  padding: 4rem 5%; /* Espaço ao redor */
-  max-width: 1250px; /* Largura máxima */
-  margin: 0 auto; /* Centraliza na tela */
-  display: grid; /* Ativa grade */
-  grid-template-columns: 7.5fr 4fr; /* Tabela maior na esquerda, resumo na direita */
-  gap: 2.5rem; /* Espaço entre as duas colunas */
+  padding: 4rem 5%;
+  max-width: 1250px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 7.5fr 4fr;
+  gap: 2.5rem;
 }
 
-/* ==========================================================
-   TABELA DE ROUPAS ESCOLHIDAS
-   ========================================================== */
 .tabela-carrinho {
-  width: 100%; /* Largura total */
-  border-collapse: collapse; /* Junta as bordas das células */
-  background: var(--branco-puro); /* Fundo branco */
-  border-radius: var(--arredondamento); /* Cantos arredondados */
-  box-shadow: var(--sombra-suave); /* Sombra leve */
-  overflow: hidden; /* Mantém cantos arredondados no topo */
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--branco-puro);
+  border-radius: var(--arredondamento);
+  box-shadow: var(--sombra-suave);
+  overflow: hidden;
 }
 
 .tabela-carrinho th {
-  background-color: var(--roxo-escuro); /* Cabeçalho roxo */
-  color: var(--dourado); /* Texto dourado */
-  text-transform: uppercase; /* Letras maiúsculas */
-  font-size: 0.78rem; /* Tamanho da letra */
-  letter-spacing: 1px; /* Espaço entre letras */
-  padding: 1.1rem; /* Espaço interno */
-  text-align: left; /* Alinha texto à esquerda */
+  background-color: var(--roxo-escuro);
+  color: var(--dourado);
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  letter-spacing: 1px;
+  padding: 1.1rem;
+  text-align: left;
 }
 
 .tabela-carrinho td {
-  padding: 1.1rem; /* Espaço interno */
-  border-bottom: 1px solid var(--lilas-claro); /* Linha divisória */
-  vertical-align: middle; /* Centraliza na vertical */
-  font-family: system-ui, sans-serif; /* Fonte limpa */
+  padding: 1.1rem;
+  border-bottom: 1px solid var(--lilas-claro);
+  vertical-align: middle;
+  font-family: system-ui, sans-serif;
 }
 
 .etiqueta-prazo {
-  display: inline-block; /* Formato de etiqueta */
-  background-color: var(--branco-perola); /* Fundo claro */
-  color: var(--roxo-escuro); /* Texto roxo */
-  border: 1px solid var(--dourado); /* Borda dourada */
-  padding: 4px 10px; /* Espaço interno */
-  border-radius: 20px; /* Cantos bem arredondados */
-  font-size: 0.75rem; /* Letra pequena */
-  font-weight: 600; /* Semi-negrito */
+  display: inline-block;
+  background-color: var(--branco-perola);
+  color: var(--roxo-escuro);
+  border: 1px solid var(--dourado);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
 }
 
 .botao-quantidade {
-  background: var(--roxo-escuro); /* Fundo roxo */
-  color: var(--dourado); /* Símbolo dourado */
-  border: 1px solid var(--dourado); /* Borda dourada */
-  width: 28px; /* Largura */
-  height: 28px; /* Altura */
-  border-radius: 4px; /* Canto arredondado */
-  cursor: pointer; /* Mãozinha */
-  font-weight: bold; /* Negrito */
-  transition: var(--transicao-suave); /* Animação suave */
+  background: var(--roxo-escuro);
+  color: var(--dourado);
+  border: 1px solid var(--dourado);
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: var(--transicao-suave);
 }
 
 .botao-quantidade:hover {
-  background: var(--dourado); /* Fundo vira dourado */
-  color: var(--roxo-escuro); /* Símbolo vira roxo */
+  background: var(--dourado);
+  color: var(--roxo-escuro);
 }
 
 .numero-quantidade {
-  font-weight: 600; /* Negrito */
-  width: 28px; /* Largura fixa */
-  text-align: center; /* Centralizado */
-  display: inline-block; /* Fica na mesma linha dos botões */
+  font-weight: 600;
+  width: 28px;
+  text-align: center;
+  display: inline-block;
 }
 
 .botao-excluir {
-  background: transparent; /* Sem fundo */
-  color: var(--vermelho-vinho); /* Texto vermelho */
-  border: none; /* Sem borda */
-  font-weight: 600; /* Negrito */
-  cursor: pointer; /* Mãozinha */
-  font-size: 0.8rem; /* Tamanho da letra */
-  text-transform: uppercase; /* Maiúsculas */
+  background: transparent;
+  color: var(--vermelho-vinho);
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.8rem;
+  text-transform: uppercase;
 }
 
 .botao-excluir:hover {
-  text-decoration: underline; /* Sublinha ao passar o mouse */
+  text-decoration: underline;
 }
 
-/* ==========================================================
-   CAIXA DE RESUMO, PAGAMENTO E ENCOMENDA
-   ========================================================== */
 .caixa-resumo {
-  background: var(--branco-puro); /* Fundo branco */
-  padding: 2rem; /* Espaço interno */
-  border-radius: var(--arredondamento); /* Cantos arredondados */
-  box-shadow: var(--sombra-suave); /* Sombra leve */
-  border: 1px solid var(--lilas-claro); /* Borda fina */
-  height: fit-content; /* Altura ajustada ao conteúdo */
+  background: var(--branco-puro);
+  padding: 2rem;
+  border-radius: var(--arredondamento);
+  box-shadow: var(--sombra-suave);
+  border: 1px solid var(--lilas-claro);
+  height: fit-content;
 }
 
 .titulo-resumo {
-  margin-bottom: 1.5rem; /* Espaço abaixo */
-  text-transform: uppercase; /* Maiúsculas */
-  color: var(--roxo-escuro); /* Cor roxa */
-  font-size: 1.1rem; /* Tamanho da letra */
-  letter-spacing: 1px; /* Espaço entre letras */
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  color: var(--roxo-escuro);
+  font-size: 1.1rem;
+  letter-spacing: 1px;
 }
 
 .linha-resumo {
-  display: flex; /* Coloca texto e valor lado a lado */
-  justify-content: space-between; /* Empurra para as pontas */
-  margin-bottom: 1rem; /* Espaço abaixo */
-  border-bottom: 1px dashed var(--lilas-claro); /* Linha tracejada */
-  padding-bottom: 0.5rem; /* Espaço antes da linha */
-  font-family: system-ui, sans-serif; /* Fonte limpa */
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  border-bottom: 1px dashed var(--lilas-claro);
+  padding-bottom: 0.5rem;
+  font-family: system-ui, sans-serif;
 }
 
 .linha-total {
-  font-size: 1.3rem; /* Tamanho maior para o total */
-  font-weight: 700; /* Negrito */
-  color: var(--roxo-escuro); /* Cor roxa */
-  border-bottom: none; /* Sem linha embaixo */
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--roxo-escuro);
+  border-bottom: none;
 }
 
 .aviso-prazos {
-  margin-top: 1.2rem; /* Espaço acima */
-  padding: 1rem; /* Espaço interno */
-  background-color: var(--branco-perola); /* Fundo claro suave */
-  border-left: 3px solid var(--dourado); /* Barra dourada na esquerda */
-  border-radius: 4px; /* Cantos leves */
-  font-family: system-ui, sans-serif; /* Fonte limpa */
-  font-size: 0.82rem; /* Letra pequena */
-  color: var(--roxo-acinzentado); /* Cor suave */
-  line-height: 1.6; /* Espaço entre linhas */
+  margin-top: 1.2rem;
+  padding: 1rem;
+  background-color: var(--branco-perola);
+  border-left: 3px solid var(--dourado);
+  border-radius: 4px;
+  font-family: system-ui, sans-serif;
+  font-size: 0.82rem;
+  color: var(--roxo-acinzentado);
+  line-height: 1.6;
 }
 
 .formulario-pagamento {
-  margin-top: 1.5rem; /* Espaço acima */
-  display: flex; /* Organiza campos */
-  flex-direction: column; /* Empilha campos */
-  gap: 14px; /* Espaço entre campos */
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
 .campo-selecao {
-  font-family: system-ui, sans-serif; /* Fonte limpa */
-  width: 100%; /* Largura total */
-  padding: 11px 14px; /* Espaço interno */
-  border: 1px solid var(--lilas-claro); /* Borda lilás */
-  border-radius: var(--arredondamento); /* Cantos arredondados */
-  background-color: var(--branco-puro); /* Fundo branco */
-  color: var(--roxo-quase-preto); /* Texto escuro */
-  cursor: pointer; /* Mãozinha */
+  font-family: system-ui, sans-serif;
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid var(--lilas-claro);
+  border-radius: var(--arredondamento);
+  background-color: var(--branco-puro);
+  color: var(--roxo-quase-preto);
+  cursor: pointer;
 }
 
 .campo-selecao:focus {
-  border-color: var(--dourado); /* Borda dourada ao selecionar */
-  outline: none; /* Tira contorno padrão */
+  border-color: var(--dourado);
+  outline: none;
 }
 
 @media (max-width: 960px) {
   .area-carrinho {
-    grid-template-columns: 1fr; /* Coloca resumo abaixo da tabela no celular */
-    padding: 2rem 3%; /* Diminui margem lateral */
+    grid-template-columns: 1fr;
+    padding: 2rem 3%;
   }
 }

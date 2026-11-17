@@ -1,314 +1,297 @@
-/* ==========================================================
-   PALETA DE CORES (NOMES DAS CORES)
-   ========================================================== */
 :root {
-  --branco-perola: #faf8fb;       /* Cor de fundo principal */
-  --branco-puro: #ffffff;         /* Cor dos cartões e caixas */
-  --roxo-quase-preto: #21153b;    /* Cor principal dos textos */
-  --roxo-acinzentado: #62557a;    /* Cor de textos secundários */
-  --lilas-claro: #ebdff5;         /* Cor das bordas suaves */
-  --roxo-escuro: #2e1a47;         /* Cor principal da marca */
-  --roxo-profundo: #1f1033;       /* Roxo mais escuro para detalhes */
-  --dourado: #d4af37;             /* Cor dourada da marca */
-  --dourado-escuro: #b89326;      /* Dourado mais escuro */
-  --vermelho-vinho: #9e2a2b;      /* Cor de erro ou excluir */
-  --rosa-claro: #fff0f0;          /* Fundo de aviso de erro */
-  --verde-escuro: #1e5e3a;        /* Cor de sucesso */
-  --verde-claro: #f0fbf4;         /* Fundo de aviso de sucesso */
-  --arredondamento: 6px;          /* Arredondamento dos cantos */
-  --sombra-suave: 0 4px 25px rgb(46 26 71 / 8%); /* Sombra leve */
-  --transicao-suave: all 0.35s ease; /* Velocidade das animações */
+  --branco-perola: #faf8fb;
+  --branco-puro: #ffffff;
+  --roxo-quase-preto: #21153b;
+  --roxo-acinzentado: #62557a;
+  --lilas-claro: #ebdff5;
+  --roxo-escuro: #2e1a47;
+  --roxo-profundo: #1f1033;
+  --dourado: #d4af37;
+  --dourado-escuro: #b89326;
+  --vermelho-vinho: #9e2a2b;
+  --rosa-claro: #fff0f0;
+  --verde-escuro: #1e5e3a;
+  --verde-claro: #f0fbf4;
+  --arredondamento: 6px;
+  --sombra-suave: 0 4px 25px rgb(46 26 71 / 8%);
+  --transicao-suave: all 0.35s ease;
 }
 
-/* ==========================================================
-   CONFIGURAÇÃO GERAL DA PÁGINA
-   ========================================================== */
 * {
-  margin: 0; /* Remove margens padrão */
-  padding: 0; /* Remove espaçamentos padrão */
-  box-sizing: border-box; /* Faz bordas não aumentarem o tamanho das caixas */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  font-family: 'Playfair Display', Georgia, sans-serif; /* Fonte elegante */
-  background-color: var(--branco-perola); /* Aplica o fundo claro */
-  color: var(--roxo-quase-preto); /* Aplica a cor do texto */
-  overflow-x: hidden; /* Evita rolagem horizontal */
-  line-height: 1.5; /* Espaço entre linhas */
+  font-family: 'Playfair Display', Georgia, sans-serif;
+  background-color: var(--branco-perola);
+  color: var(--roxo-quase-preto);
+  overflow-x: hidden;
+  line-height: 1.5;
 }
 
-/* ==========================================================
-   CABEÇALHO E MENU SUPERIOR (FLEXBOX)
-   ========================================================== */
 header {
-  background-color: var(--roxo-escuro); /* Fundo roxo no topo */
-  border-bottom: 3px solid var(--dourado); /* Linha dourada embaixo */
-  padding: 1rem 5%; /* Espaço interno */
-  display: flex; /* Coloca logo e menu lado a lado */
-  justify-content: space-between; /* Empurra logo para esquerda e menu para direita */
-  align-items: center; /* Centraliza na vertical */
-  position: sticky; /* Gruda o menu no topo ao rolar */
-  top: 0; /* Posição no topo */
-  z-index: 1000; /* Fica por cima de tudo */
-  box-shadow: var(--sombra-suave); /* Sombra abaixo do menu */
+  background-color: var(--roxo-escuro);
+  border-bottom: 3px solid var(--dourado);
+  padding: 1rem 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: var(--sombra-suave);
 }
 
 .marca-cabecalho {
-  display: flex; /* Coloca imagem da logo e texto lado a lado */
-  align-items: center; /* Alinha imagem e texto no meio */
-  gap: 12px; /* Espaço entre a logo e o nome */
-  text-decoration: none; /* Tira sublinhado do link */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
 }
 
 .imagem-logo {
-  width: 42px; /* Largura da logo */
-  height: 42px; /* Altura da logo */
-  border-radius: 50%; /* Deixa a logo redonda */
-  border: 1.5px solid var(--dourado); /* Borda dourada na logo */
-  object-fit: cover; /* Ajusta a foto sem esticar */
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1.5px solid var(--dourado);
+  object-fit: cover;
 }
 
 .texto-logo {
-  color: var(--dourado); /* Cor dourada no nome */
-  font-size: 1.4rem; /* Tamanho da letra */
-  font-weight: 700; /* Negrito */
-  text-transform: uppercase; /* Letras maiúsculas */
-  letter-spacing: 2px; /* Espaço entre letras */
+  color: var(--dourado);
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 header nav ul {
-  display: flex; /* Coloca links na horizontal */
-  list-style: none; /* Tira bolinhas da lista */
-  gap: 2rem; /* Espaço entre os links */
-  align-items: center; /* Centraliza os links */
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+  align-items: center;
 }
 
 header nav a {
-  color: var(--branco-puro); /* Texto branco */
-  text-decoration: none; /* Tira sublinhado */
-  font-weight: 600; /* Semi-negrito */
-  text-transform: uppercase; /* Maiúsculas */
-  font-size: 0.85rem; /* Tamanho da fonte */
-  letter-spacing: 1px; /* Espaço entre letras */
-  font-family: system-ui, sans-serif; /* Fonte limpa para menu */
-  transition: var(--transicao-suave); /* Suaviza troca de cor */
+  color: var(--branco-puro);
+  text-decoration: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  font-family: system-ui, sans-serif;
+  transition: var(--transicao-suave);
 }
 
 header nav a:hover,
 header nav a.ativo {
-  color: var(--dourado); /* Fica dourado ao passar mouse ou na página atual */
+  color: var(--dourado);
 }
 
-/* ==========================================================
-   BOTÕES E CAMPOS DE FORMULÁRIO
-   ========================================================== */
 .botao-principal {
-  font-family: system-ui, sans-serif; /* Fonte do botão */
-  font-weight: 600; /* Negrito */
-  text-transform: uppercase; /* Letras maiúsculas */
-  letter-spacing: 1px; /* Espaço entre letras */
-  font-size: 0.85rem; /* Tamanho da letra */
-  padding: 12px 24px; /* Espaço interno do botão */
-  border: 1px solid var(--dourado); /* Borda dourada */
-  background-color: var(--roxo-escuro); /* Fundo roxo */
-  color: var(--dourado); /* Texto dourado */
-  border-radius: var(--arredondamento); /* Cantos arredondados */
-  cursor: pointer; /* Mãozinha ao passar o mouse */
-  transition: var(--transicao-suave); /* Animação suave */
-  text-decoration: none; /* Tira sublinhado se for link */
-  display: inline-block; /* Permite definir largura e padding */
-  text-align: center; /* Centraliza o texto */
+  font-family: system-ui, sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.85rem;
+  padding: 12px 24px;
+  border: 1px solid var(--dourado);
+  background-color: var(--roxo-escuro);
+  color: var(--dourado);
+  border-radius: var(--arredondamento);
+  cursor: pointer;
+  transition: var(--transicao-suave);
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
 }
 
 .botao-principal:hover {
-  background-color: var(--dourado); /* Fundo vira dourado */
-  color: var(--roxo-escuro); /* Texto vira roxo */
-  transform: translateY(-3px); /* Sobe levemente */
-  box-shadow: 0 6px 15px rgba(212, 175, 55, 0.25); /* Brilho dourado */
+  background-color: var(--dourado);
+  color: var(--roxo-escuro);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(212, 175, 55, 0.25);
 }
 
 .botao-largura-total {
-  width: 100%; /* Ocupa 100% da largura */
+  width: 100%;
 }
 
 .botao-dourado {
-  display: inline-block; /* Formato de bloco em linha */
-  padding: 10px 26px; /* Espaço interno */
-  background-color: transparent; /* Fundo transparente */
-  color: var(--dourado); /* Texto dourado */
-  border: 2px solid var(--dourado); /* Borda dourada */
-  text-decoration: none; /* Sem sublinhado */
-  text-transform: uppercase; /* Letras maiúsculas */
-  font-weight: 600; /* Negrito */
-  font-size: 0.8rem; /* Tamanho da letra */
-  letter-spacing: 2px; /* Espaço entre letras */
-  border-radius: var(--arredondamento); /* Cantos arredondados */
-  transition: var(--transicao-suave); /* Animação suave */
-  cursor: pointer; /* Mãozinha ao passar o mouse */
+  display: inline-block;
+  padding: 10px 26px;
+  background-color: transparent;
+  color: var(--dourado);
+  border: 2px solid var(--dourado);
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  border-radius: var(--arredondamento);
+  transition: var(--transicao-suave);
+  cursor: pointer;
 }
 
 .botao-dourado:hover {
-  background-color: var(--dourado); /* Preenche de dourado */
-  color: var(--roxo-escuro); /* Texto fica roxo */
-  transform: translateY(-4px); /* Sobe 4px ao passar o mouse */
-  box-shadow: 0 10px 20px rgba(212, 175, 55, 0.25); /* Sombra dourada */
+  background-color: var(--dourado);
+  color: var(--roxo-escuro);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(212, 175, 55, 0.25);
 }
 
 .grupo-campo {
-  display: flex; /* Organiza etiqueta e caixa */
-  flex-direction: column; /* Coloca etiqueta em cima da caixa */
-  gap: 6px; /* Espaço entre etiqueta e caixa */
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .grupo-campo label {
-  font-size: 0.85rem; /* Tamanho da etiqueta */
-  font-weight: 600; /* Negrito */
-  color: var(--roxo-quase-preto); /* Cor do texto */
-  font-family: system-ui, sans-serif; /* Fonte limpa */
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--roxo-quase-preto);
+  font-family: system-ui, sans-serif;
 }
 
 input {
-  font-family: system-ui, sans-serif; /* Fonte de digitação */
-  width: 100%; /* Largura total */
-  padding: 11px 14px; /* Espaço interno */
-  border: 1px solid var(--lilas-claro); /* Borda lilás */
-  border-radius: var(--arredondamento); /* Cantos arredondados */
-  background: var(--branco-puro); /* Fundo branco */
-  color: var(--roxo-quase-preto); /* Texto escuro */
-  transition: var(--transicao-suave); /* Suaviza foco */
+  font-family: system-ui, sans-serif;
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid var(--lilas-claro);
+  border-radius: var(--arredondamento);
+  background: var(--branco-puro);
+  color: var(--roxo-quase-preto);
+  transition: var(--transicao-suave);
 }
 
 input:focus {
-  border-color: var(--dourado); /* Borda dourada ao clicar */
-  outline: none; /* Tira borda azul padrão do navegador */
-  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.18); /* Brilho dourado */
+  border-color: var(--dourado);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.18);
 }
 
 .grade-duas-colunas {
-  display: grid; /* Ativa grade */
-  grid-template-columns: repeat(2, 1fr); /* 2 colunas iguais */
-  gap: 1rem; /* Espaço entre colunas */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
 }
 
 .campo-inteiro {
-  grid-column: 1 / -1; /* Faz o campo ocupar as 2 colunas */
+  grid-column: 1 / -1;
 }
 
 .texto-ajuda {
-  font-family: system-ui, sans-serif; /* Fonte limpa */
-  font-size: 0.8rem; /* Letra pequena */
-  color: var(--roxo-acinzentado); /* Cor suave */
+  font-family: system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: var(--roxo-acinzentado);
 }
 
 .caixa-alerta {
-  padding: 0.8rem 1rem; /* Espaço interno */
-  margin-bottom: 1.2rem; /* Espaço abaixo */
-  border-radius: var(--arredondamento); /* Cantos arredondados */
-  border: 1px solid var(--vermelho-vinho); /* Borda vermelha */
-  background-color: var(--rosa-claro); /* Fundo rosado */
-  color: var(--vermelho-vinho); /* Texto vermelho */
-  font-family: system-ui, sans-serif; /* Fonte limpa */
-  font-size: 0.9rem; /* Tamanho do texto */
+  padding: 0.8rem 1rem;
+  margin-bottom: 1.2rem;
+  border-radius: var(--arredondamento);
+  border: 1px solid var(--vermelho-vinho);
+  background-color: var(--rosa-claro);
+  color: var(--vermelho-vinho);
+  font-family: system-ui, sans-serif;
+  font-size: 0.9rem;
 }
 
 .caixa-alerta[hidden] {
-  display: none; /* Esconde o alerta quando não há erro */
+  display: none;
 }
 
-/* ==========================================================
-   VITRINE E CARTÕES DE ROUPAS (USADO NO INÍCIO E COLEÇÕES)
-   ========================================================== */
 .secao-vitrine {
-  padding: 4.5rem 5%; /* Espaço ao redor da vitrine */
+  padding: 4.5rem 5%;
 }
 
 .titulo-secao {
-  text-align: center; /* Centraliza o título */
-  font-size: 2.1rem; /* Tamanho do título */
-  color: var(--roxo-escuro); /* Cor roxa */
-  margin-bottom: 3rem; /* Espaço abaixo do título */
-  text-transform: uppercase; /* Letras maiúsculas */
-  letter-spacing: 2px; /* Espaço entre letras */
+  text-align: center;
+  font-size: 2.1rem;
+  color: var(--roxo-escuro);
+  margin-bottom: 3rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .grade-produtos {
-  display: flex; /* Coloca roupas lado a lado */
-  flex-wrap: wrap; /* Quebra linha se não couber */
-  gap: 2.5rem; /* Espaço entre os cartões */
-  justify-content: center; /* Centraliza os cartões */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: center;
 }
 
 .cartao-produto {
-  background: var(--branco-puro); /* Fundo branco */
-  border: 1px solid var(--lilas-claro); /* Borda fina */
-  width: 290px; /* Largura fixa do cartão */
-  padding: 1.25rem; /* Espaço interno */
-  display: flex; /* Organiza itens dentro do cartão */
-  flex-direction: column; /* Empilha foto, nome, preço e botão */
-  align-items: center; /* Centraliza tudo */
-  border-radius: var(--arredondamento); /* Cantos arredondados */
-  box-shadow: var(--sombra-suave); /* Sombra leve */
-  transition: var(--transicao-suave); /* Animação suave */
+  background: var(--branco-puro);
+  border: 1px solid var(--lilas-claro);
+  width: 290px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: var(--arredondamento);
+  box-shadow: var(--sombra-suave);
+  transition: var(--transicao-suave);
 }
 
 .cartao-produto:hover {
-  transform: translateY(-8px); /* Sobe o cartão ao passar o mouse */
-  border-color: var(--dourado); /* Borda fica dourada */
-  box-shadow: 0 15px 30px rgba(46, 26, 71, 0.12); /* Aumenta a sombra */
+  transform: translateY(-8px);
+  border-color: var(--dourado);
+  box-shadow: 0 15px 30px rgba(46, 26, 71, 0.12);
 }
+
 .moldura-foto {
-  width: 100%; /* Largura total do cartão */
-  height: 350px; /* Altura fixa da foto */
-  background-color: #f5f2f9; /* Fundo enquanto carrega */
-  margin-bottom: 1.2rem; /* Espaço abaixo da foto */
-  overflow: hidden; /* Corta sobras da imagem */
-  border-radius: 4px; /* Canto levemente arredondado */
+  width: 100%;
+  height: 350px;
+  background-color: #f5f2f9;
+  margin-bottom: 1.2rem;
+  overflow: hidden;
+  border-radius: 4px;
 }
 
 .moldura-foto img {
-  width: 100%; /* Preenche largura */
-  height: 100%; /* Preenche altura */
-  object-fit: cover; /* Corta sem distorcer a roupa */
-  transition: var(--transicao-suave); /* Suaviza zoom */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transicao-suave);
 }
 
 .cartao-produto:hover .moldura-foto img {
-  transform: scale(1.05); /* Dá zoom leve na foto ao passar o mouse */
+  transform: scale(1.05);
 }
 
 .nome-produto {
-  font-family: system-ui, sans-serif; /* Fonte limpa */
-  font-size: 1rem; /* Tamanho do nome */
-  font-weight: 600; /* Semi-negrito */
-  text-align: center; /* Centralizado */
-  margin-bottom: 0.4rem; /* Espaço abaixo */
-  color: var(--roxo-quase-preto); /* Cor escura */
+  font-family: system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 0.4rem;
+  color: var(--roxo-quase-preto);
 }
 
 .preco-produto {
-  font-family: system-ui, sans-serif; /* Fonte limpa */
-  color: var(--roxo-acinzentado); /* Cor suave */
-  font-weight: 700; /* Negrito */
-  font-size: 1.15rem; /* Tamanho do preço */
-  margin-bottom: 1.2rem; /* Espaço antes do botão */
+  font-family: system-ui, sans-serif;
+  color: var(--roxo-acinzentado);
+  font-weight: 700;
+  font-size: 1.15rem;
+  margin-bottom: 1.2rem;
 }
 
-/* ==========================================================
-RESPONSIVIDADE GERAL (CELULARES)
-========================================================== */
 @media (max-width: 860px) {
   header {
-    flex-direction: column; /* Empilha logo e menu no celular */
-    gap: 1rem; /* Espaço entre logo e links */
+    flex-direction: column;
+    gap: 1rem;
   }
 
   header nav ul {
-    gap: 1rem; /* Diminui espaço entre links */
-    flex-wrap: wrap; /* Permite quebrar linha */
-    justify-content: center; /* Centraliza links */
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   .titulo-secao {
-    font-size: 1.6rem; /* Diminui título no celular */
+    font-size: 1.6rem;
   }
 }

@@ -1,146 +1,134 @@
-/* ==========================================================
-   TELA DIVIDIDA SOFISTICADA (LOGIN E CADASTRO)
-   ========================================================== */
 .tela-acesso {
-  min-height: 100vh; /* Ocupa 100% da altura da tela */
-  display: grid; /* Divide a tela em colunas */
-  grid-template-columns: 5fr 7fr; /* Lado esquerdo menor, direito maior */
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 5fr 7fr;
 }
 
-/* ==========================================================
-   PAINEL ESQUERDO (IDENTIDADE DA GRIFE)
-   ========================================================== */
 .painel-marca {
-  display: flex; /* Organiza conteúdo */
-  flex-direction: column; /* Empilha logo, título e texto */
-  justify-content: center; /* Centraliza na vertical */
-  padding: 4rem 3.5rem; /* Espaço interno generoso */
-  color: var(--branco-puro); /* Texto branco */
-  background: radial-gradient(circle at top left, #4a2a75 0%, var(--roxo-profundo) 75%); /* Degradê luxuoso */
-  border-right: 3px solid var(--dourado); /* Linha dourada divisória */
-  position: relative; /* Base para detalhes */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem 3.5rem;
+  color: var(--branco-puro);
+  background: radial-gradient(circle at top left, #4a2a75 0%, var(--roxo-profundo) 75%);
+  border-right: 3px solid var(--dourado);
+  position: relative;
 }
 
 .cabecalho-marca-acesso {
-  display: flex; /* Coloca logo e nome lado a lado */
-  align-items: center; /* Centraliza na vertical */
-  gap: 14px; /* Espaço entre logo e texto */
-  margin-bottom: 2.5rem; /* Espaço abaixo da marca */
-  text-decoration: none; /* Tira sublinhado */
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 2.5rem;
+  text-decoration: none;
 }
 
 .logo-acesso {
-  width: 54px; /* Largura da logo */
-  height: 54px; /* Altura da logo */
-  border-radius: 50%; /* Deixa redonda */
-  border: 2px solid var(--dourado); /* Borda dourada */
-  object-fit: cover; /* Ajusta foto sem esticar */
-  box-shadow: 0 0 20px rgba(212, 175, 55, 0.35); /* Brilho dourado */
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  border: 2px solid var(--dourado);
+  object-fit: cover;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.35);
 }
 
 .nome-marca-acesso {
-  font-weight: 700; /* Negrito */
-  font-size: 1.5rem; /* Tamanho do nome */
-  color: var(--dourado); /* Dourado */
-  letter-spacing: 3px; /* Espaço entre letras */
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--dourado);
+  letter-spacing: 3px;
 }
 
 .painel-marca h1 {
-  font-size: 2.4rem; /* Título grande */
-  line-height: 1.25; /* Altura da linha */
-  margin-bottom: 1rem; /* Espaço abaixo */
-  color: var(--branco-puro); /* Branco */
+  font-size: 2.4rem;
+  line-height: 1.25;
+  margin-bottom: 1rem;
+  color: var(--branco-puro);
 }
 
 .painel-marca p {
-  color: var(--lilas-claro); /* Lilás suave */
-  font-size: 1rem; /* Tamanho do parágrafo */
-  font-family: system-ui, sans-serif; /* Fonte limpa */
-  max-width: 36ch; /* Limita largura para leitura elegante */
+  color: var(--lilas-claro);
+  font-size: 1rem;
+  font-family: system-ui, sans-serif;
+  max-width: 36ch;
 }
 
 .link-voltar-loja {
-  margin-top: 2.5rem; /* Espaço acima */
-  color: var(--dourado); /* Cor dourada */
-  text-decoration: none; /* Sem sublinhado */
-  font-family: system-ui, sans-serif; /* Fonte limpa */
-  font-size: 0.85rem; /* Tamanho da letra */
-  letter-spacing: 1px; /* Espaço entre letras */
-  text-transform: uppercase; /* Maiúsculas */
+  margin-top: 2.5rem;
+  color: var(--dourado);
+  text-decoration: none;
+  font-family: system-ui, sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .link-voltar-loja:hover {
-  text-decoration: underline; /* Sublinha ao passar o mouse */
+  text-decoration: underline;
 }
 
-/* ==========================================================
-   PAINEL DIREITO (CARTÃO DO FORMULÁRIO)
-   ========================================================== */
 .painel-formulario {
-  display: flex; /* Centraliza o cartão */
-  align-items: center; /* Centraliza na vertical */
-  justify-content: center; /* Centraliza na horizontal */
-  padding: 2.5rem 1.5rem; /* Espaço ao redor */
-  background-color: var(--branco-perola); /* Fundo claro */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1.5rem;
+  background-color: var(--branco-perola);
 }
 
 .cartao-formulario {
-  width: 100%; /* Largura total até o limite */
-  max-width: 480px; /* Largura máxima elegante */
-  background: var(--branco-puro); /* Fundo branco */
-  padding: 2.8rem; /* Espaço interno */
-  border-radius: var(--arredondamento); /* Cantos arredondados */
-  border: 1px solid var(--lilas-claro); /* Borda fina */
-  border-top: 4px solid var(--dourado); /* Detalhe dourado no topo */
-  box-shadow: 0 12px 35px rgba(46, 26, 71, 0.08); /* Sombra sofisticada */
+  width: 100%;
+  max-width: 480px;
+  background: var(--branco-puro);
+  padding: 2.8rem;
+  border-radius: var(--arredondamento);
+  border: 1px solid var(--lilas-claro);
+  border-top: 4px solid var(--dourado);
+  box-shadow: 0 12px 35px rgba(46, 26, 71, 0.08);
 }
 
 .titulo-formulario {
-  font-size: 1.6rem; /* Tamanho do título */
-  color: var(--roxo-escuro); /* Cor roxa */
-  margin-bottom: 0.4rem; /* Espaço abaixo */
+  font-size: 1.6rem;
+  color: var(--roxo-escuro);
+  margin-bottom: 0.4rem;
 }
 
 .subtitulo-formulario {
-  font-family: system-ui, sans-serif; /* Fonte limpa */
-  font-size: 0.9rem; /* Tamanho pequeno */
-  color: var(--roxo-acinzentado); /* Cor suave */
-  margin-bottom: 1.8rem; /* Espaço antes dos campos */
+  font-family: system-ui, sans-serif;
+  font-size: 0.9rem;
+  color: var(--roxo-acinzentado);
+  margin-bottom: 1.8rem;
 }
 
 .formulario-lista {
-  display: flex; /* Organiza campos */
-  flex-direction: column; /* Empilha um abaixo do outro */
-  gap: 1.1rem; /* Espaço entre campos */
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
 }
 
 .divisor-cadastro {
-  margin-top: 1.8rem; /* Espaço acima */
-  padding-top: 1.4rem; /* Espaço interno acima */
-  border-top: 1px solid var(--lilas-claro); /* Linha divisória */
-  text-align: center; /* Centraliza texto e botão */
+  margin-top: 1.8rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--lilas-claro);
+  text-align: center;
 }
 
 .divisor-cadastro p {
-  font-family: system-ui, sans-serif; /* Fonte limpa */
-  font-size: 0.85rem; /* Tamanho pequeno */
-  color: var(--roxo-acinzentado); /* Cor suave */
-  margin-bottom: 0.8rem; /* Espaço antes do botão */
+  font-family: system-ui, sans-serif;
+  font-size: 0.85rem;
+  color: var(--roxo-acinzentado);
+  margin-bottom: 0.8rem;
 }
 
-/* ==========================================================
-   RESPONSIVIDADE (CELULARES)
-   ========================================================== */
 @media (max-width: 860px) {
   .tela-acesso {
-    grid-template-columns: 1fr; /* Empilha painéis no celular */
+    grid-template-columns: 1fr;
   }
   .painel-marca {
-    padding: 2.5rem 1.5rem; /* Diminui espaço interno */
-    border-right: none; /* Tira borda lateral */
-    border-bottom: 3px solid var(--dourado); /* Coloca borda dourada embaixo */
+    padding: 2.5rem 1.5rem;
+    border-right: none;
+    border-bottom: 3px solid var(--dourado);
   }
   .cartao-formulario {
-    padding: 1.8rem; /* Diminui espaço interno no celular */
+    padding: 1.8rem;
   }
 }

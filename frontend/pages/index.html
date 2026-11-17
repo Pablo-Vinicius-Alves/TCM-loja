@@ -4,15 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SmartClothes | Início</title>
-  <!-- Ícone da marca na aba do navegador -->
   <link rel="icon" type="image/jpeg" href="../imag/logoDaMarca.jpg">
-  <!-- CSS principal e CSS exclusivo da página inicial -->
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/inicio.css">
 </head>
 <body>
 
-  <!-- DIVISÃO 1: CABEÇALHO SUPERIOR (Logo ao lado do nome + Menu de navegação) -->
   <header>
     <a href="index.html" class="marca-cabecalho">
       <img src="../imag/logoDaMarca.jpg" alt="Logo SmartClothes" class="imagem-logo">
@@ -28,11 +25,9 @@
     </nav>
   </header>
 
-  <!-- DIVISÃO 2: BANNER CARROSSEL EDITORIAL (Foto emoldurada à esquerda + Textos à direita) -->
   <section class="area-carrossel">
     <div class="grade-carrossel-editorial">
 
-      <!-- Lado Esquerdo: Foto da peça com selo no canto e setas nas laterais -->
       <div class="caixa-foto-editorial">
         <span class="selo-foto" id="selo-slide">&#10022; EDIÇÃO RARA</span>
         <button type="button" class="seta-editorial seta-esquerda" id="botao-voltar-slide">&larr;</button>
@@ -40,7 +35,6 @@
         <button type="button" class="seta-editorial seta-direita" id="botao-avancar-slide">&rarr;</button>
       </div>
 
-      <!-- Lado Direito: Coleção, Título grande, Detalhe em itálico, Descrição, Preço e Botão -->
       <div class="detalhes-peca-editorial" id="bloco-texto-slide">
         <span class="etiqueta-colecao-topo" id="colecao-slide">CREPÚSCULO DOURADO &middot; EDIÇÃO RARA</span>
         <h1 class="titulo-peca-grande" id="titulo-slide">Vestido de Seda Imperial</h1>
@@ -59,7 +53,6 @@
     </div>
   </section>
 
-  <!-- DIVISÃO 3: VITRINE DE PRODUTOS (Exibe as roupas disponíveis para adicionar ao carrinho) -->
   <section class="secao-vitrine">
     <h2 class="titulo-secao">Estilo para o Ano Todo</h2>
     <div class="grade-produtos">
@@ -94,7 +87,6 @@
     </div>
   </section>
 
-  <!-- Scripts do sistema -->
   <script type="module" src="../js/auth.js"></script>
   <script src="../js/inicio.js"></script>
   <script src="../js/carrinho.js"></script>

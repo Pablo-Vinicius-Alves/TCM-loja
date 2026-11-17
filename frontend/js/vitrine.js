@@ -5,65 +5,24 @@ const $ = (id) => document.getElementById(id);
 let usuarioAutenticado = false;
 let usuarioDados = null;
 
-const PRODUTOS = [
-  {
-    id: 1,
-    nome: 'Vestido Brilho',
-    preco: 159.90,
-    imagem: '../assets/produtos/vestido-brilho.jpg'
-  },
-  {
-    id: 2,
-    nome: 'Vestido Grande',
-    preco: 189.90,
-    imagem: '../assets/produtos/vestido-grande.jpg'
-  },
-  {
-    id: 3,
-    nome: 'Vestido Ind',
-    preco: 139.90,
-    imagem: '../assets/produtos/vestido-ind.jpg'
-  },
-  {
-    id: 4,
-    nome: 'Look Temo',
-    preco: 99.90,
-    imagem: '../assets/produtos/vestido-costas.jpg'
-  },
-  {
-    id: 5,
-    nome: 'Look Temo',
-    preco: 99.90,
-    imagem: '../assets/produtos/vestido-amarelos.jpg'
-  },
-  {
-    id: 6,
-    nome: 'Look Temo',
-    preco: 99.90,
-    imagem: '../assets/produtos/terno2.jpg'
+async function carregarProdutosDaAPI() {
+  try {
+    const produtos = await api('/produtos', { redirecionar401: false });
+    renderizarProdutos(produtos);
+  } catch (erro) {
+    console.error('Erro ao carregar produtos da API:', erro);
+    const grade = $('grade-produtos');
+    if (grade) {
+      grade.innerHTML = `<p style="text-align: center; color: var(--perigo);">Erro ao carregar os produtos do sistema.</p>`;
+    }
   }
-];
-
-function obterCarrinhoLocal() {
-  return JSON.parse(localStorage.getItem('carrinho')) || [];
-}
-
-function salvarCarrinhoLocal(carrinho) {
-  localStorage.setItem('carrinho', JSON.stringify(carrinho));
-  atualizarContadorCarrinho();
-}
-
-function atualizarContadorCarrinho() {
-  const carrinho = obterCarrinhoLocal();
-  const totalItens = carrinho.reduce((acc, item) => acc + item.quantidade, 0);
-  const contadorEl = $('carrinho-contador');
-  if (contadorEl) contadorEl.textContent = totalItens;
 }
 
 async function checarSessao() {
   try {
     usuarioDados = await api('/auth/me', { redirecionar401: false });
     usuarioAutenticado = true;
+    localStorage.removeItem('carrinho'); 
     renderizarHeaderUsuario();
   } catch {
     usuarioAutenticado = false;
@@ -82,99 +41,77 @@ function renderizarHeaderUsuario() {
   }
 }
 
-function renderizarProdutos() {
+function renderizarProdutos(produtos) {
   const grade = $('grade-produtos');
   if (!grade) return;
 
-  grade.innerHTML = PRODUTOS.map(p => `
+  if (!produtos || produtos.length === 0) {
+    grade.innerHTML = `<p style="text-align: center;">Nenhum produto cadastrado no momento.</p>`;
+    return;
+  }
+
+  grade.innerHTML = produtos.map(p => `
     <div class="card-produto">
       <div class="card-produto__imagem-container">
         <img 
-          src="${p.imagem}" 
+          src="../assets/produtos/${p.imagem || 'default.jpg'}" 
           alt="${p.nome}"
           onerror="this.onerror=null; this.src='../assets/products/images.jpg';"
         >
       </div>
       <h3 class="card-produto__titulo">${p.nome}</h3>
-      <p class="card-produto__preco">R$ ${p.preco.toFixed(2).replace('.', ',')}</p>
-      <button class="btn btn--primario btn-adicionar" data-id="${p.id}">
+      <p class="card-produto__preco">R$ ${Number(p.preco).toFixed(2).replace('.', ',')}</p>
+      <button class="btn btn--primario btn-adicionar" data-id="${p.id_produto}">
         Adicionar ao Carrinho
       </button>
     </div>
   `).join('');
 }
 
-function adicionarAoCarrinho(produtoId) {
-  const carrinho = obterCarrinhoLocal();
-  const id = String(produtoId);
-  const itemExistente = carrinho.find(item => String(item.produtoId) === id);
-
-  if (itemExistente) {
-    itemExistente.quantidade += 1;
-  } else {
-    carrinho.push({ produtoId: id, quantidade: 1 });
-  }
-
-  salvarCarrinhoLocal(carrinho);
-}
-
-async function finalizarCompra() {
-  const carrinho = obterCarrinhoLocal();
+async function adicionarAoCarrinhoAPI(produtoId, botao) {
+  botao.disabled = true;
+  const textoOriginal = botao.textContent;
   
-  if (carrinho.length === 0) {
-    alert('Seu carrinho está vazio.');
-    return;
-  }
-
   try {
-    await api('/auth/perfil', { redirecionar401: false });
-    usuarioAutenticado = true;
-  } catch {
-    usuarioAutenticado = false;
-  }
+    const resposta = await api('/carrinho/itens', { 
+      method: 'POST', 
+      body: { id_produto: Number(produtoId), quantidade: 1 } 
+    });
 
-  if (!usuarioAutenticado) {
-    sessionStorage.setItem('redirecionar_checkout', 'true');
-    window.location.href = '/pages/login.html';
-    return;
-  }
+    botao.textContent = '✓ Adicionado!';
+    botao.style.backgroundColor = '#16a34a';
 
-  window.location.href = '/pages/checkout.html';
+    const contadorEl = $('carrinho-contador');
+    if (contadorEl && resposta) {
+      contadorEl.textContent = resposta.quantidade_total || 0;
+    }
+  } catch (erro) {
+    console.error('Erro ao adicionar:', erro);
+    alert('Erro ao adicionar produto ao carrinho. Faça login novamente.');
+  } finally {
+    setTimeout(() => {
+      botao.textContent = textoOriginal;
+      botao.style.backgroundColor = '';
+      botao.disabled = false;
+    }, 1000);
+  }
 }
 
 const grade = $('grade-produtos');
 if (grade) {
   grade.addEventListener('click', (evento) => {
     const botao = evento.target.closest('.btn-adicionar');
-    
     if (botao) {
       evento.preventDefault();
       evento.stopPropagation();
-
       const produtoId = botao.dataset.id;
-      botao.disabled = true;
-      
-      adicionarAoCarrinho(produtoId);
-
-      const textoOriginal = botao.textContent;
-      botao.textContent = '✓ Adicionado!';
-      botao.style.backgroundColor = '#28a745';
-
-      setTimeout(() => {
-        botao.textContent = textoOriginal;
-        botao.style.backgroundColor = '';
-        botao.disabled = false;
-      }, 1000);
+      adicionarAoCarrinhoAPI(produtoId, botao);
     }
   });
 }
 
-$('btn-finalizar-compra')?.addEventListener('click', finalizarCompra);
-$('modal-fechar')?.addEventListener('click', () => $('modal-auth')?.close());
-
 checarSessao();
-renderizarProdutos();
-atualizarContadorCarrinho();
+carregarProdutosDaAPI();
 
 const trilho = $('grade-produtos');
 const btnPrev = $('btn-prev');

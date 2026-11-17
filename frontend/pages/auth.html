@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SmartClothes | Acesso</title>
+    <link rel="icon" type="image/jpeg" href="../imag/logoDaMarca.jpg">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+
+<body>
+
+<div class="tela-acesso">
+
+    <aside class="painel-marca">
+        <div class="cabecalho-marca-acesso">
+            <img
+                src="../imag/logoDaMarca.jpg"
+                alt="Logo SmartClothes"
+                class="logo-acesso">
+
+            <span class="nome-marca-acesso">
+                SMARTCLOTHES
+            </span>
+        </div>
+
+        <h1>Bem-vindo à nossa grife</h1>
+
+        <p>
+            Entre na sua conta para conferir coleções exclusivas
+            e acompanhar pedidos.
+        </p>
+    </aside>
+
+    <main class="painel-formulario">
+
+        <div class="cartao-formulario" style="max-width: 560px;">
+
+            <div class="abas-auth">
+                <button
+                    type="button"
+                    id="btn-login"
+                    class="botao-principal">
+                    Entrar
+                </button>
+
+                <button
+                    type="button"
+                    id="btn-cadastro"
+                    class="botao-dourado">
+                    Criar Conta
+                </button>
+            </div>
+
+            <div
+                id="caixa-alerta"
+                class="caixa-alerta"
+                role="alert"
+                hidden>
+            </div>
+
+
+            <section id="painel-login">
+
+                <h2 class="titulo-formulario">
+                    Identifique-se
+                </h2>
+
+                <p class="subtitulo-formulario">
+                    Digite seus dados para acessar a loja.
+                </p>
+
+                <form
+                    id="formulario-login"
+                    class="formulario-lista"
+                    novalidate>
+
+                    <div class="grupo-campo">
+                        <label for="campo-usuario-login">
+                            Usuário
+                        </label>
+
+                        <input
+                            id="campo-usuario-login"
+                            type="text"
+                            placeholder="Digite seu usuário"
+                            required>
+                    </div>
+
+                    <div class="grupo-campo">
+                        <label for="campo-senha-login">
+                            Senha
+                        </label>
+
+                        <input
+                            id="campo-senha-login"
+                            type="password"
+                            placeholder="Digite sua senha"
+                            required>
+                    </div>
+
+                    <button
+                        id="botao-entrar"
+                        class="botao-principal botao-largura-total"
+                        type="submit">
+
+                        Entrar na Loja
+
+                    </button>
+                </form>
+
+            </section>
+
+            <section id="painel-cadastro" hidden>
+
+                <h2 class="titulo-formulario">
+                    Nova Conta
+                </h2>
+
+                <p class="subtitulo-formulario">
+                    Preencha seus dados para se cadastrar.
+                </p>
+
+                <form
+                    id="formulario-cadastro"
+                    novalidate>
+
+                    <div class="grade-duas-colunas">
+
+                        <div class="grupo-campo campo-inteiro">
+                            <label for="cadastro-nome">
+                                Nome completo
+                            </label>
+
+                            <input
+                                id="cadastro-nome"
+                                type="text"
+                                maxlength="100"
+                                required>
+                        </div>
+
+                        <div class="grupo-campo">
+                            <label for="cadastro-email">
+                                E-mail
+                            </label>
+
+                            <input
+                                id="cadastro-email"
+                                type="email"
+                                maxlength="120"
+                                required>
+                        </div>
+
+                        <div class="grupo-campo">
+                            <label for="cadastro-cpf">
+                                CPF
+                            </label>
+
+                            <input
+                                id="cadastro-cpf"
+                                type="text"
+                                maxlength="14"
+                                placeholder="000.000.000-00"
+                                required>
+                        </div>
+
+                        <div class="grupo-campo">
+                            <label for="cadastro-telefone">
+                                Telefone
+                            </label>
+
+                            <input
+                                id="cadastro-telefone"
+                                type="text"
+                                maxlength="20">
+                        </div>
+
+                        <div class="grupo-campo">
+                            <label for="cadastro-endereco">
+                                Endereço
+                            </label>
+
+                            <input
+                                id="cadastro-endereco"
+                                type="text"
+                                maxlength="200">
+                        </div>
+
+                        <div class="grupo-campo campo-inteiro">
+                            <label for="cadastro-usuario">
+                                Nome de Usuário
+                            </label>
+
+                            <input
+                                id="cadastro-usuario"
+                                type="text"
+                                maxlength="50"
+                                required>
+
+                            <span class="texto-ajuda">
+                                Mínimo de 3 caracteres.
+                            </span>
+                        </div>
+
+                        <div class="grupo-campo">
+                            <label for="cadastro-senha">
+                                Senha
+                            </label>
+
+                            <input
+                                id="cadastro-senha"
+                                type="password"
+                                required>
+                        </div>
+
+                        <div class="grupo-campo">
+                            <label for="cadastro-confirmar">
+                                Repita a senha
+                            </label>
+
+                            <input
+                                id="cadastro-confirmar"
+                                type="password"
+                                required>
+                        </div>
+
+                        <span class="texto-ajuda campo-inteiro">
+                            A senha precisa ter pelo menos 8 caracteres.
+                        </span>
+
+                    </div>
+
+                    <button
+                        id="botao-cadastrar"
+                        class="botao-principal botao-largura-total"
+                        type="submit"
+                        style="margin-top: 1.5rem;">
+
+                        Criar Minha Conta
+
+                    </button>
+
+                </form>
+
+            </section>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script type="module" src="../js/auth.js"></script>
+</body>
+</html>

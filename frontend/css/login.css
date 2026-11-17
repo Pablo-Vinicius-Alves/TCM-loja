@@ -1,0 +1,134 @@
+.tela-acesso {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+}
+
+.painel-marca {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem 3.5rem;
+  color: var(--branco-puro);
+  background: radial-gradient(circle at top left, #4a2a75 0%, var(--roxo-profundo) 75%);
+  border-right: 3px solid var(--dourado);
+  position: relative;
+}
+
+.cabecalho-marca-acesso {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 2.5rem;
+  text-decoration: none;
+}
+
+.logo-acesso {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  border: 2px solid var(--dourado);
+  object-fit: cover;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.35);
+}
+
+.nome-marca-acesso {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--dourado);
+  letter-spacing: 3px;
+}
+
+.painel-marca h1 {
+  font-size: 2.4rem;
+  line-height: 1.25;
+  margin-bottom: 1rem;
+  color: var(--branco-puro);
+}
+
+.painel-marca p {
+  color: var(--lilas-claro);
+  font-size: 1rem;
+  font-family: system-ui, sans-serif;
+  max-width: 36ch;
+}
+
+.link-voltar-loja {
+  margin-top: 2.5rem;
+  color: var(--dourado);
+  text-decoration: none;
+  font-family: system-ui, sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.link-voltar-loja:hover {
+  text-decoration: underline;
+}
+
+.painel-formulario {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1.5rem;
+  background-color: var(--branco-perola);
+}
+
+.cartao-formulario {
+  width: 100%;
+  max-width: 480px;
+  background: var(--branco-puro);
+  padding: 2.8rem;
+  border-radius: var(--arredondamento);
+  border: 1px solid var(--lilas-claro);
+  border-top: 4px solid var(--dourado);
+  box-shadow: 0 12px 35px rgba(46, 26, 71, 0.08);
+}
+
+.titulo-formulario {
+  font-size: 1.6rem;
+  color: var(--roxo-escuro);
+  margin-bottom: 0.4rem;
+}
+
+.subtitulo-formulario {
+  font-family: system-ui, sans-serif;
+  font-size: 0.9rem;
+  color: var(--roxo-acinzentado);
+  margin-bottom: 1.8rem;
+}
+
+.formulario-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.divisor-cadastro {
+  margin-top: 1.8rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--lilas-claro);
+  text-align: center;
+}
+
+.divisor-cadastro p {
+  font-family: system-ui, sans-serif;
+  font-size: 0.85rem;
+  color: var(--roxo-acinzentado);
+  margin-bottom: 0.8rem;
+}
+
+@media (max-width: 860px) {
+  .tela-acesso {
+    grid-template-columns: 1fr;
+  }
+  .painel-marca {
+    padding: 2.5rem 1.5rem;
+    border-right: none;
+    border-bottom: 3px solid var(--dourado);
+  }
+  .cartao-formulario {
+    padding: 1.8rem;
+  }
+}

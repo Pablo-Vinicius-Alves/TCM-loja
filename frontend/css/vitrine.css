@@ -1,4 +1,4 @@
-* { box-sizing: border-box; font-family: system-ui, -apple-system, sans-serif; }
+/* * { box-sizing: border-box; font-family: system-ui, -apple-system, sans-serif; }
 
 body { background-color: #f4f0fa; color: #261c33; margin: 0; }
 .container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
@@ -233,4 +233,4 @@ body { background-color: #f4f0fa; color: #261c33; margin: 0; }
   transform: translateY(-2px);
   box-shadow: 0 6px 18px rgba(234, 179, 8, 0.5);
   color: #261c33;
-}
+} */

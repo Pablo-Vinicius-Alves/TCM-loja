@@ -1,41 +1,146 @@
-import { api, ApiError } from './api.js';
-import { mostrarAlerta } from './ui.js';
+document.addEventListener('DOMContentLoaded', () => {
+  let listaCarrinho = JSON.parse(localStorage.getItem('smartclothes_cart')) || [];
 
-export const obterCarrinho = () => api('/carrinho');
+  const contadorMenu = document.getElementById('contagem-carrinho');
+  const tabelaItens = document.getElementById('lista-itens-carrinho');
+  const textoSubtotal = document.getElementById('valor-subtotal');
+  const textoPrazoEstimado = document.getElementById('prazo-estimado');
+  const textoTotal = document.getElementById('valor-total');
+  const painelFechamento = document.getElementById('painel-fechamento');
+  const selecaoPagamento = document.getElementById('forma-pagamento');
+  const areaNumeroCartao = document.getElementById('area-numero-cartao');
+  const inputNumeroCartao = document.getElementById('numero-cartao');
+  const formularioEncomenda = document.getElementById('formulario-encomenda');
 
-export const adicionarAoCarrinho = (idProduto, quantidade = 1) =>
-  api('/carrinho/itens', { method: 'POST', body: { id_produto: idProduto, quantidade } });
+  const pecasInverno = ['Vestido de Seda Imperial', 'Vestido Cravejado'];
 
-export const alterarQuantidade = (idProduto, quantidade) =>
-  api(`/carrinho/itens/${idProduto}`, { method: 'PATCH', body: { quantidade } });
-
-export const removerDoCarrinho = (idProduto) =>
-  api(`/carrinho/itens/${idProduto}`, { method: 'DELETE' });
-
-export const esvaziarCarrinho = () => api('/carrinho', { method: 'DELETE' });
-
-export function mostrarContagem(carrinho) {
-  const alvo = document.getElementById('contagem-carrinho');
-  if (alvo) alvo.textContent = String(carrinho?.quantidade_total ?? 0);
-}
-
-export async function atualizarContagem() {
-  try {
-    mostrarContagem(await api('/carrinho', { redirecionar401: false }));
-  } catch (erro) {
-    if (!(erro instanceof ApiError)) throw erro;
-    mostrarContagem(null);
+  function descobrirPrazoDias(nomeRoupa) {
+    if (pecasInverno.includes(nomeRoupa)) {
+      return 3; 
+    }
+    return 2; 
   }
-}
 
-export async function aoClicarAdicionar(botao, areaDeAviso) {
-  botao.disabled = true;
-  try {
-    mostrarContagem(await adicionarAoCarrinho(Number(botao.dataset.idProduto)));
-  } catch (erro) {
-    if (!(erro instanceof ApiError)) throw erro;
-    if (areaDeAviso) mostrarAlerta(areaDeAviso, erro.message);
-  } finally {
-    botao.disabled = false;
+  if (selecaoPagamento && areaNumeroCartao) {
+    selecaoPagamento.addEventListener('change', () => {
+      const escolheuCartao = selecaoPagamento.value.includes('Cartão');
+      areaNumeroCartao.hidden = !escolheuCartao;
+      if (inputNumeroCartao) inputNumeroCartao.required = escolheuCartao;
+    });
   }
-}
+  function atualizarContadorMenu() {
+    if (!contadorMenu) return;
+    const totalPecas = listaCarrinho.reduce((soma, item) => soma + item.quantidade, 0);
+    contadorMenu.innerText = totalPecas;
+  }
+
+  function desenharTabelaCarrinho() {
+    if (!tabelaItens) return;
+    tabelaItens.innerHTML = '';
+
+    if (listaCarrinho.length === 0) {
+      tabelaItens.innerHTML = `<tr><td colspan="6" style="text-align:center; padding: 3.5rem; color: var(--roxo-acinzentado);">Seu carrinho está vazio! Escolha suas roupas em Início ou Coleções.</td></tr>`;
+      if (painelFechamento) painelFechamento.style.display = 'none';
+      return;
+    }
+
+    if (painelFechamento) painelFechamento.style.display = 'block';
+    let somaGeral = 0;
+    let maiorPrazo = 2;
+
+    listaCarrinho.forEach((item, posicao) => {
+      const precoNumero = parseFloat(item.preco.replace('R$', '').replace('.', '').replace(',', '.').trim());
+      const subtotalItem = precoNumero * item.quantidade;
+      const diasPrazo = descobrirPrazoDias(item.nome);
+
+      somaGeral += subtotalItem;
+      if (diasPrazo > maiorPrazo) maiorPrazo = diasPrazo;
+
+      const linha = document.createElement('tr');
+      linha.innerHTML = `
+        <td style="font-weight: 600;">${item.nome}</td>
+        <td><span class="etiqueta-prazo">Até ${diasPrazo} dias úteis</span></td>
+        <td>${item.preco}</td>
+        <td>
+          <button class="botao-quantidade" data-posicao="${posicao}" data-acao="diminuir">-</button>
+          <span class="numero-quantidade">${item.quantidade}</span>
+          <button class="botao-quantidade" data-posicao="${posicao}" data-acao="aumentar">+</button>
+        </td>
+        <td style="font-weight: 600; color: var(--roxo-escuro);">R$ ${subtotalItem.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</td>
+        <td><button class="botao-excluir" data-posicao="${posicao}">Excluir</button></td>
+      `;
+      tabelaItens.appendChild(linha);
+    });
+
+    if (textoSubtotal) textoSubtotal.innerText = `R$ ${somaGeral.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+    if (textoPrazoEstimado) textoPrazoEstimado.innerText = `Até ${maiorPrazo} dias úteis`;
+    if (textoTotal) textoTotal.innerText = `R$ ${somaGeral.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+
+    ativarBotoesTabela();
+  }
+
+  function ativarBotoesTabela() {
+    document.querySelectorAll('.botao-quantidade').forEach((botao) => {
+      botao.addEventListener('click', () => {
+        const posicao = botao.getAttribute('data-posicao');
+        const acao = botao.getAttribute('data-acao');
+
+        if (acao === 'aumentar') {
+          listaCarrinho[posicao].quantidade += 1;
+        } else if (acao === 'diminuir' && listaCarrinho[posicao].quantidade > 1) {
+          listaCarrinho[posicao].quantidade -= 1;
+        }
+        salvarEAtualizar();
+      });
+    });
+
+    document.querySelectorAll('.botao-excluir').forEach((botao) => {
+      botao.addEventListener('click', () => {
+        const posicao = botao.getAttribute('data-posicao');
+        listaCarrinho.splice(posicao, 1);
+        salvarEAtualizar();
+      });
+    });
+  }
+
+  function salvarEAtualizar() {
+    localStorage.setItem('smartclothes_cart', JSON.stringify(listaCarrinho));
+    atualizarContadorMenu();
+    desenharTabelaCarrinho();
+  }
+
+  document.querySelectorAll('.cartao-produto .botao-dourado').forEach((botao) => {
+    botao.addEventListener('click', (evento) => {
+      evento.preventDefault();
+      const cartao = botao.closest('.cartao-produto');
+      const nomeRoupa = cartao.querySelector('.nome-produto').innerText;
+      const precoRoupa = cartao.querySelector('.preco-produto').innerText;
+
+      const roupaJaExiste = listaCarrinho.find((item) => item.nome === nomeRoupa);
+      if (roupaJaExiste) {
+        roupaJaExiste.quantidade += 1;
+      } else {
+        listaCarrinho.push({ nome: nomeRoupa, preco: precoRoupa, quantidade: 1 });
+      }
+
+      salvarEAtualizar();
+      alert(`${nomeRoupa} foi adicionado ao seu carrinho!`);
+    });
+  });
+
+  if (formularioEncomenda) {
+    formularioEncomenda.addEventListener('submit', (evento) => {
+      evento.preventDefault();
+      const formaEscolhida = selecaoPagamento ? selecaoPagamento.value : 'PIX';
+      const prazoFinal = textoPrazoEstimado ? textoPrazoEstimado.innerText : 'até 3 dias úteis';
+      const valorFinal = textoTotal ? textoTotal.innerText : '';
+
+      alert(`Pagamento via ${formaEscolhida} (${valorFinal}) confirmado!\nSua encomenda na SmartClothes ficará pronta em ${prazoFinal}.`);
+      listaCarrinho = [];
+      salvarEAtualizar();
+      window.location.href = 'index.html';
+    });
+  }
+  atualizarContadorMenu();
+  desenharTabelaCarrinho();
+});

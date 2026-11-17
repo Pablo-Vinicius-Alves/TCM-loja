@@ -1,0 +1,199 @@
+@keyframes surgirSuave {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.area-carrossel {
+  width: 100%;
+  min-height: 82vh;
+  background: radial-gradient(circle at 65% 45%, #3d2163 0%, var(--roxo-profundo) 80%);
+  border-bottom: 2px solid var(--dourado);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3.5rem 5%;
+}
+
+.grade-carrossel-editorial {
+  width: 100%;
+  max-width: 1120px;
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 4.5rem;
+  align-items: center;
+}
+
+
+.caixa-foto-editorial {
+  position: relative;
+  width: 100%;
+  max-width: 430px;
+  height: 540px;
+  margin: 0 auto;
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+}
+
+.caixa-foto-editorial img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: opacity 0.4s ease;
+}
+
+.selo-foto {
+  position: absolute;
+  top: 22px;
+  left: 22px;
+  background: rgba(25, 14, 40, 0.78);
+  backdrop-filter: blur(6px);
+  color: var(--dourado);
+  padding: 7px 14px;
+  font-family: system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+
+.seta-editorial {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(25, 14, 40, 0.72);
+  color: var(--dourado);
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transicao-suave);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.seta-editorial:hover {
+  background: var(--dourado);
+  color: var(--roxo-profundo);
+}
+
+.seta-esquerda {
+  left: 14px;
+}
+
+.seta-direita {
+  right: 14px;
+}
+
+.detalhes-peca-editorial {
+  color: var(--branco-puro);
+  text-align: left;
+  animation: surgirSuave 0.7s ease-out;
+}
+
+.etiqueta-colecao-topo {
+  display: block;
+  color: var(--dourado);
+  font-family: system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
+
+.titulo-peca-grande {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 4rem;
+  font-weight: 400;
+  line-height: 1.08;
+  color: var(--branco-puro);
+  margin-bottom: 1rem;
+}
+
+.subtitulo-italico {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 1.45rem;
+  color: var(--lilas-claro);
+  margin-bottom: 1.6rem;
+}
+
+.linha-dourada-editorial {
+  width: 75px;
+  height: 1.5px;
+  background-color: var(--dourado);
+  margin-bottom: 1.6rem;
+}
+
+.descricao-peca-editorial {
+  font-family: system-ui, sans-serif;
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: #d6cbe3;
+  max-width: 44ch;
+  margin-bottom: 2.2rem;
+}
+
+.rodape-peca-editorial {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.preco-editorial {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.9rem;
+  color: var(--lilas-claro);
+  letter-spacing: 1px;
+}
+
+.botao-descobrir-cheio {
+  display: inline-block;
+  padding: 15px 38px;
+  background: linear-gradient(135deg, #e5c158 0%, var(--dourado) 100%);
+  color: var(--roxo-profundo);
+  font-family: system-ui, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 3px;
+  transition: var(--transicao-suave);
+  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.25);
+}
+
+.botao-descobrir-cheio:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 26px rgba(212, 175, 55, 0.4);
+  filter: brightness(1.06);
+}
+
+@media (max-width: 900px) {
+  .grade-carrossel-editorial {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .caixa-foto-editorial {
+    height: 440px;
+  }
+  .titulo-peca-grande {
+    font-size: 2.7rem;
+  }
+}

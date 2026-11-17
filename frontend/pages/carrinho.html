@@ -3,41 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Carrinho | TCM Loja</title>
+  <title>Seu Carrinho | SmartClothes</title>
+
+  <link rel="icon" type="image/jpeg" href="../imag/logoDaMarca.jpg">
+
   <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/vitrine.css">
   <link rel="stylesheet" href="../css/carrinho.css">
 </head>
 <body>
 
-  <header class="header">
-    <div class="header__conteudo">
-      <h1 class="header__logo">Smart-Clothes</h1>
-      <div class="header__acoes">
-        <a class="btn" href="vitrine.html">Continuar comprando</a>
-        <span>Carrinho (<span id="carrinho-contador">0</span>)</span>
-      </div>
-    </div>
+
+  <header>
+    <a href="index.html" class="marca-cabecalho">
+      <img src="../imag/logoDaMarca.jpg" alt="Logo SmartClothes" class="imagem-logo">
+@@ -28,10 +25,8 @@
+    </nav>
   </header>
 
-  <main class="carrinho-pagina">
-    <h2>Seu Carrinho</h2>
-    <p id="carrinho-aviso" class="aviso" role="alert" hidden></p>
 
-    <div id="carrinho-itens" class="carrinho-itens" aria-live="polite"></div>
+  <main class="area-carrinho">
 
-    <div class="carrinho-rodape">
-      <div class="carrinho-total">
-        <span>Total:</span>
-        <strong id="carrinho-total-valor">R$ 0,00</strong>
-      </div>
-      <div class="carrinho-pagina__acoes">
-        <button id="btn-esvaziar" class="btn" type="button" disabled>Esvaziar carrinho</button>
-        <button id="btn-finalizar-compra" class="btn btn--primario" type="button">Finalizar Compra</button>
-      </div>
-    </div>
+
+    <section>
+      <h2 class="titulo-secao" style="text-align: left; margin-bottom: 2rem;">Seu Carrinho</h2>
+      <table class="tabela-carrinho">
+
+</table>
+    </section>
   </main>
-
-  <script type="module" src="../js/carrinho.js"></script>
 </body>
 </html>

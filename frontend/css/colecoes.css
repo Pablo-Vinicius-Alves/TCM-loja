@@ -1,0 +1,63 @@
+.subtitulo-secao {
+  text-align: center;
+  margin-top: -2rem;
+  margin-bottom: 3.5rem;
+  color: var(--roxo-acinzentado);
+  font-family: system-ui, sans-serif;
+}
+
+.secao-passadas {
+  background-color: #f3eff7;
+  padding: 4.5rem 5%;
+  border-top: 2px dashed var(--lilas-claro);
+}
+
+.grade-passadas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.cartao-passado {
+  background: var(--branco-puro);
+  border: 1px solid var(--lilas-claro);
+  width: 260px;
+  padding: 1rem;
+  border-radius: var(--arredondamento);
+  opacity: 0.78;
+  filter: grayscale(35%);
+  transition: var(--transicao-suave);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: var(--sombra-suave);
+}
+
+.cartao-passado:hover {
+  opacity: 1;
+  filter: grayscale(0%);
+  transform: scale(1.03);
+  border-color: var(--dourado);
+}
+
+.etiqueta-esgotado {
+  background-color: var(--roxo-acinzentado);
+  color: var(--branco-puro);
+  font-size: 0.7rem;
+  padding: 4px 10px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  margin-top: 0.6rem;
+  margin-bottom: 0.5rem;
+  font-family: system-ui, sans-serif;
+  letter-spacing: 1px;
+}
+
+.preco-riscado {
+  font-size: 0.95rem;
+  color: var(--roxo-acinzentado);
+  font-weight: 700;
+  text-decoration: line-through;
+  font-family: system-ui, sans-serif;
+}

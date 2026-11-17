@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Lista completa com todas as peças da loja e seus textos editoriais
   const listaSlides = [
     {
       imagem: "../imag/images.jpg",
@@ -63,7 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (!elementoImagem) return;
 
-  // Atualiza todos os elementos do carrossel e reinicia a animação suave
   function mostrarSlide(indice) {
     const slide = listaSlides[indice];
 
@@ -76,21 +74,18 @@ document.addEventListener('DOMContentLoaded', () => {
     if (elementoDescricao) elementoDescricao.innerText = slide.descricao;
     if (elementoPreco) elementoPreco.innerText = slide.preco;
 
-    // Reinicia a animação de entrada suave do texto a cada troca
     if (blocoTexto) {
       blocoTexto.style.animation = 'none';
-      blocoTexto.offsetHeight; // Força o navegador a reiniciar a animação
+      blocoTexto.offsetHeight; 
       blocoTexto.style.animation = 'surgirSuave 0.7s ease-out';
     }
   }
 
-  // Avança para a próxima peça
   function proximoSlide() {
     indiceAtual = (indiceAtual + 1) % listaSlides.length;
     mostrarSlide(indiceAtual);
   }
 
-  // Volta para a peça anterior
   function slideAnterior() {
     indiceAtual = (indiceAtual - 1 + listaSlides.length) % listaSlides.length;
     mostrarSlide(indiceAtual);
@@ -99,9 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (botaoAvancar) botaoAvancar.addEventListener('click', proximoSlide);
   if (botaoVoltar) botaoVoltar.addEventListener('click', slideAnterior);
 
-  // Carrega a primeira peça ao abrir
   mostrarSlide(0);
 
-  // Troca automaticamente a cada 6 segundos
   setInterval(proximoSlide, 6000);
 });

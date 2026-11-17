@@ -12,3 +12,7 @@ export function validarCPF(cpf) {
   }
   return true;
 }
+
+export function limparCpf(valor) {
+  return String(valor ?? '').replace(/\D/g, '');
+}

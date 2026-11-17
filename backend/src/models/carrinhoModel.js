@@ -1,0 +1,194 @@
+import connectionDB from '../config/db.js';
+import { AppError } from '../utils/appError.js';
+
+export const MAX_POR_ITEM = 10;
+const STATUS_CARRINHO = 'CARRINHO';
+
+async function comTransacao(trabalho) {
+  const conexao = await connectionDB.getConnection();
+  try {
+    await conexao.beginTransaction();
+    const resultado = await trabalho(conexao);
+    await conexao.commit();
+    return resultado;
+  } catch (erro) {
+    await conexao.rollback();
+    throw erro;
+  } finally {
+    conexao.release();
+  }
+}
+
+async function travarCliente(conexao, idCliente) {
+  await conexao.query('SELECT id_cliente FROM cliente WHERE id_cliente = ? FOR UPDATE', [idCliente]);
+}
+
+async function acharCarrinho(conexao, idCliente) {
+  const [linhas] = await conexao.query(
+    'SELECT id_compra FROM compra WHERE id_cliente = ? AND status_compra = ? LIMIT 1',
+    [idCliente, STATUS_CARRINHO]
+  );
+  return linhas[0]?.id_compra ?? null;
+}
+
+async function acharOuCriarCarrinho(conexao, idCliente) {
+  const existente = await acharCarrinho(conexao, idCliente);
+  if (existente) return existente;
+  const [r] = await conexao.query(
+    'INSERT INTO compra (id_cliente, status_compra) VALUES (?, ?)',
+    [idCliente, STATUS_CARRINHO]
+  );
+  return r.insertId;
+}
+
+async function montarCarrinho(conexao, idCompra, sincronizar = false) {
+  if (!idCompra) return { id_compra: null, itens: [], quantidade_total: 0, total: '0.00' };
+
+  if (sincronizar) {
+    await conexao.query(
+      `UPDATE carrinho_de_compra ci
+         JOIN produto p ON p.id_produto = ci.id_produto
+          SET ci.preco_unitario = p.preco
+        WHERE ci.id_compra = ? AND ci.preco_unitario <> p.preco`,
+      [idCompra]
+    );
+    await conexao.query(
+      `UPDATE compra
+          SET valor_total = (SELECT COALESCE(SUM(subtotal), 0)
+                               FROM carrinho_de_compra WHERE id_compra = ?)
+        WHERE id_compra = ?`,
+      [idCompra, idCompra]
+    );
+  }
+
+  const [itens] = await conexao.query(
+    `SELECT ci.id_produto, p.nome, p.imagem, ci.quantidade,
+            p.preco AS preco_unitario,
+            ci.quantidade * p.preco AS subtotal,
+            p.estoque,
+            (p.ativo = TRUE AND c.ativa = TRUE AND p.estoque >= ci.quantidade) AS disponivel
+       FROM carrinho_de_compra ci
+       JOIN produto p ON p.id_produto = ci.id_produto
+       JOIN colecao c ON c.id_colecao = p.id_colecao
+      WHERE ci.id_compra = ?
+      ORDER BY ci.id_carrinho`,
+    [idCompra]
+  );
+  const [[soma]] = await conexao.query(
+    `SELECT COALESCE(SUM(ci.quantidade * p.preco), 0) AS total,
+            COALESCE(SUM(ci.quantidade), 0) AS quantidade_total
+       FROM carrinho_de_compra ci JOIN produto p ON p.id_produto = ci.id_produto
+      WHERE ci.id_compra = ?`,
+    [idCompra]
+  );
+
+  return {
+    id_compra: idCompra,
+    itens: itens.map((i) => ({ ...i, disponivel: Boolean(i.disponivel) })),
+    quantidade_total: Number(soma.quantidade_total),
+    total: soma.total
+  };
+}
+export async function obter(idCliente) {
+  const conexao = await connectionDB.getConnection();
+  try {
+    return await montarCarrinho(conexao, await acharCarrinho(conexao, idCliente));
+  } finally {
+    conexao.release();
+  }
+}
+
+export function adicionar(idCliente, idProduto, quantidade) {
+  return comTransacao(async (conexao) => {
+    await travarCliente(conexao, idCliente);
+
+    const [produtos] = await conexao.query(
+      `SELECT p.preco, p.estoque
+         FROM produto p JOIN colecao c ON c.id_colecao = p.id_colecao
+        WHERE p.id_produto = ? AND p.ativo = TRUE AND c.ativa = TRUE`,
+      [idProduto]
+    );
+    if (!produtos[0]) throw new AppError('Produto não encontrado', 404);
+
+    const idCompra = await acharOuCriarCarrinho(conexao, idCliente);
+    const [atual] = await conexao.query(
+      'SELECT quantidade FROM carrinho_de_compra WHERE id_compra = ? AND id_produto = ?',
+      [idCompra, idProduto]
+    );
+    const novaQuantidade = (atual[0]?.quantidade ?? 0) + quantidade;
+
+    validarQuantidade(novaQuantidade, produtos[0].estoque);
+
+    await conexao.query(
+      `INSERT INTO carrinho_de_compra (id_compra, id_produto, quantidade, preco_unitario)
+       VALUES (?, ?, ?, ?)
+       ON DUPLICATE KEY UPDATE quantidade = VALUES(quantidade),
+                               preco_unitario = VALUES(preco_unitario)`,
+      [idCompra, idProduto, novaQuantidade, produtos[0].preco]
+    );
+    return montarCarrinho(conexao, idCompra, true);
+  });
+}
+
+export function definirQuantidade(idCliente, idProduto, quantidade) {
+  return comTransacao(async (conexao) => {
+    await travarCliente(conexao, idCliente);
+    const idCompra = await acharCarrinho(conexao, idCliente);
+
+    const [itens] = idCompra
+      ? await conexao.query(
+          `SELECT p.estoque
+             FROM carrinho_de_compra ci JOIN produto p ON p.id_produto = ci.id_produto
+            WHERE ci.id_compra = ? AND ci.id_produto = ?`,
+          [idCompra, idProduto]
+        )
+      : [[]];
+    if (!itens[0]) throw new AppError('Este produto não está no carrinho', 404);
+
+    validarQuantidade(quantidade, itens[0].estoque);
+
+    await conexao.query(
+      'UPDATE carrinho_de_compra SET quantidade = ? WHERE id_compra = ? AND id_produto = ?',
+      [quantidade, idCompra, idProduto]
+    );
+    return montarCarrinho(conexao, idCompra, true);
+  });
+}
+
+export function removerItem(idCliente, idProduto) {
+  return comTransacao(async (conexao) => {
+    await travarCliente(conexao, idCliente);
+    const idCompra = await acharCarrinho(conexao, idCliente);
+
+    const [r] = idCompra
+      ? await conexao.query(
+          'DELETE FROM carrinho_de_compra WHERE id_compra = ? AND id_produto = ?',
+          [idCompra, idProduto]
+        )
+      : [{ affectedRows: 0 }];
+    if (r.affectedRows === 0) throw new AppError('Este produto não está no carrinho', 404);
+
+    return montarCarrinho(conexao, idCompra, true);
+  });
+}
+
+export function esvaziar(idCliente) {
+  return comTransacao(async (conexao) => {
+    await travarCliente(conexao, idCliente);
+    const idCompra = await acharCarrinho(conexao, idCliente);
+    if (idCompra) await conexao.query('DELETE FROM carrinho_de_compra WHERE id_compra = ?', [idCompra]);
+    return montarCarrinho(conexao, idCompra, true);
+  });
+}
+
+function validarQuantidade(quantidade, estoque) {
+  if (quantidade > MAX_POR_ITEM) {
+    throw new AppError(`Limite de ${MAX_POR_ITEM} unidades por produto`, 409);
+  }
+  if (quantidade > estoque) {
+    throw new AppError(
+      estoque > 0 ? `Estoque insuficiente: restam ${estoque} unidade(s)` : 'Produto esgotado',
+      409
+    );
+  }
+}

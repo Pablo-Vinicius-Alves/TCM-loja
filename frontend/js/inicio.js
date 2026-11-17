@@ -1,50 +1,50 @@
 document.addEventListener('DOMContentLoaded', () => {
   const listaSlides = [
     {
-      imagem: "../imag/images.jpg",
+      imagem: "../imag/vestido-seda-imperial.jpg",
       selo: "✦ EDIÇÃO RARA",
       colecao: "CREPÚSCULO DOURADO · COLEÇÃO DE INVERNO",
       titulo: "Vestido de Seda Imperial",
       italico: "seda pura e corte nobre",
-      descricao: "Seda pura em tom profundo, caimento fluido e acabamento artesanal com detalhes dourados exclusivos da grife.",
-      preco: "R$ 1.899,00"
+      descricao: "Seda pura em tom profundo, caimento fluido e acabamento artesanal, feito com Lã Vicunha obtida de um raro camélido sul-americano dos Andes",
+      preco: "R$ 25.600"
     },
     {
-      imagem: "../imag/purple-open-back-cape-dress-rhinestone-detail-hotel.webp",
+      imagem: "../imag/vestido-cravejado.jpg",
       selo: "✦ ALTA COSTURA",
       colecao: "CREPÚSCULO DOURADO · COLEÇÃO DE INVERNO",
       titulo: "Vestido Cravejado",
       italico: "bordado a mão",
-      descricao: "Modelagem estruturada com capa fluida e aplicações brilhantes aplicadas artesanalmente para noites de gala.",
-      preco: "R$ 2.450,00"
+      descricao: "Modelagem estruturada com brilho intenso e aplicações feitas artesanalmente para noites de gala.",
+      preco: "R$ 50.900"
+    },
+    {
+      imagem: "../imag/vestido-flores-ouro.jpg",
+      selo: "✦ CONFORTO NOBRE",
+      colecao: "ESTILO PARA O ANO TODO · EDIÇÃO LIMITADA",
+      titulo: "Vestido Flores Ouro",
+      italico: "estampa exclusiva",
+      descricao: "Tecido encorpado com estampa floral de ouro alto relevo, feito com Seda de Lótus",
+      preco: "R$ 2.890,00"
+    },
+    {
+      imagem: "../imag/blazer-preto-cravejado.jpg",
+      selo: "✦ SOB MEDIDA",
+      colecao: "ESTILO PARA O ANO TODO · ALFAIATARIA",
+      titulo: "Blazer Preto Cravejado",
+      italico: "alfaiataria precisa",
+      descricao: "Corte ajustado com acabamento refinado e detalhes brilhantes, oferecendo elegância marcante.",
+      preco: "R$ 4.600,00"
     },
     {
       imagem: "../imag/images (1).jpg",
-      selo: "✦ ATEMPORAL",
-      colecao: "ESTILO PARA O ANO TODO · ALFAIATARIA",
-      titulo: "Sobretudo Casual Urbano",
-      italico: "corte contemporâneo",
-      descricao: "Tecido encorpado de toque macio, ideal para compor visuais sofisticados em qualquer estação do ano.",
-      preco: "R$ 749,00"
+      selo: "✦ COLEÇÃO MÍSTICA",
+      colecao: "CREPÚSCULO DOURADO · GALA",
+      titulo: "Vestido Teias Violetas",
+      italico: "capa fluida",
+      descricao: "Vestido longo em tom violeta profundo com capa transparente, feito com a parente selvagem da vicunha e da lhama que também vive nos Andes a Lã de Guanaco.",
+      preco: "R$ 1.200,00"
     },
-    {
-      imagem: "../imag/cf304a7455fe18cfe8936889e975e63e.jpg",
-      selo: "✦ CONFORTO NOBRE",
-      colecao: "ESTILO PARA O ANO TODO · TRICÔ FINO",
-      titulo: "Blusa de Lã Premium",
-      italico: "fios selecionados",
-      descricao: "Trama delicada de lã selecionada que une leveza térmica e caimento impecável para o dia a dia.",
-      preco: "R$ 780,00"
-    },
-    {
-      imagem: "../imag/images (2).jpg",
-      selo: "✦ SOB MEDIDA",
-      colecao: "ESTILO PARA O ANO TODO · CLÁSSICO",
-      titulo: "Terno Slim Fit Casual",
-      italico: "alfaiataria precisa",
-      descricao: "Corte ajustado com acabamento refinado, oferecendo elegância discreta e conforto prolongado.",
-      preco: "R$ 599,00"
-    }
   ];
 
   let indiceAtual = 0;

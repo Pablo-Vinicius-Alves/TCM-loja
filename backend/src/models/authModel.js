@@ -59,3 +59,14 @@ export async function criarConta(cliente, usuario, senhaHash) {
     conexao.release();        
   }
 }
+
+export async function buscarPerfil(usuario) {
+  const [linhas] = await connectionDB.query(
+    `SELECT c.id_cliente, c.nome, c.email, c.telefone, ca.usuario
+       FROM cadastro ca
+       JOIN cliente c ON c.id_cliente = ca.id_cliente
+      WHERE ca.usuario = ? AND ca.ativo = TRUE`,
+    [usuario]
+  );
+  return linhas[0] ?? null;
+}

@@ -51,7 +51,7 @@ export const sair = () => chamar('/auth/logout', { method: 'POST' });
 
 export async function obterUsuario() {
   try {
-    return await chamar('/auth/me');
+    return await chamar('/auth/perfil');
   } catch (erro) {
     if (erro instanceof ErroApi && erro.status === 401) return null;
     throw erro;

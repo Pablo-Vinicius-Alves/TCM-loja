@@ -1,0 +1,47 @@
+[hidden] { display: none !important; }
+
+.aviso {
+  margin: 12px auto;
+  max-width: 720px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  background: #fdecea;
+  color: #a12a22;
+  font-weight: 600;
+  text-align: center;
+}
+
+#caixa-alerta ul { margin: .5rem 0 0 1.2rem; padding: 0; }
+#caixa-alerta.caixa-alerta--ok { background: #e7f6ed; color: #17623a; border-color: #17623a; }
+
+.carrinho-vazio { text-align: center; padding: 2rem 0; opacity: .7; }
+.carrinho-produto { display: flex; align-items: center; gap: 12px; }
+.carrinho-foto { width: 56px; height: 72px; background: rgba(128,128,128,.15); border-radius: 4px; overflow: hidden; flex: none; }
+.carrinho-foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.carrinho-alerta-item { margin-top: 4px; font-size: .85rem; color: #a12a22; font-weight: 400; }
+.item-indisponivel .carrinho-nome { color: #a12a22; }
+
+.carrinho-qtd { display: inline-flex; align-items: center; gap: 8px; }
+.carrinho-numero { min-width: 1.5ch; text-align: center; font-weight: 600; }
+.btn-menos, .btn-mais, .btn-remover {
+  min-width: 32px; height: 32px; padding: 0;
+  border: 1px solid rgba(128,128,128,.5);
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.btn-menos:disabled, .btn-mais:disabled { opacity: .4; cursor: not-allowed; }
+.btn-remover:hover { border-color: #a12a22; color: #a12a22; }
+
+.carrinho-total-linha td { font-weight: 700; font-size: 1.1rem; }
+.carrinho-acoes { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 1.5rem; align-items: center; }
+.carrinho-acoes button:disabled { opacity: .6; cursor: not-allowed; }
+.carrinho-acoes a { text-decoration: none; }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}

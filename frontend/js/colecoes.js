@@ -4,6 +4,8 @@ import { criarCartao, ligarCompra } from './UI.js';
 
 const lista = document.getElementById('lista-colecoes');
 const aviso = document.getElementById('aviso-colecoes');
+const campoBusca = document.getElementById('campo-busca');
+let vitrineCompleta = [];
 
 function criarSecao(colecao, produtos) {
   const secao = document.createElement('section');
@@ -38,10 +40,31 @@ try {
     aviso.hidden = false;
   } else {
     const produtos = await Promise.all(colecoes.map((c) => listarProdutos({ colecao: c.id_colecao })));
-    lista.replaceChildren(...colecoes.map((c, i) => criarSecao(c, produtos[i])));
+    vitrineCompleta = colecoes.map((c, i) => ({colecao: c, produtos: produtos[i] }));
+    renderizarBusca();
   }
 } catch (erro) {
   if (!(erro instanceof ErroApi)) throw erro;
   aviso.textContent = `Não foi possível carregar as coleções. ${erro.message}`;
   aviso.hidden = false;
 }
+
+function renderizarBusca(termo = '') {
+  const busca = termo.trim().toLowerCase();
+
+  const secoesFiltradas = vitrineCompleta.map(({colecao, produtos}) => ({
+    colecao,
+    produtos: produtos.filter((p) => p.nome.toLowerCase().includes(busca))
+  })).filter((item) => item.produtos.length > 0);
+
+  if(secoesFiltradas.length === 0){
+    aviso.textContent = 'Nenhum produto encontrado';
+    aviso.hidden = false;
+    lista.replaceChildren();
+    return
+  };
+  aviso.hidden = true;
+  lista.replaceChildren(...secoesFiltradas.map((item) => criarSecao(item.colecao, item.produtos)));
+};
+
+campoBusca.addEventListener('input', () => renderizarBusca(campoBusca.value));

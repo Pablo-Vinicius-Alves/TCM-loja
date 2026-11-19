@@ -61,3 +61,32 @@
   text-decoration: line-through;
   font-family: system-ui, sans-serif;
 }
+
+header nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+#campo-busca {
+  width: 290px;
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  border-radius: 20px;
+  outline: none;
+  margin: 0;
+  transition: width 0.25s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+#campo-busca::placeholder {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+#campo-busca:focus {
+  width: 490px;
+  border-color: #d4af37;
+  background-color: rgba(255, 255, 255, 0.16);
+}

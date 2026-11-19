@@ -34,6 +34,13 @@ export function criarCartao(produto) {
   botao.disabled = produto.estoque <= 0;
 
   cartao.append(moldura, nome, preco, botao);
+
+  if (produto.estoque > 0 && produto.estoque <= 5) {
+  const alerta = document.createElement('div');
+  alerta.className = 'alerta-estoque';
+  alerta.textContent = `Restam apenas ${produto.estoque} unidade(s)!`;
+  cartao.append(alerta);
+}
   return cartao;
 }
 

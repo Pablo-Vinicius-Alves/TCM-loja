@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const listaSlides = [
     {
-      imagem: "../imag/vestido-seda-imperial.jpg",
+      imagem: "../imgs/vestido_amarelos.jpg",
       selo: "✦ EDIÇÃO RARA",
       colecao: "CREPÚSCULO DOURADO · COLEÇÃO DE INVERNO",
       titulo: "Vestido de Seda Imperial",
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
       preco: "R$ 25.600"
     },
     {
-      imagem: "../imag/vestido-cravejado.jpg",
+      imagem: "../imgs/vestido_brilho.jpg",
       selo: "✦ ALTA COSTURA",
       colecao: "CREPÚSCULO DOURADO · COLEÇÃO DE INVERNO",
       titulo: "Vestido Cravejado",
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
       preco: "R$ 50.900"
     },
     {
-      imagem: "../imag/vestido-flores-ouro.jpg",
+      imagem: "../imgs/vestido_ind.jpg",
       selo: "✦ CONFORTO NOBRE",
       colecao: "ESTILO PARA O ANO TODO · EDIÇÃO LIMITADA",
       titulo: "Vestido Flores Ouro",
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
       preco: "R$ 2.890,00"
     },
     {
-      imagem: "../imag/blazer-preto-cravejado.jpg",
+      imagem: "../imgs/look.jpg",
       selo: "✦ SOB MEDIDA",
       colecao: "ESTILO PARA O ANO TODO · ALFAIATARIA",
       titulo: "Blazer Preto Cravejado",
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
       preco: "R$ 4.600,00"
     },
     {
-      imagem: "../imag/images (1).jpg",
+      imagem: "../imgs/vestido_grande.jpg",
       selo: "✦ COLEÇÃO MÍSTICA",
       colecao: "CREPÚSCULO DOURADO · GALA",
       titulo: "Vestido Teias Violetas",

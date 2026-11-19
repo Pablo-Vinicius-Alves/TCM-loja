@@ -1,146 +1,131 @@
-document.addEventListener('DOMContentLoaded', () => {
-  let listaCarrinho = JSON.parse(localStorage.getItem('smartclothes_cart')) || [];
+import {
+  MAX_POR_ITEM, ErroApi, formatarPreco, irParaLogin,
+  obterCarrinho, alterarQuantidade, removerDoCarrinho, esvaziarCarrinho
+} from './loja.js';
+import { iniciarSessao, mostrarContador } from './sessao.js';
 
-  const contadorMenu = document.getElementById('contagem-carrinho');
-  const tabelaItens = document.getElementById('lista-itens-carrinho');
-  const textoSubtotal = document.getElementById('valor-subtotal');
-  const textoPrazoEstimado = document.getElementById('prazo-estimado');
-  const textoTotal = document.getElementById('valor-total');
-  const painelFechamento = document.getElementById('painel-fechamento');
-  const selecaoPagamento = document.getElementById('forma-pagamento');
-  const areaNumeroCartao = document.getElementById('area-numero-cartao');
-  const inputNumeroCartao = document.getElementById('numero-cartao');
-  const formularioEncomenda = document.getElementById('formulario-encomenda');
+const $ = (id) => document.getElementById(id);
+const corpo = $('itens-carrinho');
+const total = $('total-carrinho');
+const aviso = $('aviso-carrinho');
+const btnEsvaziar = $('btn-esvaziar');
+let ocupado = false;
 
-  const pecasInverno = ['Vestido de Seda Imperial', 'Vestido Cravejado'];
+function el(tag, classe, texto) {
+  const e = document.createElement(tag);
+  if (classe) e.className = classe;
+  if (texto !== undefined) e.textContent = texto;
+  return e;
+}
+function celula(...filhos) {
+  const td = el('td');
+  td.append(...filhos);
+  return td;
+}
+function botao(acao, texto, rotulo, desativado = false) {
+  const b = el('button', `btn-${acao}`, texto);
+  b.type = 'button';
+  b.dataset.acao = acao;
+  b.setAttribute('aria-label', rotulo);
+  b.disabled = desativado;
+  return b;
+}
 
-  function descobrirPrazoDias(nomeRoupa) {
-    if (pecasInverno.includes(nomeRoupa)) {
-      return 3; 
-    }
-    return 2; 
+function criarLinha(item) {
+  const linha = el('tr');
+  linha.dataset.idProduto = item.id_produto;
+  linha.dataset.quantidade = item.quantidade;
+  if (!item.disponivel) linha.classList.add('item-indisponivel');
+
+  const foto = el('div', 'carrinho-foto');
+  if (item.imagem) {
+    const img = el('img');
+    img.src = item.imagem;
+    img.alt = item.nome;
+    foto.append(img);
+  }
+  const nome = el('div', 'carrinho-nome', item.nome);
+  const produto = el('div', 'carrinho-produto');
+  produto.append(foto, nome);
+  if (!item.disponivel) {
+    nome.append(el('div', 'carrinho-alerta-item', 'Indisponível no momento: reduza a quantidade ou remova.'));
   }
 
-  if (selecaoPagamento && areaNumeroCartao) {
-    selecaoPagamento.addEventListener('change', () => {
-      const escolheuCartao = selecaoPagamento.value.includes('Cartão');
-      areaNumeroCartao.hidden = !escolheuCartao;
-      if (inputNumeroCartao) inputNumeroCartao.required = escolheuCartao;
-    });
+  const limite = Math.min(MAX_POR_ITEM, item.estoque);
+  const qtd = el('div', 'carrinho-qtd');
+  qtd.append(
+    botao('menos', '−', `Diminuir a quantidade de ${item.nome}`, item.quantidade <= 1),
+    el('span', 'carrinho-numero', String(item.quantidade)),
+    botao('mais', '+', `Aumentar a quantidade de ${item.nome}`, item.quantidade >= limite)
+  );
+
+  linha.append(
+    celula(produto),
+    celula(document.createTextNode(formatarPreco(item.preco_unitario))),
+    celula(qtd),
+    celula(document.createTextNode(formatarPreco(item.subtotal))),
+    celula(botao('remover', '×', `Remover ${item.nome} do carrinho`))
+  );
+  return linha;
+}
+
+function mostrarAviso(texto) {
+  aviso.textContent = texto;
+  aviso.hidden = !texto;
+}
+
+function mostrar(carrinho) {
+  if (carrinho.itens.length === 0) {
+    const vazio = el('td', 'carrinho-vazio', 'Seu carrinho está vazio.');
+    vazio.colSpan = 5;
+    const linha = el('tr');
+    linha.append(vazio);
+    corpo.replaceChildren(linha);
+  } else {
+    corpo.replaceChildren(...carrinho.itens.map(criarLinha));
   }
-  function atualizarContadorMenu() {
-    if (!contadorMenu) return;
-    const totalPecas = listaCarrinho.reduce((soma, item) => soma + item.quantidade, 0);
-    contadorMenu.innerText = totalPecas;
+  total.textContent = formatarPreco(carrinho.total);
+  btnEsvaziar.disabled = carrinho.itens.length === 0;
+  mostrarAviso('');
+  mostrarContador(carrinho);
+}
+
+async function executar(pedido) {
+  if (ocupado) return; 
+  ocupado = true;
+  corpo.setAttribute('aria-busy', 'true');
+  try {
+    mostrar(await pedido());
+  } catch (erro) {
+    if (!(erro instanceof ErroApi)) throw erro;
+    if (erro.status === 401) return irParaLogin();
+    mostrarAviso(erro.message);
+  } finally {
+    ocupado = false;
+    corpo.removeAttribute('aria-busy');
   }
+}
 
-  function desenharTabelaCarrinho() {
-    if (!tabelaItens) return;
-    tabelaItens.innerHTML = '';
+corpo.addEventListener('click', (evento) => {
+  const clicado = evento.target.closest('button[data-acao]');
+  const linha = clicado?.closest('tr[data-id-produto]');
+  if (!clicado || !linha || clicado.disabled) return;
 
-    if (listaCarrinho.length === 0) {
-      tabelaItens.innerHTML = `<tr><td colspan="6" style="text-align:center; padding: 3.5rem; color: var(--roxo-acinzentado);">Seu carrinho está vazio! Escolha suas roupas em Início ou Coleções.</td></tr>`;
-      if (painelFechamento) painelFechamento.style.display = 'none';
-      return;
-    }
-
-    if (painelFechamento) painelFechamento.style.display = 'block';
-    let somaGeral = 0;
-    let maiorPrazo = 2;
-
-    listaCarrinho.forEach((item, posicao) => {
-      const precoNumero = parseFloat(item.preco.replace('R$', '').replace('.', '').replace(',', '.').trim());
-      const subtotalItem = precoNumero * item.quantidade;
-      const diasPrazo = descobrirPrazoDias(item.nome);
-
-      somaGeral += subtotalItem;
-      if (diasPrazo > maiorPrazo) maiorPrazo = diasPrazo;
-
-      const linha = document.createElement('tr');
-      linha.innerHTML = `
-        <td style="font-weight: 600;">${item.nome}</td>
-        <td><span class="etiqueta-prazo">Até ${diasPrazo} dias úteis</span></td>
-        <td>${item.preco}</td>
-        <td>
-          <button class="botao-quantidade" data-posicao="${posicao}" data-acao="diminuir">-</button>
-          <span class="numero-quantidade">${item.quantidade}</span>
-          <button class="botao-quantidade" data-posicao="${posicao}" data-acao="aumentar">+</button>
-        </td>
-        <td style="font-weight: 600; color: var(--roxo-escuro);">R$ ${subtotalItem.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</td>
-        <td><button class="botao-excluir" data-posicao="${posicao}">Excluir</button></td>
-      `;
-      tabelaItens.appendChild(linha);
-    });
-
-    if (textoSubtotal) textoSubtotal.innerText = `R$ ${somaGeral.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
-    if (textoPrazoEstimado) textoPrazoEstimado.innerText = `Até ${maiorPrazo} dias úteis`;
-    if (textoTotal) textoTotal.innerText = `R$ ${somaGeral.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
-
-    ativarBotoesTabela();
-  }
-
-  function ativarBotoesTabela() {
-    document.querySelectorAll('.botao-quantidade').forEach((botao) => {
-      botao.addEventListener('click', () => {
-        const posicao = botao.getAttribute('data-posicao');
-        const acao = botao.getAttribute('data-acao');
-
-        if (acao === 'aumentar') {
-          listaCarrinho[posicao].quantidade += 1;
-        } else if (acao === 'diminuir' && listaCarrinho[posicao].quantidade > 1) {
-          listaCarrinho[posicao].quantidade -= 1;
-        }
-        salvarEAtualizar();
-      });
-    });
-
-    document.querySelectorAll('.botao-excluir').forEach((botao) => {
-      botao.addEventListener('click', () => {
-        const posicao = botao.getAttribute('data-posicao');
-        listaCarrinho.splice(posicao, 1);
-        salvarEAtualizar();
-      });
-    });
-  }
-
-  function salvarEAtualizar() {
-    localStorage.setItem('smartclothes_cart', JSON.stringify(listaCarrinho));
-    atualizarContadorMenu();
-    desenharTabelaCarrinho();
-  }
-
-  document.querySelectorAll('.cartao-produto .botao-dourado').forEach((botao) => {
-    botao.addEventListener('click', (evento) => {
-      evento.preventDefault();
-      const cartao = botao.closest('.cartao-produto');
-      const nomeRoupa = cartao.querySelector('.nome-produto').innerText;
-      const precoRoupa = cartao.querySelector('.preco-produto').innerText;
-
-      const roupaJaExiste = listaCarrinho.find((item) => item.nome === nomeRoupa);
-      if (roupaJaExiste) {
-        roupaJaExiste.quantidade += 1;
-      } else {
-        listaCarrinho.push({ nome: nomeRoupa, preco: precoRoupa, quantidade: 1 });
-      }
-
-      salvarEAtualizar();
-      alert(`${nomeRoupa} foi adicionado ao seu carrinho!`);
-    });
-  });
-
-  if (formularioEncomenda) {
-    formularioEncomenda.addEventListener('submit', (evento) => {
-      evento.preventDefault();
-      const formaEscolhida = selecaoPagamento ? selecaoPagamento.value : 'PIX';
-      const prazoFinal = textoPrazoEstimado ? textoPrazoEstimado.innerText : 'até 3 dias úteis';
-      const valorFinal = textoTotal ? textoTotal.innerText : '';
-
-      alert(`Pagamento via ${formaEscolhida} (${valorFinal}) confirmado!\nSua encomenda na SmartClothes ficará pronta em ${prazoFinal}.`);
-      listaCarrinho = [];
-      salvarEAtualizar();
-      window.location.href = 'index.html';
-    });
-  }
-  atualizarContadorMenu();
-  desenharTabelaCarrinho();
+  const id = Number(linha.dataset.idProduto);
+  const quantidade = Number(linha.dataset.quantidade);
+  if (clicado.dataset.acao === 'mais') executar(() => alterarQuantidade(id, quantidade + 1));
+  if (clicado.dataset.acao === 'menos') executar(() => alterarQuantidade(id, quantidade - 1));
+  if (clicado.dataset.acao === 'remover') executar(() => removerDoCarrinho(id));
 });
+
+btnEsvaziar.addEventListener('click', () => {
+  if (window.confirm('Remover todos os itens do carrinho?')) executar(esvaziarCarrinho);
+});
+
+const finalizar = $('btn-finalizar');
+finalizar.disabled = true;
+finalizar.title = 'Disponível em breve';
+
+const usuario = await iniciarSessao();
+if (!usuario) irParaLogin();
+else await executar(obterCarrinho);

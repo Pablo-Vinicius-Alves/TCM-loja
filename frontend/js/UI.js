@@ -1,34 +1,64 @@
-export const soDigitos = (texto) => String(texto ?? '').replace(/\D/g, '');
+import { 
+  ErroApi, 
+  formatarPreco, 
+  irParaLogin, 
+  adicionarAoCarrinho } from './loja.js';
 
-export function formatarCpf(valor) {
-  const d = soDigitos(valor).slice(0, 11);
-  return d
-    .replace(/^(\d{3})(\d)/, '$1.$2')
-    .replace(/^(\d{3})\.(\d{3})(\d)/, '$1.$2.$3')
-    .replace(/\.(\d{3})(\d)/, '.$1-$2');
-}
+export function criarCartao(produto) {
+  const cartao = document.createElement('div');
+  cartao.className = 'cartao-produto';
 
-export function mostrarAlerta(caixa, texto, tipo = 'erro', detalhes = []) {
-  caixa.replaceChildren();
-  caixa.className = `alerta alerta--${tipo}`;
- 
-  const titulo = document.createElement('strong');
-  titulo.textContent = texto;
-  caixa.append(titulo);
- 
-  if (detalhes.length) {
-    const lista = document.createElement('ul');
-    for (const detalhe of detalhes) {
-      const item = document.createElement('li');
-      item.textContent = detalhe;
-      lista.append(item);
-    }
-    caixa.append(lista);
+  const moldura = document.createElement('div');
+  moldura.className = 'moldura-foto';
+  if (produto.imagem) {
+    const foto = document.createElement('img');
+    foto.src = produto.imagem;
+    foto.alt = produto.nome;
+    foto.loading = 'lazy';
+    moldura.append(foto);
   }
- 
-  caixa.hidden = false;
+
+  const nome = document.createElement('div');
+  nome.className = 'nome-produto';
+  nome.textContent = produto.nome;
+
+  const preco = document.createElement('div');
+  preco.className = 'preco-produto';
+  preco.textContent = formatarPreco(produto.preco);
+
+  const botao = document.createElement('button');
+  botao.className = 'botao-dourado';
+  botao.type = 'button';
+  botao.dataset.idProduto = produto.id_produto;
+  botao.textContent = produto.estoque > 0 ? 'Adicionar' : 'Esgotado';
+  botao.disabled = produto.estoque <= 0;
+
+  cartao.append(moldura, nome, preco, botao);
+  return cartao;
 }
- 
-export function esconderAlerta(caixa) {
-  caixa.hidden = true;
+
+export function ligarCompra({ container, usuario, aviso, aoAdicionar }) {
+  const mostrarAviso = (texto) => { aviso.textContent = texto; aviso.hidden = !texto; };
+
+  container.addEventListener('click', async (evento) => {
+    const botao = evento.target.closest('button[data-id-produto]');
+    if (!botao || botao.disabled) return;
+
+    if (!usuario) return irParaLogin(); 
+
+    const textoOriginal = botao.textContent;
+    botao.disabled = true; 
+    try {
+      aoAdicionar(await adicionarAoCarrinho(Number(botao.dataset.idProduto)));
+      mostrarAviso('');
+      botao.textContent = 'Adicionado ✓';
+      setTimeout(() => { botao.textContent = textoOriginal; botao.disabled = false; }, 1200);
+    } catch (erro) {
+      botao.textContent = textoOriginal;
+      botao.disabled = false;
+      if (!(erro instanceof ErroApi)) throw erro;
+      if (erro.status === 401) return irParaLogin();
+      mostrarAviso(erro.message);
+    }
+  });
 }

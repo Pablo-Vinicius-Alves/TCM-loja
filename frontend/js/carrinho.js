@@ -1,6 +1,6 @@
 import {
   MAX_POR_ITEM, ErroApi, formatarPreco, irParaLogin,
-  obterCarrinho, alterarQuantidade, removerDoCarrinho, esvaziarCarrinho
+  obterCarrinho, alterarQuantidade, removerDoCarrinho, esvaziarCarrinho, finalizarCompra
 } from './loja.js';
 import { iniciarSessao, mostrarContador } from './sessao.js';
 
@@ -9,6 +9,7 @@ const corpo = $('itens-carrinho');
 const total = $('total-carrinho');
 const aviso = $('aviso-carrinho');
 const btnEsvaziar = $('btn-esvaziar');
+const btnFinalizar = $('btn-finalizar');
 let ocupado = false;
 
 function el(tag, classe, texto) {
@@ -17,11 +18,13 @@ function el(tag, classe, texto) {
   if (texto !== undefined) e.textContent = texto;
   return e;
 }
+
 function celula(...filhos) {
   const td = el('td');
   td.append(...filhos);
   return td;
 }
+
 function botao(acao, texto, rotulo, desativado = false) {
   const b = el('button', `btn-${acao}`, texto);
   b.type = 'button';
@@ -84,14 +87,19 @@ function mostrar(carrinho) {
   } else {
     corpo.replaceChildren(...carrinho.itens.map(criarLinha));
   }
+
+  const temIndisponivel = carrinho.itens.some((i) => !i.disponivel);
   total.textContent = formatarPreco(carrinho.total);
   btnEsvaziar.disabled = carrinho.itens.length === 0;
+  btnFinalizar.disabled = carrinho.itens.length === 0 || temIndisponivel;
+  btnFinalizar.title = temIndisponivel ? 'Remova ou ajuste os itens indisponíveis' : '';
+
   mostrarAviso('');
   mostrarContador(carrinho);
 }
 
 async function executar(pedido) {
-  if (ocupado) return; 
+  if (ocupado) return;
   ocupado = true;
   corpo.setAttribute('aria-busy', 'true');
   try {
@@ -122,9 +130,26 @@ btnEsvaziar.addEventListener('click', () => {
   if (window.confirm('Remover todos os itens do carrinho?')) executar(esvaziarCarrinho);
 });
 
-const finalizar = $('btn-finalizar');
-finalizar.disabled = true;
-finalizar.title = 'Disponível em breve';
+btnFinalizar.addEventListener('click', async () => {
+  if (ocupado || btnFinalizar.disabled) return;
+  if (!window.confirm('Deseja finalizar a compra e emitir a Nota Fiscal?')) return;
+
+  ocupado = true;
+  btnFinalizar.disabled = true;
+  btnFinalizar.textContent = 'Processando...';
+  try {
+    const nf = await finalizarCompra();
+    window.location.assign(`/pages/nota-fiscal.html?id=${nf.id_nota_fiscal}`);
+  } catch (erro) {
+    btnFinalizar.textContent = 'Finalizar Compra';
+    btnFinalizar.disabled = false;
+    if (!(erro instanceof ErroApi)) throw erro;
+    if (erro.status === 401) return irParaLogin();
+    mostrarAviso(erro.message);
+  } finally {
+    ocupado = false;
+  }
+});
 
 const usuario = await iniciarSessao();
 if (!usuario) irParaLogin();

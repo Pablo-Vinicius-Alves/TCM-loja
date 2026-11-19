@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nota Fiscal - SmartClothes</title>
+  <link rel="icon" type="image/jpeg" href="../imgs/logoDaMarca.jpg">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/loja.css">
+  <link rel="stylesheet" href="../css/notaFiscal.css">
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="marca-cabecalho">
+      <img src="../imgs/logoDaMarca.jpg" alt="Logo SmartClothes" class="imagem-logo">
+      <span class="texto-logo">SMARTCLOTHES</span>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="colecoes.html">Coleções</a></li>
+        <li><a href="auth.html">Login</a></li>
+        <li><a href="carrinho.html">Carrinho (<span id="contagem-carrinho">0</span>)</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <p id="aviso-nf" class="aviso" role="alert" hidden></p>
+
+  <main id="conteudo-nf" class="nf-container" hidden>
+    <div class="nf-topo">
+      <div>
+        <h1 class="nf-titulo">NOTA FISCAL ELETRÔNICA (<span id="nf-tipo">NF-e</span>)</h1>
+        <p class="nf-subtitulo">Número: <strong id="nf-numero"></strong></p>
+      </div>
+      <span class="nf-badge" id="nf-status">EMITIDA</span>
+    </div>
+
+    <div class="nf-dados">
+      <div class="nf-coluna">
+        <p><strong>Cliente:</strong> <span id="nf-cliente"></span></p>
+        <p><strong>CPF:</strong> <span id="nf-cpf"></span></p>
+        <p><strong>E-mail:</strong> <span id="nf-email"></span></p>
+      </div>
+      <div class="nf-coluna">
+        <p><strong>Pedido Nº:</strong> #<span id="nf-pedido"></span></p>
+        <p><strong>Data de Emissão:</strong> <span id="nf-emissao"></span></p>
+        <p><strong>Previsão de Entrega:</strong> <span id="nf-entrega"></span></p>
+      </div>
+    </div>
+
+    <table class="nf-tabela">
+      <thead>
+        <tr>
+          <th>Produto</th>
+          <th>Qtd.</th>
+          <th>Valor Unit.</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody id="nf-itens"></tbody>
+    </table>
+
+    <div class="nf-total">
+      Valor Total da Nota: <span id="nf-total"></span>
+    </div>
+
+    <div class="nf-acoes">
+      <a href="colecoes.html" class="botao-dourado nf-link-voltar">Continuar Comprando</a>
+      <button type="button" id="btn-imprimir" class="botao-dourado">Imprimir / Salvar PDF</button>
+    </div>
+  </main>
+
+  <script type="module" src="../js/notaFiscal.js"></script>
+</body>
+</html>

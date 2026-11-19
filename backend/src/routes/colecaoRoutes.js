@@ -1,5 +1,9 @@
-import * as Colecao from '../models/colecaoModel.js';
+import { Router } from 'express';
+import * as controller from '../controllers/colecaoController.js';
+import  asyncHandler from '../middlewares/async.js';
 
-export async function listarColecoes(req, res) {
-  res.json(await Colecao.listar());
-}
+const router = Router();
+
+router.get('/', asyncHandler(controller.listarColecoes)); 
+
+export default router;

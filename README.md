@@ -162,7 +162,7 @@ Diagrama: veja `docs/` (DER).
  
 ```bash
 # 1) Clonar e entrar na pasta
-git clone <URL-DO-REPOSITORIO>
+git clone https://github.com/Pablo-Vinicius-Alves/TCM-loja.git
 cd TCM-loja
  
 # 2) Instalar dependências

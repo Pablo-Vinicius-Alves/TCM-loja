@@ -33,7 +33,6 @@
 10. [Regras de negócio importantes](#10-regras-de-negócio-importantes)
 11. [Segurança](#11-segurança)
 12. [Problemas comuns](#12-problemas-comuns)
-13. [Equipe](#13-equipe)
 ---
  
 ## 1. Funcionalidades
@@ -343,13 +342,6 @@ POST /api/auth/registrar
 | Erro 1452 ao criar FK | Itens órfãos no carrinho | Rode `correcao_rapida.sql`. |
  
 **Dica de diagnóstico:** abra o DevTools (F12) → aba **Network** → clique na requisição vermelha → veja *Payload* (o que foi enviado) e *Response* (o que o servidor respondeu). O stack trace completo fica no terminal do Node.
- 
-## 13. Equipe
- 
-| Nome | Responsabilidade |
-|---|---|
-| Pablo | Banco de dados, back-end (MVC), integração com o front |
-| *(colega)* | Design e páginas do front-end (HTML/CSS) |
  
 ## Próximos passos (ideias)
  

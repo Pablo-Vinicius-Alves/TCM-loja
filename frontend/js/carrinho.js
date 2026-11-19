@@ -139,7 +139,7 @@ btnFinalizar.addEventListener('click', async () => {
   btnFinalizar.textContent = 'Processando...';
   try {
     const nf = await finalizarCompra();
-    window.location.assign(`/pages/nota-fiscal.html?id=${nf.id_nota_fiscal}`);
+    window.location.assign(`/pages/notaFiscal.html?id=${nf.id_nota_fiscal}`);
   } catch (erro) {
     btnFinalizar.textContent = 'Finalizar Compra';
     btnFinalizar.disabled = false;

@@ -1,22 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
   const listaSlides = [
     {
-      imagem: "../imgs/vestido_amarelos.jpg",
-      selo: "✦ EDIÇÃO RARA",
-      colecao: "CREPÚSCULO DOURADO · COLEÇÃO DE INVERNO",
-      titulo: "Vestido de Seda Imperial",
-      italico: "seda pura e corte nobre",
-      descricao: "Seda pura em tom profundo, caimento fluido e acabamento artesanal, feito com Lã Vicunha obtida de um raro camélido sul-americano dos Andes",
-      preco: "R$ 25.600"
-    },
-    {
       imagem: "../imgs/vestido_brilho.jpg",
       selo: "✦ ALTA COSTURA",
       colecao: "CREPÚSCULO DOURADO · COLEÇÃO DE INVERNO",
       titulo: "Vestido Cravejado",
       italico: "bordado a mão",
       descricao: "Modelagem estruturada com brilho intenso e aplicações feitas artesanalmente para noites de gala.",
-      preco: "R$ 50.900"
+      preco: "R$ 1159,90"
     },
     {
       imagem: "../imgs/vestido_ind.jpg",
@@ -25,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
       titulo: "Vestido Flores Ouro",
       italico: "estampa exclusiva",
       descricao: "Tecido encorpado com estampa floral de ouro alto relevo, feito com Seda de Lótus",
-      preco: "R$ 2.890,00"
+      preco: "R$ 1139,90"
     },
     {
       imagem: "../imgs/look.jpg",
@@ -34,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
       titulo: "Blazer Preto Cravejado",
       italico: "alfaiataria precisa",
       descricao: "Corte ajustado com acabamento refinado e detalhes brilhantes, oferecendo elegância marcante.",
-      preco: "R$ 4.600,00"
+      preco: "R$ 999,90"
     },
     {
       imagem: "../imgs/vestido_grande.jpg",
@@ -43,7 +34,16 @@ document.addEventListener('DOMContentLoaded', () => {
       titulo: "Vestido Teias Violetas",
       italico: "capa fluida",
       descricao: "Vestido longo em tom violeta profundo com capa transparente, feito com a parente selvagem da vicunha e da lhama que também vive nos Andes a Lã de Guanaco.",
-      preco: "R$ 1.200,00"
+      preco: "R$ 1189,90"
+    },
+    {
+      imagem: "../imgs/saia_midi.jpg",
+      selo: "✦ COLEÇÃO MÍSTICA",
+      colecao: "CREPÚSCULO ROXO · GALA",
+      titulo: "Saia Teias Violetas",
+      italico: "capa de seda tecnológica",
+      descricao: "Saia longa em tom lilás, com efeito transparente. Feito com a parente selvagem da vicunha e da lhama que também vive nos Andes a Lã de Guanaco.",
+      preco: "R$ 1119,90"
     },
   ];
 

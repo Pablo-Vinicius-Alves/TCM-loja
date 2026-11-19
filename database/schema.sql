@@ -79,17 +79,18 @@ CONSTRAINT ck_venda_valor CHECK (valor_venda >= 0)
 );
 
 CREATE TABLE carrinho_de_compra (
-id_carrinho INT NOT NULL AUTO_INCREMENT,
-id_compra INT NOT NULL,
-id_produto INT NOT NULL,
-quantidade INT NOT NULL DEFAULT 1,
-preco_unitario DECIMAL(10,2) NOT NULL,
-subtotal DECIMAL(10,2) GENERATED ALWAYS AS (quantidade * preco_unitario) STORED,
- 
-CONSTRAINT PRIMARY KEY (id_carrinho),
-CONSTRAINT fk_carrinho_compra FOREIGN KEY (id_compra) REFERENCES compra (id_compra) ON DELETE CASCADE,
-CONSTRAINT ck_carrinho_qtd CHECK (quantidade > 0),
-CONSTRAINT ck_carrinho_preco CHECK (preco_unitario >= 0)
+  id_carrinho int(11) NOT NULL AUTO_INCREMENT,
+  id_compra int(11) NOT NULL,
+  id_produto int(11) NOT NULL,
+  quantidade int(11) NOT NULL DEFAULT 1,
+  preco_unitario decimal(10,2) NOT NULL,
+  subtotal decimal(10,2) GENERATED ALWAYS AS (quantidade * preco_unitario) STORED,
+  PRIMARY KEY (id_carrinho),
+  UNIQUE KEY uq_carrinho_compra_produto (id_compra, id_produto),
+  KEY fk_carrinho_compra (id_compra),
+  CONSTRAINT fk_carrinho_compra FOREIGN KEY (id_compra) REFERENCES compra (id_compra) ON DELETE CASCADE,
+  CONSTRAINT ck_carrinho_qtd CHECK (quantidade > 0),
+  CONSTRAINT ck_carrinho_preco CHECK (preco_unitario >= 0)
 );
 
 CREATE TABLE nota_fiscal (

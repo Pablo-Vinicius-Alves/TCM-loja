@@ -137,11 +137,11 @@ export function definirQuantidade(idCliente, idProduto, quantidade) {
 
     const [itens] = idCompra
       ? await conexao.query(
-          `SELECT p.estoque
+        `SELECT p.estoque
              FROM carrinho_de_compra ci JOIN produto p ON p.id_produto = ci.id_produto
             WHERE ci.id_compra = ? AND ci.id_produto = ?`,
-          [idCompra, idProduto]
-        )
+        [idCompra, idProduto]
+      )
       : [[]];
     if (!itens[0]) throw new AppError('Este produto não está no carrinho', 404);
 
@@ -162,9 +162,9 @@ export function removerItem(idCliente, idProduto) {
 
     const [r] = idCompra
       ? await conexao.query(
-          'DELETE FROM carrinho_de_compra WHERE id_compra = ? AND id_produto = ?',
-          [idCompra, idProduto]
-        )
+        'DELETE FROM carrinho_de_compra WHERE id_compra = ? AND id_produto = ?',
+        [idCompra, idProduto]
+      )
       : [{ affectedRows: 0 }];
     if (r.affectedRows === 0) throw new AppError('Este produto não está no carrinho', 404);
 
@@ -191,4 +191,81 @@ function validarQuantidade(quantidade, estoque) {
       409
     );
   }
+}
+
+export function finalizar(idCliente) {
+  return comTransacao(async (conexao) => {
+    await travarCliente(conexao, idCliente);
+    const idCompra = await acharCarrinho(conexao, idCliente);
+    if (!idCompra) throw new AppError('Seu carrinho está vazio', 400);
+
+    const carrinho = await montarCarrinho(conexao, idCompra, true);
+    if (carrinho.itens.length === 0) throw new AppError('Seu carrinho está vazio', 400);
+
+    const indisponivel = carrinho.itens.find((i) => !i.disponivel);
+    if (indisponivel) {
+      throw new AppError(`Produto "${indisponivel.nome}" indisponível ou sem estoque suficiente`, 409);
+    }
+
+    for (const item of carrinho.itens) {
+      const [resEstoque] = await conexao.query(
+        'UPDATE produto SET estoque = estoque - ? WHERE id_produto = ? AND estoque >= ?',
+        [item.quantidade, item.id_produto, item.quantidade]
+      );
+      if (resEstoque.affectedRows === 0) {
+        throw new AppError(`Estoque insuficiente para "${item.nome}"`, 409);
+      }
+    }
+
+    await conexao.query(
+      `UPDATE compra
+          SET status_compra = 'FINALIZADA',
+              valor_total = ?,
+              data_compra = CURRENT_TIMESTAMP,
+              data_entrega_estimada = DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 7 DAY)
+        WHERE id_compra = ?`,
+      [carrinho.total, idCompra]
+    );
+
+    const ano = new Date().getFullYear();
+    const numeroNf = `NF-${ano}-${String(idCompra).padStart(6, '0')}`;
+
+    const [resNf] = await conexao.query(
+      `INSERT INTO nota_fiscal (id_compra, numero_nf, valor_total_nf, tipo_documento, status_nf)
+       VALUES (?, ?, ?, 'NF-e', 'EMITIDA')`,
+      [idCompra, numeroNf, carrinho.total]
+    );
+
+    return {
+      id_nota_fiscal: resNf.insertId,
+      id_compra: idCompra,
+      numero_nf: numeroNf
+    };
+  });
+}
+
+export async function obterNotaFiscal(idCliente, idNotaFiscal) {
+  const [notas] = await connectionDB.query(
+    `SELECT nf.id_nota_fiscal, nf.numero_nf, nf.data_emissao, nf.valor_total_nf,
+            nf.tipo_documento, nf.status_nf,
+            co.id_compra, co.data_entrega_estimada,
+            cl.nome AS cliente_nome, cl.cpf AS cliente_cpf, cl.email AS cliente_email
+       FROM nota_fiscal nf
+       JOIN compra co ON co.id_compra = nf.id_compra
+       JOIN cliente cl ON cl.id_cliente = co.id_cliente
+      WHERE nf.id_nota_fiscal = ? AND co.id_cliente = ?`,
+    [idNotaFiscal, idCliente]
+  );
+  if (!notas[0]) throw new AppError('Nota fiscal não encontrada', 404);
+
+  const [itens] = await connectionDB.query(
+    `SELECT ci.id_produto, p.nome, ci.quantidade, ci.preco_unitario, ci.subtotal
+       FROM carrinho_de_compra ci
+       JOIN produto p ON p.id_produto = ci.id_produto
+      WHERE ci.id_compra = ?
+      ORDER BY ci.id_carrinho`,
+    [notas[0].id_compra]
+  );
+
+  return { ...notas[0], itens };
 }

@@ -39,3 +39,14 @@ export async function removerItem(req, res) {
 export async function esvaziar(req, res) {
   res.json(await Carrinho.esvaziar(req.usuario.id_cliente));
 }
+
+export async function finalizar(req, res) {
+  const resultado = await Carrinho.finalizar(req.usuario.id_cliente);
+  res.status(201).json(resultado);
+}
+
+export async function obterNotaFiscal(req, res) {
+  const idNf = lerInteiroPositivo(req.params.idNotaFiscal, 'id_nota_fiscal');
+  const nota = await Carrinho.obterNotaFiscal(req.usuario.id_cliente, idNf);
+  res.json(nota);
+}

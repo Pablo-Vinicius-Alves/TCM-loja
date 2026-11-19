@@ -8,6 +8,8 @@ router.get('/', asyncHandler(controller.obter));
 router.post('/itens', asyncHandler(controller.adicionar));                          
 router.patch('/itens/:idProduto', asyncHandler(controller.alterarQuantidade));      
 router.delete('/itens/:idProduto', asyncHandler(controller.removerItem));           
-router.delete('/', asyncHandler(controller.esvaziar));                              
+router.delete('/', asyncHandler(controller.esvaziar));    
+router.post('/finalizar', asyncHandler(controller.finalizar));
+router.get('/nota-fiscal/:idNotaFiscal', asyncHandler(controller.obterNotaFiscal));                          
 
 export default router;

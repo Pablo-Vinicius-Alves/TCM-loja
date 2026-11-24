@@ -345,7 +345,7 @@ POST /api/auth/registrar
  
 ## Próximos passos (ideias)
  
-- Página **Meus pedidos** (histórico por cliente).
+- [x] Página **Meus pedidos** (histórico por cliente).
 - **Painel administrativo:** cadastrar produtos e atualizar status de pedidos.
 - Rota para **coleções passadas** (inativas).
 - Testes automatizados da API.

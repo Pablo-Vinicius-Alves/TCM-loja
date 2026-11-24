@@ -269,3 +269,16 @@ export async function obterNotaFiscal(idCliente, idNotaFiscal) {
 
   return { ...notas[0], itens };
 }
+
+export async function listarPedidos(idCliente) {
+  const [pedidos] = await connectionDB.query(
+    `SELECT co.id_compra, co.data_compra, co.valor_total, co.status_compra, co.data_entrega_estimada,
+            nf.id_nota_fiscal, nf.numero_nf
+       FROM compra co
+       LEFT JOIN nota_fiscal nf ON nf.id_compra = co.id_compra
+      WHERE co.id_cliente = ? AND co.status_compra = 'FINALIZADA'
+      ORDER BY co.data_compra DESC`,
+    [idCliente]
+  );
+  return pedidos;
+}

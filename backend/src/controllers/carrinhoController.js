@@ -50,3 +50,7 @@ export async function obterNotaFiscal(req, res) {
   const nota = await Carrinho.obterNotaFiscal(req.usuario.id_cliente, idNf);
   res.json(nota);
 }
+
+export async function listarPedidos(req, res) {
+  res.json(await Carrinho.listarPedidos(req.usuario.id_cliente));
+}

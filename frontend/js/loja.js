@@ -77,3 +77,5 @@ export const esvaziarCarrinho = () => chamar('/carrinho', { method: 'DELETE' });
 
 export const finalizarCompra = () => chamar('/carrinho/finalizar', { method: 'POST' });
 export const obterNotaFiscal = (idNf) => chamar(`/carrinho/nota-fiscal/${idNf}`);
+
+export const listarPedidos = () => chamar('/carrinho/pedidos');

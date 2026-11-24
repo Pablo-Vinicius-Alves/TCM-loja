@@ -10,6 +10,14 @@ export async function iniciarSessao() {
 
   const link = document.querySelector('nav a[href$="auth.html"]');
   if (link && usuario) {
+    const liPedidos = document.createElement('li');
+    const aPedidos = document.createElement('a');
+    aPedidos.href = 'pedidos.html';
+    aPedidos.textContent = 'Meus Pedidos';
+    if (window.location.pathname.endsWith('pedidos.html')) aPedidos.className = 'ativo';
+    liPedidos.append(aPedidos);
+    link.closest('li')?.before(liPedidos);
+
     link.textContent = `Sair (${usuario.nome.split(' ')[0]})`;
     link.setAttribute('href', '#');
     link.addEventListener('click', async (evento) => {

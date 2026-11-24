@@ -26,21 +26,29 @@ function preencherFormulario(dados) {
   campoEndereco.value = dados.endereco ?? '';
 }
 
-const usuario = await iniciarSessao();
-if (!usuario) {
-  irParaLogin();
-} else {
+async function carregarPerfil() {
+  const usuario = await iniciarSessao();
+  if (!usuario) {
+    irParaLogin();
+    return;
+  }
+
   try {
     const perfil = await obterMeuPerfil();
     preencherFormulario(perfil);
     form.hidden = false;
   } catch (erro) {
     if (!(erro instanceof ErroApi)) throw erro;
-    if (erro.status === 401) return irParaLogin();
+    if (erro.status === 401) {
+      irParaLogin();
+      return;
+    }
     aviso.textContent = erro.message;
     aviso.hidden = false;
   }
 }
+
+await carregarPerfil();
 
 form.addEventListener('submit', async (evento) => {
   evento.preventDefault();
@@ -60,7 +68,10 @@ form.addEventListener('submit', async (evento) => {
     sucesso.hidden = false;
   } catch (erro) {
     if (!(erro instanceof ErroApi)) throw erro;
-    if (erro.status === 401) return irParaLogin();
+    if (erro.status === 401) {
+      irParaLogin();
+      return;
+    }
     const detalhe = erro.detalhes?.length ? ` (${erro.detalhes.join(', ')})` : '';
     aviso.textContent = `${erro.message}${detalhe}`;
     aviso.hidden = false;

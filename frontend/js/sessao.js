@@ -10,13 +10,21 @@ export async function iniciarSessao() {
 
   const link = document.querySelector('nav a[href$="auth.html"]');
   if (link && usuario) {
+    const liPerfil = document.createElement('li');
+    const aPerfil = document.createElement('a');
+    aPerfil.href = 'perfil.html';
+    aPerfil.textContent = 'Minha Conta';
+    if (window.location.pathname.endsWith('perfil.html')) aPerfil.className = 'ativo';
+    liPerfil.append(aPerfil);
+
     const liPedidos = document.createElement('li');
     const aPedidos = document.createElement('a');
     aPedidos.href = 'pedidos.html';
     aPedidos.textContent = 'Meus Pedidos';
     if (window.location.pathname.endsWith('pedidos.html')) aPedidos.className = 'ativo';
     liPedidos.append(aPedidos);
-    link.closest('li')?.before(liPedidos);
+
+    link.closest('li')?.before(liPerfil, liPedidos);
 
     link.textContent = `Sair (${usuario.nome.split(' ')[0]})`;
     link.setAttribute('href', '#');

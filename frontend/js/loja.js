@@ -7,8 +7,8 @@ export class ErroApi extends Error {
   constructor(mensagem, status, detalhes = []) {
     super(mensagem);
     this.name = 'ErroApi';
-    this.status = status;     
-    this.detalhes = detalhes; 
+    this.status = status;
+    this.detalhes = detalhes;
   }
 }
 
@@ -79,3 +79,7 @@ export const finalizarCompra = () => chamar('/carrinho/finalizar', { method: 'PO
 export const obterNotaFiscal = (idNf) => chamar(`/carrinho/nota-fiscal/${idNf}`);
 
 export const listarPedidos = () => chamar('/carrinho/pedidos');
+
+export const obterMeuPerfil = () => chamar('/clientes/me');
+export const atualizarMeuPerfil = (dados) =>
+  chamar('/clientes/me', { method: 'PUT', body: dados });

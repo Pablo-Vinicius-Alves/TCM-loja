@@ -1,55 +1,68 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Meus Pedidos | SmartClothes</title>
-  <link rel="icon" type="image/jpeg" href="../imgs/logoDaMarca.jpg">
-  <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/carrinho.css">
-  <link rel="stylesheet" href="../css/loja.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Meus Pedidos | SmartClothes</title>
+    <link rel="icon" type="image/jpeg" href="../imgs/logoDaMarca.jpg">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/carrinho.css">
+    <link rel="stylesheet" href="../css/loja.css">
 </head>
+
 <body>
 
-  <header>
-    <a href="index.html" class="marca-cabecalho">
-      <img src="../imgs/logoDaMarca.jpg" alt="Logo SmartClothes" class="imagem-logo">
-      <span class="texto-logo">SMARTCLOTHES</span>
-    </a>
-    <nav>
-      <ul>
-        <li><a href="index.html">Início</a></li>
-        <li><a href="colecoes.html">Coleções</a></li>
-        <li><a href="auth.html">Login</a></li>
-        <li><a href="carrinho.html">Carrinho (<span id="contagem-carrinho">0</span>)</a></li>
-      </ul>
-    </nav>
-  </header>
+    <header>
+        <a href="index.html" class="marca-cabecalho">
+            <img src="../imgs/logoDaMarca.jpg" alt="Logo SmartClothes" class="imagem-logo">
+            <span class="texto-logo">SMARTCLOTHES</span>
+        </a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="colecoes.html">Coleções</a></li>
+                <li><a href="auth.html">Login</a></li>
+                <li><a href="carrinho.html">Carrinho (<span id="contagem-carrinho">0</span>)</a></li>
+                <li>
+                    <a href="perfil.html" title="Minha Conta" aria-label="Minha Conta"
+                        style="display: inline-flex; align-items: center;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
 
-  <main class="area-carrinho">
-    <section>
-      <h2 class="titulo-secao" style="text-align: left; margin-bottom: 2rem;">Meus Pedidos</h2>
-      <p id="aviso-pedidos" class="aviso" role="alert" hidden></p>
+    <main class="area-carrinho">
+        <section>
+            <h2 class="titulo-secao" style="text-align: left; margin-bottom: 2rem;">Meus Pedidos</h2>
+            <p id="aviso-pedidos" class="aviso" role="alert" hidden></p>
 
-      <table id="tabela-pedidos" class="tabela-carrinho" hidden>
-        <thead>
-          <tr>
-            <th>Pedido</th>
-            <th>Data</th>
-            <th>Previsão de Entrega</th>
-            <th>Total</th>
-            <th>Nota Fiscal</th>
-          </tr>
-        </thead>
-        <tbody id="lista-pedidos" aria-live="polite"></tbody>
-      </table>
+            <table id="tabela-pedidos" class="tabela-carrinho" hidden>
+                <thead>
+                    <tr>
+                        <th>Pedido</th>
+                        <th>Data</th>
+                        <th>Previsão de Entrega</th>
+                        <th>Total</th>
+                        <th>Nota Fiscal</th>
+                    </tr>
+                </thead>
+                <tbody id="lista-pedidos" aria-live="polite"></tbody>
+            </table>
 
-      <div class="carrinho-acoes" style="margin-top: 2rem;">
-        <a class="botao-dourado" href="colecoes.html">Voltar às Coleções</a>
-      </div>
-    </section>
-  </main>
+            <div class="carrinho-acoes" style="margin-top: 2rem;">
+                <a class="botao-dourado" href="colecoes.html">Voltar às Coleções</a>
+            </div>
+        </section>
+    </main>
 
-  <script type="module" src="../js/pedidos.js"></script>
+    <script type="module" src="../js/pedidos.js"></script>
 </body>
+
 </html>

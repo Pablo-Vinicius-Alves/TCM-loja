@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Minha Conta | SmartClothes</title>
+  <link rel="icon" type="image/jpeg" href="../imgs/logoDaMarca.jpg">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/carrinho.css">
+  <link rel="stylesheet" href="../css/loja.css">
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="marca-cabecalho">
+      <img src="../imgs/logoDaMarca.jpg" alt="Logo SmartClothes" class="imagem-logo">
+      <span class="texto-logo">SMARTCLOTHES</span>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="colecoes.html">Coleções</a></li>
+        <li><a href="auth.html">Login</a></li>
+        <li><a href="carrinho.html">Carrinho (<span id="contagem-carrinho">0</span>)</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="area-carrinho">
+    <section>
+      <h2 class="titulo-secao" style="text-align: left; margin-bottom: 1.5rem;">Minha Conta</h2>
+      <p id="aviso-perfil" class="aviso" role="alert" hidden></p>
+      <p id="sucesso-perfil" class="aviso-sucesso" role="status" hidden>Dados atualizados com sucesso!</p>
+
+      <form id="form-perfil" class="cartao-perfil" hidden>
+        <div class="campo-perfil">
+          <label for="perfil-nome">Nome completo</label>
+          <input id="perfil-nome" type="text" maxlength="100" required>
+        </div>
+
+        <div class="campo-perfil">
+          <label for="perfil-cpf">CPF (não alterável)</label>
+          <input id="perfil-cpf" type="text" disabled>
+        </div>
+
+        <div class="campo-perfil">
+          <label for="perfil-email">E-mail</label>
+          <input id="perfil-email" type="email" maxlength="120" required>
+        </div>
+
+        <div class="campo-perfil">
+          <label for="perfil-telefone">Telefone / WhatsApp</label>
+          <input id="perfil-telefone" type="text" maxlength="20" placeholder="(11) 99999-9999">
+        </div>
+
+        <div class="campo-perfil">
+          <label for="perfil-endereco">Endereço de Entrega</label>
+          <input id="perfil-endereco" type="text" maxlength="200" placeholder="Rua, número, bairro, cidade - UF">
+        </div>
+
+        <div class="carrinho-acoes" style="margin-top: 1.5rem;">
+          <button id="btn-salvar-perfil" class="botao-principal" type="submit">Salvar alterações</button>
+          <a class="botao-dourado" href="pedidos.html">Ver meus pedidos</a>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <script type="module" src="../js/perfil.js"></script>
+</body>
+</html>

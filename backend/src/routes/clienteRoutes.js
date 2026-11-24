@@ -3,7 +3,9 @@ import * as controller from '../controllers/clienteController.js';
 import asyncHandler from '../middlewares/async.js';
  
 const router = Router();
- 
+
+router.get('/me', asyncHandler(controller.obterMeuPerfil));
+router.put('/me', asyncHandler(controller.atualizarMeuPerfil)); 
 router.get('/', asyncHandler(controller.listarClientes));   
 router.get('/:id', asyncHandler(controller.buscarCliente));     
 router.post('/', asyncHandler(controller.criarCliente));        

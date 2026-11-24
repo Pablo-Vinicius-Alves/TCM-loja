@@ -72,3 +72,21 @@ export async function removerCliente(req, res) {
   if (!removidos) throw new AppError('Cliente não encontrado', 404);
   res.status(204).send();
 }
+
+export async function obterMeuPerfil(req, res) {
+  res.json(await exigirCliente(req.usuario.id_cliente));
+}
+
+export async function atualizarMeuPerfil(req, res) {
+  const id = req.usuario.id_cliente;
+  const atual = await exigirCliente(id);
+  const dados = lerDadosCliente({
+    nome: req.body?.nome ?? atual.nome,
+    email: req.body?.email ?? atual.email,
+    cpf: atual.cpf,
+    telefone: req.body?.telefone,
+    endereco: req.body?.endereco
+  });
+  await Cliente.atualizar(id, dados);
+  res.json(await Cliente.buscarPorId(id));
+}

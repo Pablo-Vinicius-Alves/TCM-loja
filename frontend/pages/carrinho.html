@@ -55,6 +55,23 @@
         </thead>
         <tbody id="itens-carrinho" aria-live="polite"></tbody>
         <tfoot>
+          <tr>
+            <td colspan="5" class="carrinho-cupom-celula">
+              <div class="carrinho-cupom-box">
+                <input id="input-cupom" class="carrinho-cupom-input" type="text"
+                  placeholder="Cupom (ex: PRIMEIRACOMPRA)" maxlength="30">
+                <button id="btn-aplicar-cupom" class="botao-dourado" type="button">Aplicar cupom</button>
+                <span id="status-cupom" class="carrinho-cupom-status"></span>
+              </div>
+            </td>
+          </tr>
+          <tr id="linha-desconto" class="carrinho-desconto-linha" hidden>
+            <td colspan="3">Desconto (<span id="nome-cupom-ativo"></span>)</td>
+            <td id="valor-desconto" class="carrinho-desconto-valor">− R$ 0,00</td>
+            <td>
+              <button id="btn-remover-cupom" class="btn-remover" type="button" aria-label="Remover cupom">×</button>
+            </td>
+          </tr>
           <tr class="carrinho-total-linha">
             <td colspan="3">Total</td>
             <td id="total-carrinho">R$ 0,00</td>

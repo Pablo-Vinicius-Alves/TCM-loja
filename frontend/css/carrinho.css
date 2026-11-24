@@ -150,6 +150,46 @@
   outline: none;
 }
 
+.carrinho-cupom-celula {
+  padding: 1rem 0;
+}
+
+.carrinho-cupom-box {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.carrinho-cupom-input {
+  padding: 9px 12px;
+  border: 1px solid #cfc4dc;
+  border-radius: 8px;
+  text-transform: uppercase;
+  min-width: 230px;
+}
+
+.carrinho-cupom-status {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.carrinho-cupom-status.sucesso {
+  color: #1e6b38;
+}
+
+.carrinho-cupom-status.erro {
+  color: #a61c1c;
+}
+
+.carrinho-desconto-linha {
+  color: #1e6b38;
+}
+
+.carrinho-desconto-valor {
+  font-weight: 600;
+}
+
 @media (max-width: 960px) {
   .area-carrinho {
     grid-template-columns: 1fr;

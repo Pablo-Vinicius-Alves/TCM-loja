@@ -1,6 +1,7 @@
 import {
   MAX_POR_ITEM, ErroApi, formatarPreco, irParaLogin,
-  obterCarrinho, alterarQuantidade, removerDoCarrinho, esvaziarCarrinho, finalizarCompra
+  obterCarrinho, alterarQuantidade, removerDoCarrinho, esvaziarCarrinho,
+  finalizarCompra, validarCupom
 } from './loja.js';
 import { iniciarSessao, mostrarContador } from './sessao.js';
 
@@ -10,7 +11,18 @@ const total = $('total-carrinho');
 const aviso = $('aviso-carrinho');
 const btnEsvaziar = $('btn-esvaziar');
 const btnFinalizar = $('btn-finalizar');
+
+const inputCupom = $('input-cupom');
+const btnAplicarCupom = $('btn-aplicar-cupom');
+const btnRemoverCupom = $('btn-remover-cupom');
+const statusCupom = $('status-cupom');
+const linhaDesconto = $('linha-desconto');
+const nomeCupomAtivo = $('nome-cupom-ativo');
+const valorDesconto = $('valor-desconto');
+
 let ocupado = false;
+let cupomAtivo = null;
+let ultimoSubtotal = 0;
 
 function el(tag, classe, texto) {
   const e = document.createElement(tag);
@@ -77,7 +89,35 @@ function mostrarAviso(texto) {
   aviso.hidden = !texto;
 }
 
-function mostrar(carrinho) {
+function limparCupom(mensagem = '', erro = false) {
+  cupomAtivo = null;
+  linhaDesconto.hidden = true;
+  total.textContent = formatarPreco(ultimoSubtotal);
+  statusCupom.textContent = mensagem;
+  statusCupom.classList.toggle('erro', Boolean(mensagem) && erro);
+  statusCupom.classList.toggle('sucesso', Boolean(mensagem) && !erro);
+}
+
+async function sincronizarCupom() {
+  if (!cupomAtivo || ultimoSubtotal <= 0) {
+    limparCupom();
+    return;
+  }
+  try {
+    const res = await validarCupom(cupomAtivo);
+    nomeCupomAtivo.textContent = `${res.codigo} (${res.descricao})`;
+    valorDesconto.textContent = `− ${formatarPreco(res.desconto)}`;
+    linhaDesconto.hidden = false;
+    total.textContent = formatarPreco(res.totalFinal);
+    statusCupom.textContent = `Cupom ${res.codigo} aplicado!`;
+    statusCupom.classList.remove('erro');
+    statusCupom.classList.add('sucesso');
+  } catch (erro) {
+    if (erro instanceof ErroApi) limparCupom(erro.message, true);
+  }
+}
+
+async function mostrar(carrinho) {
   if (carrinho.itens.length === 0) {
     const vazio = el('td', 'carrinho-vazio', 'Seu carrinho está vazio.');
     vazio.colSpan = 5;
@@ -88,14 +128,17 @@ function mostrar(carrinho) {
     corpo.replaceChildren(...carrinho.itens.map(criarLinha));
   }
 
+  ultimoSubtotal = Number(carrinho.total);
   const temIndisponivel = carrinho.itens.some((i) => !i.disponivel);
-  total.textContent = formatarPreco(carrinho.total);
+
   btnEsvaziar.disabled = carrinho.itens.length === 0;
+  btnAplicarCupom.disabled = carrinho.itens.length === 0;
   btnFinalizar.disabled = carrinho.itens.length === 0 || temIndisponivel;
   btnFinalizar.title = temIndisponivel ? 'Remova ou ajuste os itens indisponíveis' : '';
 
   mostrarAviso('');
   mostrarContador(carrinho);
+  await sincronizarCupom();
 }
 
 async function executar(pedido) {
@@ -103,7 +146,7 @@ async function executar(pedido) {
   ocupado = true;
   corpo.setAttribute('aria-busy', 'true');
   try {
-    mostrar(await pedido());
+    await mostrar(await pedido());
   } catch (erro) {
     if (!(erro instanceof ErroApi)) throw erro;
     if (erro.status === 401) return irParaLogin();
@@ -113,6 +156,18 @@ async function executar(pedido) {
     corpo.removeAttribute('aria-busy');
   }
 }
+
+btnAplicarCupom.addEventListener('click', async () => {
+  const codigo = inputCupom.value.trim().toUpperCase();
+  if (!codigo) return limparCupom('Digite um código de cupom.', true);
+  cupomAtivo = codigo;
+  await sincronizarCupom();
+});
+
+btnRemoverCupom.addEventListener('click', () => {
+  inputCupom.value = '';
+  limparCupom('Cupom removido.');
+});
 
 corpo.addEventListener('click', (evento) => {
   const clicado = evento.target.closest('button[data-acao]');
@@ -138,10 +193,10 @@ btnFinalizar.addEventListener('click', async () => {
   btnFinalizar.disabled = true;
   btnFinalizar.textContent = 'Processando...';
   try {
-    const nf = await finalizarCompra();
+    const nf = await finalizarCompra(cupomAtivo);
     window.location.assign(`/pages/notaFiscal.html?id=${nf.id_nota_fiscal}`);
   } catch (erro) {
-    btnFinalizar.textContent = 'Finalizar Compra';
+    btnFinalizar.textContent = 'Finalizar compra';
     btnFinalizar.disabled = false;
     if (!(erro instanceof ErroApi)) throw erro;
     if (erro.status === 401) return irParaLogin();

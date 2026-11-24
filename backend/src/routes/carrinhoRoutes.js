@@ -11,6 +11,7 @@ router.patch('/itens/:idProduto', asyncHandler(controller.alterarQuantidade));
 router.delete('/itens/:idProduto', asyncHandler(controller.removerItem));           
 router.delete('/', asyncHandler(controller.esvaziar));    
 router.post('/finalizar', asyncHandler(controller.finalizar));
-router.get('/nota-fiscal/:idNotaFiscal', asyncHandler(controller.obterNotaFiscal));                          
+router.get('/nota-fiscal/:idNotaFiscal', asyncHandler(controller.obterNotaFiscal));     
+router.post('/cupom', asyncHandler(controller.validarCupom));                     
 
 export default router;

@@ -41,7 +41,7 @@ export async function esvaziar(req, res) {
 }
 
 export async function finalizar(req, res) {
-  const resultado = await Carrinho.finalizar(req.usuario.id_cliente);
+  const resultado = await Carrinho.finalizar(req.usuario.id_cliente, req.body?.cupom);
   res.status(201).json(resultado);
 }
 
@@ -54,3 +54,13 @@ export async function obterNotaFiscal(req, res) {
 export async function listarPedidos(req, res) {
   res.json(await Carrinho.listarPedidos(req.usuario.id_cliente));
 }
+
+export async function validarCupom(req, res) {
+  const carrinho = await Carrinho.obter(req.usuario.id_cliente);
+  if (carrinho.itens.length === 0) {
+    throw new AppError('Adicione itens ao carrinho antes de aplicar um cupom.', 400);
+  }
+  const resultado = Carrinho.calcularDescontoCupom(req.body?.cupom, carrinho.total);
+  res.json(resultado);
+}
+

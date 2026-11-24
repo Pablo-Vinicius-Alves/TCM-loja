@@ -3,6 +3,35 @@ import { AppError } from '../utils/appError.js';
 
 export const MAX_POR_ITEM = 10;
 const STATUS_CARRINHO = 'CARRINHO';
+const CUPONS_VALIDOS = {
+  PRIMEIRACOMPRA: { tipo: 'percentual', valor: 10, minimo: 0, descricao: '10% OFF' },
+  SMART20: { tipo: 'fixo', valor: 20, minimo: 1000, descricao: 'R$ 20,00 OFF acima de R$ 1000' }
+};
+
+export function calcularDescontoCupom(codigoBruto, subtotal) {
+  const codigo = String(codigoBruto ?? '').trim().toUpperCase();
+  if (!codigo) return { codigo: null, desconto: 0, totalFinal: Number(subtotal) };
+
+  const cupom = CUPONS_VALIDOS[codigo];
+  if (!cupom) throw new AppError('Cupom inválido ou expirado.', 400);
+
+  const valorBase = Number(subtotal);
+  if (valorBase < cupom.minimo) {
+    throw new AppError(
+      `O cupom ${codigo} exige pedido mínimo de R$ ${cupom.minimo.toFixed(2).replace('.', ',')}.`,
+      400
+    );
+  }
+
+  const bruto = cupom.tipo === 'percentual'
+    ? (valorBase * cupom.valor) / 100
+    : cupom.valor;
+
+  const desconto = Number(Math.min(bruto, valorBase).toFixed(2));
+  const totalFinal = Number((valorBase - desconto).toFixed(2));
+
+  return { codigo, desconto, totalFinal, descricao: cupom.descricao };
+}
 
 async function comTransacao(trabalho) {
   const conexao = await connectionDB.getConnection();
@@ -193,7 +222,7 @@ function validarQuantidade(quantidade, estoque) {
   }
 }
 
-export function finalizar(idCliente) {
+export function finalizar(idCliente, codigoCupom = null) {
   return comTransacao(async (conexao) => {
     await travarCliente(conexao, idCliente);
     const idCompra = await acharCarrinho(conexao, idCliente);
@@ -206,6 +235,8 @@ export function finalizar(idCliente) {
     if (indisponivel) {
       throw new AppError(`Produto "${indisponivel.nome}" indisponível ou sem estoque suficiente`, 409);
     }
+
+    const { desconto, totalFinal } = calcularDescontoCupom(codigoCupom, carrinho.total);
 
     for (const item of carrinho.itens) {
       const [resEstoque] = await conexao.query(
@@ -224,7 +255,7 @@ export function finalizar(idCliente) {
               data_compra = CURRENT_TIMESTAMP,
               data_entrega_estimada = DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 7 DAY)
         WHERE id_compra = ?`,
-      [carrinho.total, idCompra]
+      [totalFinal, idCompra]
     );
 
     const ano = new Date().getFullYear();
@@ -233,13 +264,15 @@ export function finalizar(idCliente) {
     const [resNf] = await conexao.query(
       `INSERT INTO nota_fiscal (id_compra, numero_nf, valor_total_nf, tipo_documento, status_nf)
        VALUES (?, ?, ?, 'NF-e', 'EMITIDA')`,
-      [idCompra, numeroNf, carrinho.total]
+      [idCompra, numeroNf, totalFinal]
     );
 
     return {
       id_nota_fiscal: resNf.insertId,
       id_compra: idCompra,
-      numero_nf: numeroNf
+      numero_nf: numeroNf,
+      desconto_aplicado: desconto,
+      valor_final: totalFinal
     };
   });
 }

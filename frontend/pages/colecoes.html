@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,6 +10,7 @@
   <link rel="stylesheet" href="../css/colecoes.css">
   <link rel="stylesheet" href="../css/loja.css">
 </head>
+
 <body>
 
   <header>
@@ -31,6 +33,21 @@
 
   <div id="lista-colecoes"></div>
 
+  <dialog id="modal-produto" class="modal-detalhes">
+    <div class="modal-conteudo">
+      <button type="button" id="fechar-modal" class="btn-fechar-modal" aria-label="Fechar">&times;</button>
+      <img id="modal-imagem" src="" alt="" class="modal-img">
+      <div class="modal-info">
+        <h2 id="modal-nome"></h2>
+        <p id="modal-descricao" class="modal-desc"></p>
+        <p id="modal-estoque" class="modal-est"></p>
+        <p id="modal-preco" class="modal-prc"></p>
+        <button type="button" id="modal-btn-comprar" class="botao-dourado">Adicionar ao Carrinho</button>
+      </div>
+    </div>
+  </dialog>
+
   <script type="module" src="../js/colecoes.js"></script>
 </body>
+
 </html>

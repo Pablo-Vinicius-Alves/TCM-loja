@@ -4,7 +4,7 @@ import {
   irParaLogin, 
   adicionarAoCarrinho } from './loja.js';
 
-export function criarCartao(produto) {
+export function criarCartao(produto, aoAbrirDetalhes) {
   const cartao = document.createElement('div');
   cartao.className = 'cartao-produto';
 
@@ -22,6 +22,13 @@ export function criarCartao(produto) {
   nome.className = 'nome-produto';
   nome.textContent = produto.nome;
 
+  if (aoAbrirDetalhes) {
+    moldura.style.cursor = 'pointer';
+    nome.style.cursor = 'pointer';
+    moldura.addEventListener('click', () => aoAbrirDetalhes(produto));
+    nome.addEventListener('click', () => aoAbrirDetalhes(produto));
+  }
+
   const preco = document.createElement('div');
   preco.className = 'preco-produto';
   preco.textContent = formatarPreco(produto.preco);
@@ -36,12 +43,48 @@ export function criarCartao(produto) {
   cartao.append(moldura, nome, preco, botao);
 
   if (produto.estoque > 0 && produto.estoque <= 5) {
-  const alerta = document.createElement('div');
-  alerta.className = 'alerta-estoque';
-  alerta.textContent = `Restam apenas ${produto.estoque} unidade(s)!`;
-  cartao.append(alerta);
-}
+    const alerta = document.createElement('div');
+    alerta.className = 'alerta-estoque';
+    alerta.textContent = `Restam apenas ${produto.estoque} unidade(s)!`;
+    cartao.append(alerta);
+  }
   return cartao;
+}
+
+export function ligarModalDetalhes() {
+  const modal = document.getElementById('modal-produto');
+  if (!modal) return null;
+
+  const img = document.getElementById('modal-imagem');
+  const nome = document.getElementById('modal-nome');
+  const desc = document.getElementById('modal-descricao');
+  const estoque = document.getElementById('modal-estoque');
+  const preco = document.getElementById('modal-preco');
+  const btnComprar = document.getElementById('modal-btn-comprar');
+  const btnFechar = document.getElementById('fechar-modal');
+
+  btnFechar.addEventListener('click', () => modal.close());
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) modal.close();
+  });
+
+  return (produto) => {
+    img.src = produto.imagem || '';
+    img.alt = produto.nome;
+    nome.textContent = produto.nome;
+    desc.textContent = produto.descricao || 'Peça exclusiva da coleção SmartClothes.';
+    estoque.textContent = produto.estoque > 0 
+      ? `Em estoque: ${produto.estoque} unidade(s)` 
+      : 'Produto esgotado';
+    preco.textContent = formatarPreco(produto.preco);
+
+    btnComprar.dataset.idProduto = produto.id_produto;
+    btnComprar.disabled = produto.estoque <= 0;
+    btnComprar.textContent = produto.estoque > 0 ? 'Adicionar ao Carrinho' : 'Esgotado';
+
+    modal.showModal();
+  };
 }
 
 export function ligarCompra({ container, usuario, aviso, aoAdicionar }) {
